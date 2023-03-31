@@ -1,5 +1,5 @@
 import styleColors from "@/styles/styleColors";
-import { Close, Menu as MenuIcon, ShoppingCart } from "@mui/icons-material";
+import { Close, Menu as MenuIcon, Receipt, ShoppingCart } from "@mui/icons-material";
 import { Badge, Box, Container, Typography, Menu, MenuItem, IconButton, Divider } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,13 +25,22 @@ export default function Header() {
       <Container>
         <Box display={"flex"} justifyContent="space-between" py={1}>
           <Box>
-            <img src="/brand/shoes-shop-logo.png" alt="logo" />
+            <CustomLink href="/">
+              <img src="/brand/shoes-shop-logo.png" alt="logo" />
+            </CustomLink>
           </Box>
           <Box display={"flex"} justifyContent="flex-end" alignItems={"center"} gap={{ xs: 2, sm: 5 }}>
             <Box>
               <Link href="/cart">
                 <Badge badgeContent={1} color="error">
                   <ShoppingCart color="action" />
+                </Badge>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/purchase">
+                <Badge badgeContent={1} color="error">
+                  <Receipt color="action" />
                 </Badge>
               </Link>
             </Box>
@@ -107,14 +116,14 @@ export default function Header() {
             }}
           >
             <MenuItem onClick={handleCloseMenu}>
-              <CustomLink href="/auth/login">
+              <CustomLink href="/auth/login" style={{ width: "100%" }}>
                 <PrimaryButton variant="contained" fullWidth>
                   Đăng nhập
                 </PrimaryButton>
               </CustomLink>
             </MenuItem>
             <MenuItem onClick={handleCloseMenu}>
-              <CustomLink href="/auth/register">
+              <CustomLink href="/auth/register" style={{ width: "100%" }}>
                 <SecondaryButton variant="contained" fullWidth>
                   Đăng ký
                 </SecondaryButton>
