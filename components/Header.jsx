@@ -1,5 +1,5 @@
 import styleColors from "@/styles/styleColors";
-import { Close, Menu as MenuIcon, ShoppingCart } from "@mui/icons-material";
+import { Close, Menu as MenuIcon, Receipt, ShoppingCart } from "@mui/icons-material";
 import { Badge, Box, Container, Typography, Menu, MenuItem, IconButton, Divider } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
@@ -34,6 +34,13 @@ export default function Header() {
               <Link href="/cart">
                 <Badge badgeContent={1} color="error">
                   <ShoppingCart color="action" />
+                </Badge>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/purchase">
+                <Badge badgeContent={1} color="error">
+                  <Receipt color="action" />
                 </Badge>
               </Link>
             </Box>
