@@ -25,7 +25,9 @@ export default function Header() {
       <Container>
         <Box display={"flex"} justifyContent="space-between" py={1}>
           <Box>
-            <img src="/brand/shoes-shop-logo.png" alt="logo" />
+            <CustomLink href="/">
+              <img src="/brand/shoes-shop-logo.png" alt="logo" />
+            </CustomLink>
           </Box>
           <Box display={"flex"} justifyContent="flex-end" alignItems={"center"} gap={{ xs: 2, sm: 5 }}>
             <Box>
@@ -107,14 +109,14 @@ export default function Header() {
             }}
           >
             <MenuItem onClick={handleCloseMenu}>
-              <CustomLink href="/auth/login">
+              <CustomLink href="/auth/login" style={{ width: "100%" }}>
                 <PrimaryButton variant="contained" fullWidth>
                   Đăng nhập
                 </PrimaryButton>
               </CustomLink>
             </MenuItem>
             <MenuItem onClick={handleCloseMenu}>
-              <CustomLink href="/auth/register">
+              <CustomLink href="/auth/register" style={{ width: "100%" }}>
                 <SecondaryButton variant="contained" fullWidth>
                   Đăng ký
                 </SecondaryButton>
