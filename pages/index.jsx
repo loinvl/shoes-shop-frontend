@@ -1,9 +1,9 @@
 import Banner from "@/components/home/Banner";
 import { Container } from "@mui/material";
-import About from "./about";
-import Contact from "./contact";
 import Feature from "@/components/home/Feature";
 import Feedback from "@/components/home/Feedback";
+import About from "@/components/home/About";
+import Contact from "@/components/home/Contact";
 
 export default function Home() {
   return (
