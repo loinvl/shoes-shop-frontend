@@ -15,6 +15,7 @@ const PrimaryButton = styled(Button)({
 const SecondaryButton = styled(Button)({
     color: styleColors.metalGray,
     backgroundColor: styleColors.white,
+    outline: `1px solid ${styleColors.metalGray}`,
     ":hover" : {
         color: styleColors.white,
         backgroundColor: styleColors.black,

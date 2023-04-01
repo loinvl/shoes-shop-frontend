@@ -1,4 +1,4 @@
-import DefaultLayout from "@/components/layout/DefaultLayout";
+import DefaultLayout from "@/components/layouts/DefaultLayout";
 import "@/styles/globals.css";
 import styleColors from "@/styles/styleColors";
 
