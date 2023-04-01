@@ -1,13 +1,13 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import { SecondaryHeading } from "../StyledTypography";
-export default function StyledCard({ content }) {
+export default function ContactCard({ content, width, height }) {
   return (
-    <Card sx={{ width: "100%", height: "250px" }}>
+    <Card sx={{ width: width, height: height }}>
       <CardContent>
         {content.icon}
         <SecondaryHeading>{content.title}</SecondaryHeading>
         {content.texts.map((text, index) => (
-          <Typography key={index}>{text}</Typography>
+          <Typography noWrap key={index}>{text}</Typography>
         ))}
       </CardContent>
     </Card>

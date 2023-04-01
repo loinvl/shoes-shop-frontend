@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   return (
-    <Box borderBottom={`2px solid ${styleColors.cloudyGray}`}>
+    <Box borderBottom={`2px solid ${styleColors.cloudyGray}`} sx={{backgroundColor: styleColors.white}}>
       <Container>
         <Box display={"flex"} justifyContent="space-between" py={1}>
           <Box>
@@ -73,7 +73,7 @@ export default function Header() {
           display={{ xs: "none", sm: "flex" }}
           justifyContent="center"
           alignItems="center"
-          gap={10}
+          gap={{sm: 5, md: 10}}
           backgroundColor={styleColors.blue}
           p={1}
         >

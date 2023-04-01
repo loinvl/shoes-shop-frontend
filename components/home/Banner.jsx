@@ -4,15 +4,10 @@ import Carousel from "react-material-ui-carousel";
 import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import CustomLink from "../CustomLink";
 import styleColors from "@/styles/styleColors";
-
-const BannerImage = styled("img")({
-  width: "100%",
-  height: "60vh",
-  objectFit: "cover",
-});
+import ImageSlider from "./ImageSlider";
 
 export default function Banner() {
-  const items = [
+  const banners = [
     {
       src: "/banner/banner1.webp",
       alt: "banner",
@@ -35,30 +30,72 @@ export default function Banner() {
     },
   ];
 
+  const smallBanners1 = [
+    {
+      src: "/banner/banner6.png",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner7.png",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner8.jpg",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner9.jpg",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner10.jpg",
+      alt: "banner",
+    },
+  ];
+  const smallBanners2 = [
+    {
+      src: "/banner/banner7.png",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner8.jpg",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner9.jpg",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner10.jpg",
+      alt: "banner",
+    },
+    {
+      src: "/banner/banner6.png",
+      alt: "banner",
+    },
+  ];
+
   return (
-    <Box borderRadius="1em" overflow="hidden">
-      <Carousel 
-        indicatorContainerProps={{style: {position: "absolute", bottom: "2%", zIndex: 1}}}
-        indicatorIconButtonProps={{style:{padding: 5, color: styleColors.white}}}
-        activeIndicatorIconButtonProps ={{style:{color: styleColors.black}}}>
-        {items.map((item, index) => (
-          <Box position="relative" key={index}>
-            <BannerImage src={item.src} alt={item.alt} />
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: "5%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              <CustomLink href="/shoes-model">
-                <PrimaryButton sx={{ width: "200px" }}>Mua Ngay</PrimaryButton>
-              </CustomLink>
-            </Box>
-          </Box>
-        ))}
-      </Carousel>
+    <Box display="flex" gap={1}>
+      <Box flex={2}>
+        <ImageSlider items={banners} width="100%" height="300px">
+          <CustomLink href="/shoes-model">
+            <PrimaryButton sx={{ width: "200px" }}>Mua Ngay</PrimaryButton>
+          </CustomLink>
+        </ImageSlider>
+      </Box>
+      <Box flex={1} display={{xs: "none", sm: "flex"}} flexDirection="column" justifyContent="space-between">
+        <ImageSlider items={smallBanners1} width="100%" height="145px">
+          <CustomLink href="/shoes-model">
+            <SecondaryButton>Khám Phá</SecondaryButton>
+          </CustomLink>
+        </ImageSlider>
+        <ImageSlider items={smallBanners2} width="100%" height="145px">
+          <CustomLink href="/shoes-model">
+            <SecondaryButton>Trải Nghiệm</SecondaryButton>
+          </CustomLink>
+        </ImageSlider>
+      </Box>
     </Box>
   );
 }
