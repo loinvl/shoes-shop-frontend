@@ -1,23 +1,17 @@
 import { Box, Typography } from "@mui/material";
+import { PrimaryHeading, SecondaryHeading } from "../StyledTypography";
+import styleColors from "@/styles/styleColors";
 
 export default function About() {
   return (
     <Box>
-      <Box pt={10} px={{ xs: 2, sm: 6, md: 20 }} textAlign="center">
-        <Typography
-          sx={{
-            typography: { xs: { fontSize: "3em", fontWeight: "600" }, sm: { fontSize: "4em", fontWeight: "600" } },
-          }}
-        >
+      <Box py={10} px={{ xs: 2, sm: 6, md: 20 }} textAlign="center">
+        <PrimaryHeading color={styleColors.metalGray}>
           Shoes Shop
-        </Typography>
-        <Typography
-          sx={{
-            typography: { xs: { fontSize: "2em", fontWeight: "400" }, sm: { fontSize: "2.5em", fontWeight: "400" } },
-          }}
-        >
+        </PrimaryHeading>
+        <SecondaryHeading color={styleColors.metalGray}>
           Thời Trang Hiện Đại
-        </Typography>
+        </SecondaryHeading>
         <Typography mt={3}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comml
