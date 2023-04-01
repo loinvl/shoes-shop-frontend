@@ -18,7 +18,7 @@ export default function Feature() {
   const refund = {
     icon: <Paid sx={{ fontSize: "5em" }} />,
     title: "Hoàn Trả",
-    texts: ["Dễ dang hoàn trả", "Chăm sóc khách hàng 24/7"],
+    texts: ["Dễ dàng hoàn trả", "Chăm sóc khách hàng 24/7"],
   };
   return (
     <Box py={10} textAlign="center">
