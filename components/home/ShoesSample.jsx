@@ -1,5 +1,5 @@
 import { Box, Divider } from "@mui/material";
-import ImageSlider from "./ImageSlider";
+import ImageSlider from "../ImageSlider";
 import CustomLink from "../CustomLink";
 import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import styleColors from "@/styles/styleColors";

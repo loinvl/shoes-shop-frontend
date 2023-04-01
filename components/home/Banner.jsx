@@ -4,7 +4,7 @@ import Carousel from "react-material-ui-carousel";
 import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import CustomLink from "../CustomLink";
 import styleColors from "@/styles/styleColors";
-import ImageSlider from "./ImageSlider";
+import ImageSlider from "../ImageSlider";
 
 export default function Banner() {
   const banners = [
