@@ -6,7 +6,7 @@ import { Box, Container, Pagination, Stack } from "@mui/material";
 export default function ShoesModel() {
   return (
     <Container>
-      <Box my={5} display="flex" gap={5}>
+      <Box mt={{sm: 3}} mb={10} display="flex" flexDirection={{xs:"column", sm: "row"}} gap={2}>
         <Box flex={1}>
           <SideBar />
         </Box>
@@ -14,10 +14,10 @@ export default function ShoesModel() {
           <Box>
             <TopBar />
           </Box>
-          <Box>
+          <Box mt={5}>
             <ShoesModelGrid />
           </Box>
-          <Stack alignItems="center">
+          <Stack mt={5} alignItems="center">
             <Pagination count={5} variant="outlined" size="large"/>
           </Stack>
         </Box>

@@ -20,7 +20,7 @@ export default function TopBar() {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <PrimaryButton sizes="large" sx={{width: "100px"}}>
+                <PrimaryButton sizes="large" sx={{width: {md: "100px"}}}>
                   <Search />
                 </PrimaryButton>
               </InputAdornment>
