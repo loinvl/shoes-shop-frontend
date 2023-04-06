@@ -1,6 +1,6 @@
 import styleColors from "@/styles/styleColors";
-import styled from "@emotion/styled";
 import { Box, Card, CardContent, Typography } from "@mui/material";
+import { StyledImage } from "../layouts/StyledImage";
 
 /* 
 Shoes model card include:
@@ -8,11 +8,6 @@ Shoes model card include:
     - brand
     - min price
 */
-
-const ShoelModelImage = styled("img")({
-  objectFit: "cover",
-  borderRadius: "1em",
-});
 
 export default function ShoelModelCard({ content, width, height }) {
   return (
@@ -27,7 +22,7 @@ export default function ShoelModelCard({ content, width, height }) {
     >
       <CardContent sx={{ textAlign: "center", padding: "15px" }}>
         <Box>
-          <ShoelModelImage width={width} height={height} src={content.imageLink} alt="shoes model" />
+          <StyledImage width={width} height={height} src={content.imageLink} alt="shoes model" />
         </Box>
         <Typography mt={1} variant="h6" color={styleColors.cloudyGray}>
           {content.brandName}

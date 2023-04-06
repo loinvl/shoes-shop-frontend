@@ -1,12 +1,7 @@
-import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import styleColors from "@/styles/styleColors";
-
-const Image = styled("img")({
-  objectFit: "cover",
-  borderRadius: "1em"
-});
+import { StyledImage } from "./layouts/StyledImage";
 
 export default function ImageSlider({items, width, height, children}) {
   return (
@@ -18,7 +13,7 @@ export default function ImageSlider({items, width, height, children}) {
         activeIndicatorIconButtonProps ={{style:{color: styleColors.black}}}>
         {items.map((item, index) => (
           <Box position="relative" key={index}>
-            <Image src={item.src} alt={item.alt} width={width} height={height}/>
+            <StyledImage src={item.src} alt={item.alt} width={width} height={height}/>
             <Box
               sx={{
                 position: "absolute",

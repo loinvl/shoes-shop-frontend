@@ -82,7 +82,7 @@ export default function ShoesModelGrid() {
     <Grid container spacing={2}>
       {contents.map((content, index) => (
         <Grid item key={index} xs={12} sm={6} md={4}>
-          <CustomLink href="#">
+          <CustomLink href="/shoes-model/id">
             <ShoelModelCard width="100%" height="200px" content={content} />
           </CustomLink>
         </Grid>
