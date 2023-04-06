@@ -30,7 +30,7 @@ export default function ShoesModelInfo({ info }) {
       <Typography variant="h5">{info.shoelModelName}</Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} container alignItems="center" spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={5} sm={3}>
             <Typography>Thương hiệu:</Typography>
           </Grid>
           <Grid item>
@@ -40,7 +40,7 @@ export default function ShoesModelInfo({ info }) {
           </Grid>
         </Grid>
         <Grid item xs={12} container alignItems="center" spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={5} sm={3}>
             <Typography>Đơn giá:</Typography>
           </Grid>
           <Grid item>
@@ -48,11 +48,11 @@ export default function ShoesModelInfo({ info }) {
           </Grid>
         </Grid>
         <Grid item xs={12} container alignItems="center" spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <Typography>Màu sắc:</Typography>
           </Grid>
           {info.shoeses.map((shoes) => (
-            <Grid item xs={2}>
+            <Grid item xs={4} sm={2}>
               {currentShoes.shoesID === shoes.shoesID ? (
                 <PrimaryButton
                   fullWidth
@@ -76,11 +76,11 @@ export default function ShoesModelInfo({ info }) {
           ))}
         </Grid>
         <Grid item xs={12} container alignItems="center" spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <Typography>Kích thước:</Typography>
           </Grid>
           {info.shoeses.map((shoes) => (
-            <Grid item xs={2}>
+            <Grid item xs={4} sm={2}>
               {currentShoes.shoesID === shoes.shoesID ? (
                 <PrimaryButton
                   fullWidth
@@ -104,10 +104,10 @@ export default function ShoesModelInfo({ info }) {
           ))}
         </Grid>
         <Grid item xs={12} container alignItems="center" spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <Typography>Số lượng: </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={8} sm={4}>
             <NumberInput
               type="number"
               value={currentQuantity}
@@ -127,18 +127,18 @@ export default function ShoesModelInfo({ info }) {
               }}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4} sm={3}>
             <Typography>Kho: {currentShoes.quantity}</Typography>
           </Grid>
         </Grid>
         <Grid item container alignItems="center" spacing={3}>
           <Grid item>
-            <SecondaryButton size="large" startIcon={<ShoppingCart />}>
+            <SecondaryButton startIcon={<ShoppingCart />} sx={{paddingY: "10px"}}>
               Thêm Vào Giỏ Hàng
             </SecondaryButton>
           </Grid>
           <Grid item>
-            <PrimaryButton size="large" startIcon={<Payment />}>
+            <PrimaryButton startIcon={<Payment />} sx={{paddingY: "10px"}}>
               Mua Ngay
             </PrimaryButton>
           </Grid>

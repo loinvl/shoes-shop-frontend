@@ -18,13 +18,5 @@ const SecondaryHeading = styled(Typography)({
     }
 })
 
-const ThirdlyHeading = styled(Typography)({
-    fontWeight: "400",
-    fontSize: "1em",
-    "@media(min-width: 600px)":{
-        fontSize: "1.5em"
-    }
-})
-
 export default Typography;
-export {PrimaryHeading, SecondaryHeading, ThirdlyHeading};
+export {PrimaryHeading, SecondaryHeading};
