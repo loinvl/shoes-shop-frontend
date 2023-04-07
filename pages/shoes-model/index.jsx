@@ -1,9 +1,9 @@
-import ShoesModelGrid from "@/components/shoes-model/ShoesModelGrid";
-import SideBar from "@/components/shoes-model/SideBar";
-import TopBar from "@/components/shoes-model/TopBar";
+import ShoesModelGrid from "@/components/shoes-model-list/ShoesModelGrid";
+import SideBar from "@/components/shoes-model-list/SideBar";
+import TopBar from "@/components/shoes-model-list/TopBar";
 import { Box, Container, Pagination, Stack } from "@mui/material";
 
-export default function ShoesModel() {
+export default function ShoesModelListPage() {
   return (
     <Container>
       <Box mt={{sm: 3}} mb={10} display="flex" flexDirection={{xs:"column", sm: "row"}} gap={2}>

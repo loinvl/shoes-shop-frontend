@@ -31,11 +31,11 @@ export default function Header() {
           </Box>
           <Box display={"flex"} justifyContent="flex-end" alignItems={"center"} gap={{ xs: 2, sm: 5 }}>
             <Box>
-              <Link href="/cart">
+              <CustomLink href="/cart">
                 <Badge badgeContent={1} color="error">
                   <ShoppingCart color="action" />
                 </Badge>
-              </Link>
+              </CustomLink>
             </Box>
             <Box>
               <Link href="/purchase">
