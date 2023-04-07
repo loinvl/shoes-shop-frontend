@@ -1,3 +1,5 @@
+import CustomLink from "@/components/CustomLink";
+import { PrimaryButton } from "@/components/StyledButton";
 import { NumberInput } from "@/components/StyledTextField";
 import { StyledImage } from "@/components/layouts/StyledImage";
 import styleColors from "@/styles/styleColors";
@@ -193,6 +195,29 @@ export default function CartPage() {
             </Grid>
           ))}
         </Grid>
+
+        <Box
+          mt={5}
+          p={3}
+          display="flex"
+          flexDirection={{ xs: "column", sm: "row" }}
+          justifyContent="center"
+          alignItems="center"
+          gap={3}
+          sx={{ border: `1px solid ${styleColors.cloudyGray}`, backgroundColor: styleColors.cyanBlue }}
+        >
+          <Box display="flex" alignItems="center">
+            <Typography>Tổng tiền(</Typography>
+            <Typography display="inline">5 sản phẩm</Typography>
+            <Typography>):&nbsp;</Typography>
+            <Typography variant="h6" fontWeight="600">
+              1000000đ
+            </Typography>
+          </Box>
+          <CustomLink href="/checkout">
+            <PrimaryButton size="large">Mua Hàng</PrimaryButton>
+          </CustomLink>
+        </Box>
       </Box>
     </Container>
   );

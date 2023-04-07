@@ -52,7 +52,7 @@ export default function ShoesModelInfo({ info }) {
             <Typography>Màu sắc:</Typography>
           </Grid>
           {info.shoeses.map((shoes) => (
-            <Grid item xs={4} sm={2}>
+            <Grid item xs={4} sm={2} key={shoes.shoesID}>
               {currentShoes.shoesID === shoes.shoesID ? (
                 <PrimaryButton
                   fullWidth
@@ -80,7 +80,7 @@ export default function ShoesModelInfo({ info }) {
             <Typography>Kích thước:</Typography>
           </Grid>
           {info.shoeses.map((shoes) => (
-            <Grid item xs={4} sm={2}>
+            <Grid item xs={4} sm={2} key={shoes.shoesID}>
               {currentShoes.shoesID === shoes.shoesID ? (
                 <PrimaryButton
                   fullWidth
