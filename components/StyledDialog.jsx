@@ -5,7 +5,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { PrimaryButton, SecondaryButton } from "./StyledButton";
 
-const ConfirmDialog = ({ openButton, title, content, cancleLabel, okLabel, open, onClick, onCancle, onOk }) => {
+const ConfirmDialog = ({ openButton, title, content, cancleLabel, okLabel, open, onCancle, onOk }) => {
   return (
     <div>
       {openButton}
