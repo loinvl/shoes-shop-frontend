@@ -1,10 +1,11 @@
 import { PrimaryButton } from "@/components/StyledButton";
-import { ConfirmDialog } from "@/components/StyledDialog";
+import { AlertDialog, ConfirmDialog } from "@/components/StyledDialog";
 import { Container } from "@mui/material";
 import { useState } from "react";
 
 export default function Test() {
   const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(true);
   const handleClick = () => {
     setOpen(true);
   };
@@ -17,7 +18,12 @@ export default function Test() {
     console.log("do somgthing");
     setOpen(false);
   };
+
+  const handleClose = () => {
+    setOpenAlert(false);
+  }
   return (
+    <>
     <Container>
       <ConfirmDialog
         openButton={
@@ -32,7 +38,10 @@ export default function Test() {
         okLabel="ok"
         onOk={handleOk}
         open={open}
-      />
+        />
     </Container>
+
+    <AlertDialog open={openAlert} title="thong bao" content="this is content" onClose={handleClose}/>
+  </>
   );
 }

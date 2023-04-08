@@ -29,4 +29,26 @@ const ConfirmDialog = ({ openButton, title, content, cancleLabel, okLabel, open,
   );
 };
 
-export { ConfirmDialog };
+const AlertDialog = ({ title, content, open, onClose }) => {
+  return (
+    <div>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        fullWidth
+      >
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <PrimaryButton onClick={onClose}>Đóng</PrimaryButton>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
+export { ConfirmDialog, AlertDialog };
