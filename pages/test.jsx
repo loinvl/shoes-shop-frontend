@@ -1,47 +1,17 @@
-import { PrimaryButton } from "@/components/StyledButton";
-import { AlertDialog, ConfirmDialog } from "@/components/StyledDialog";
-import { Container } from "@mui/material";
-import { useState } from "react";
+import shoesModelAPI from "@/api/shoesModelAPI";
+import { useEffect, useState } from "react";
 
 export default function Test() {
-  const [open, setOpen] = useState(false);
-  const [openAlert, setOpenAlert] = useState(true);
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleCancle = () => {
-    setOpen(false);
-  };
-
-  const handleOk = () => {
-    console.log("do somgthing");
-    setOpen(false);
-  };
-
-  const handleClose = () => {
-    setOpenAlert(false);
-  }
-  return (
-    <>
-    <Container>
-      <ConfirmDialog
-        openButton={
-          <PrimaryButton size="large" onClick={handleClick}>
-            open
-          </PrimaryButton>
-        }
-        title="test con firm dialog"
-        content="this is content"
-        cancleLabel="huy"
-        onCancle={handleCancle}
-        okLabel="ok"
-        onOk={handleOk}
-        open={open}
-        />
-    </Container>
-
-    <AlertDialog open={openAlert} title="thong bao" content="this is content" onClose={handleClose}/>
-  </>
-  );
+  useEffect(() => {
+    (async function fetchShoesModelByID() {
+      const params = {
+        PageIndex: 1,
+        ItemPerPage: 10
+      }
+      
+      const res = await shoesModelAPI.getShoesModelList(params);
+      console.log(res);
+    })();
+  }, []);
+  return <div>test</div>;
 }
