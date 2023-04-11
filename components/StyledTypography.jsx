@@ -18,5 +18,10 @@ const SecondaryHeading = styled(Typography)({
     }
 })
 
+const ErrorText = styled(Typography)({
+    color: styleColors.red,
+    fontSize: "0.8em"
+})
+
 export default Typography;
-export {PrimaryHeading, SecondaryHeading};
+export {PrimaryHeading, SecondaryHeading, ErrorText};

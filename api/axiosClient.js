@@ -32,11 +32,11 @@ axiosClient.interceptors.response.use(
   (error) => {
     // Handle errors
     console.log(error);
+    
     if(error.response && error.response.data){
       return error.response.data;
     }
 
-    console.log(error);
     return {
       success: false,
       message: "Response is not data",

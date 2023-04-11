@@ -1,4 +1,4 @@
-import rateAPI from "@/api/rateAPi";
+import rateAPI from "@/api/rateAPI";
 import shoesModelAPI from "@/api/shoesModelAPI";
 import ShoesModelDesciption from "@/components/shoes-model/ShoesModelDescription";
 import ShoesModelImageShow from "@/components/shoes-model/ShoesModelImageShow";
