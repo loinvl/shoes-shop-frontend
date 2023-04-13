@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 // config base axios
-const axiosClient = axios.create({
+const axiosClientPublic = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   headers: { "Content-Type": "application/json" },
   timeout: 30000,
@@ -10,13 +10,12 @@ const axiosClient = axios.create({
 });
 
 // before request to api
-axiosClient.interceptors.request.use(async (config) => {
-  // Handle token here
+axiosClientPublic.interceptors.request.use(async (config) => {
   return config;
 });
 
 // after request to api
-axiosClient.interceptors.response.use(
+axiosClientPublic.interceptors.response.use(
   (response) => {
     if (response && response.data) {
       return response.data;
@@ -45,4 +44,4 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export default axiosClient;
+export default axiosClientPublic;

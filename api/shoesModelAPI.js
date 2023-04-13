@@ -1,9 +1,9 @@
-import axiosClient from "./axiosClient";
+import axiosClientPublic from "./axiosClientPublic";
 
 const shoesModelAPI = {
     getShoesModelList: async (params) => {
         const url = `/api/shoesmodel/list`;
-        const res = await axiosClient.get(
+        const res = await axiosClientPublic.get(
             url,
             {
                 params: params
@@ -15,14 +15,14 @@ const shoesModelAPI = {
 
     getShoesModelCount: async () => {
         const url = `/api/shoesmodel/list/count`;
-        const res = await axiosClient.get(url);
+        const res = await axiosClientPublic.get(url);
 
         return res;
     },
 
     getShoesModelByID: async (shoesModelID) => {
             const url = `/api/shoesmodel/${shoesModelID}`;
-            const res = await axiosClient.get(url);
+            const res = await axiosClientPublic.get(url);
             return res;
     }
 }

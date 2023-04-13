@@ -3,11 +3,16 @@ import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
+import { loginSuccess } from "@/redux/userReducer";
 import styleColors from "@/styles/styleColors";
+import authUtil from "@/utils/authUtil";
 import { Box, Container, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage() {
+  // control form use react-hook-form
   const {
     register,
     handleSubmit,
@@ -15,6 +20,12 @@ export default function LoginPage() {
     setError,
     formState: { errors },
   } = useForm();
+  
+  // distpatch action
+  const dispatch = useDispatch();
+
+  // next/router
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     // data
@@ -44,7 +55,12 @@ export default function LoginPage() {
 
     // success
     const { accessToken, refreshToken } = res.data;
-    console.log(accessToken, refreshToken);
+    authUtil.storeToken(accessToken, refreshToken);
+    const user = authUtil.getUserPayload(accessToken);
+    dispatch(loginSuccess(user));
+    
+    // redirect to previous page
+    router.back();
   };
 
   return (

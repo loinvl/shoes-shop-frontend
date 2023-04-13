@@ -1,9 +1,9 @@
-import axiosClient from "./axiosClient";
+import axiosClientPublic from "./axiosClientPublic";
 
 const brandAPI = {
     getBrandList: async() => {
         const url = '/api/brand/list';
-        const res = await axiosClient(url);
+        const res = await axiosClientPublic(url);
 
         return res;
     }
