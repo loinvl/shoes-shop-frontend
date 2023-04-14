@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import ShoelModelCard from "./ShoesModelCard";
 import CustomLink from "../CustomLink";
-
+// mock data
 const contents = [
   {
     imageLink: "/image/shoes-sample1.webp",
@@ -77,13 +77,13 @@ const contents = [
   },
 ];
 
-export default function ShoesModelGrid() {
+export default function ShoesModelGrid({shoesModelList}) {
   return (
     <Grid container spacing={2}>
-      {contents.map((content, index) => (
+      {shoesModelList.map((shoesModel, index) => (
         <Grid item key={index} xs={12} sm={6} md={4}>
-          <CustomLink href="/shoes-model/id">
-            <ShoelModelCard width="100%" height="200px" content={content} />
+          <CustomLink href={`/shoes-model/${shoesModel.shoesModelID}`}>
+            <ShoelModelCard width="100%" shoesModel={shoesModel} />
           </CustomLink>
         </Grid>
       ))}
