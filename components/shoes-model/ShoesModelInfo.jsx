@@ -5,6 +5,10 @@ import { NumberInput } from "../StyledTextField";
 import styleColors from "@/styles/styleColors";
 import { Add, Payment, Remove, ShoppingCart } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import cartAPI from "@/api/cartAPI";
+import { useDispatch } from "react-redux";
+import { showMessage } from "@/redux/messageReducer";
+import { useRouter } from "next/router";
 
 export default function ShoesModelInfo({ info }) {
   const [currentShoes, setCurrentShoes] = useState(
@@ -13,6 +17,9 @@ export default function ShoesModelInfo({ info }) {
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const [color, setColor] = useState(currentShoes ? currentShoes.color : null);
   const [size, setSize] = useState(currentShoes ? currentShoes.size : null);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleDownQuantity = () => {
     if (currentQuantity <= 1) {
@@ -33,6 +40,29 @@ export default function ShoesModelInfo({ info }) {
     const shoes = info.shoeses.find((shoes) => shoes.color == color && shoes.size == size);
     setCurrentShoes(shoes);
   }, [color, size]);
+
+  // add shoes to cart
+  const handleAddToCart = async () => {
+    // call api to add item to cart
+    console.log(currentShoes.shoesID, currentQuantity);
+    const res = await cartAPI.addShoesToCart(currentShoes.shoesID, currentQuantity);
+
+    // handle error res
+    if (!res.success) {
+      return;
+    }
+
+    // handle success res
+    dispatch(showMessage("Đã thêm vào giỏ hàng"));
+  };
+
+  // go to checkout page
+  const handleToCheckout = () => {
+    const shoesID = currentShoes.shoesID;
+    const url = `/checkout?ShoesID=${shoesID}`;
+
+    router.push(url);
+  }
 
   return (
     info && (
@@ -113,12 +143,22 @@ export default function ShoesModelInfo({ info }) {
           </Grid>
           <Grid item container alignItems="center" spacing={3}>
             <Grid item>
-              <SecondaryButton startIcon={<ShoppingCart />} sx={{ paddingY: "10px" }} disabled={!currentShoes}>
+              <SecondaryButton
+                startIcon={<ShoppingCart />}
+                sx={{ paddingY: "10px" }}
+                disabled={!currentShoes}
+                onClick={handleAddToCart}
+              >
                 Thêm Vào Giỏ Hàng
               </SecondaryButton>
             </Grid>
             <Grid item>
-              <PrimaryButton startIcon={<Payment />} sx={{ paddingY: "10px" }} disabled={!currentShoes}>
+              <PrimaryButton
+                startIcon={<Payment />}
+                sx={{ paddingY: "10px" }}
+                disabled={!currentShoes}
+                onClick={handleToCheckout}
+              >
                 Mua Ngay
               </PrimaryButton>
             </Grid>

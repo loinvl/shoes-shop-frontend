@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import RateCard from "./RateCard";
 
 export default function ShoesModelRate({ rates }) {
@@ -9,11 +9,15 @@ export default function ShoesModelRate({ rates }) {
           Đánh Giá Sản Phẩm
         </Typography>
         <Stack gap={5}>
-          {rates.map((rate, index) => (
-            <Box key={index}>
-              <RateCard rate={rate} />
-            </Box>
-          ))}
+          {rates.length === 0 ? (
+            <Typography textAlign="center">Chưa có đánh giá nào!</Typography>
+          ) : (
+            rates.map((rate, index) => (
+              <Box key={index}>
+                <RateCard rate={rate} />
+              </Box>
+            ))
+          )}
         </Stack>
       </Stack>
     )

@@ -1,3 +1,4 @@
+import { triggerProgressBar } from "@/redux/progressBarReducer";
 import store from "@/redux/store";
 import { logoutSuccess } from "@/redux/userReducer";
 import authUtil from "@/utils/authUtil";
@@ -5,7 +6,7 @@ import axios from "axios";
 import Router from "next/router";
 import queryString from "query-string";
 
-const {dispatch} = store;
+const { dispatch } = store;
 
 // config base axios
 const axiosClientPrivate = axios.create({
@@ -18,6 +19,9 @@ const axiosClientPrivate = axios.create({
 // before request to api
 axiosClientPrivate.interceptors.request.use(
   async (config) => {
+    // stop progress bar
+    dispatch(triggerProgressBar());
+
     // Handle token here
     const accessToken = await authUtil.getValidAccessToken();
 
@@ -39,6 +43,9 @@ axiosClientPrivate.interceptors.request.use(
 axiosClientPrivate.interceptors.response.use(
   (response) => {
     try {
+      // stop progress bar
+      dispatch(triggerProgressBar());
+
       //
       console.log(response);
 
@@ -46,7 +53,7 @@ axiosClientPrivate.interceptors.response.use(
       if (response && response.data) {
         return response.data;
       }
-      
+
       return {
         success: false,
         message: "Not response or response is not data",
@@ -63,15 +70,18 @@ axiosClientPrivate.interceptors.response.use(
   },
   (error) => {
     try {
+      // stop progress bar
+      dispatch(triggerProgressBar());
+
       //
       console.log(error);
-      
+
       // Handle errors
       if (error && error.response && error.response.status === 401) {
         // logout
         authUtil.removeToken();
         dispatch(logoutSuccess());
-        
+
         // Redirect the user to the login page
         Router.push("/auth/login");
 

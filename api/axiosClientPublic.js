@@ -1,5 +1,8 @@
+import { triggerProgressBar } from "@/redux/progressBarReducer";
+import store from "@/redux/store";
 import axios from "axios";
 import queryString from "query-string";
+const { dispatch } = store;
 
 // config base axios
 const axiosClientPublic = axios.create({
@@ -11,12 +14,16 @@ const axiosClientPublic = axios.create({
 
 // before request to api
 axiosClientPublic.interceptors.request.use(async (config) => {
+  dispatch(triggerProgressBar());
   return config;
 });
 
 // after request to api
 axiosClientPublic.interceptors.response.use(
   (response) => {
+    // stop progress bar
+    dispatch(triggerProgressBar());
+
     if (response && response.data) {
       return response.data;
     }
@@ -29,17 +36,20 @@ axiosClientPublic.interceptors.response.use(
     };
   },
   (error) => {
+    // stop progress bar
+    dispatch(triggerProgressBar());
+
     // Handle errors
     console.log(error);
-    
-    if(error.response && error.response.data){
+
+    if (error.response && error.response.data) {
       return error.response.data;
     }
 
     return {
       success: false,
       message: "Response is not data",
-      data: null
+      data: null,
     };
   }
 );

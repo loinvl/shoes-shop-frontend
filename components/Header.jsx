@@ -1,6 +1,6 @@
 import styleColors from "@/styles/styleColors";
 import { Close, Menu as MenuIcon, Receipt, ShoppingCart } from "@mui/icons-material";
-import { Badge, Box, Container, Typography, Menu, MenuItem, IconButton, Divider, Avatar } from "@mui/material";
+import { Badge, Box, Container, Typography, Menu, MenuItem, IconButton, Divider, Avatar, LinearProgress } from "@mui/material";
 import { useState } from "react";
 import CustomLink from "./CustomLink";
 import { PrimaryButton, SecondaryButton } from "./StyledButton";
@@ -17,6 +17,7 @@ export default function Header() {
 
   // redux
   const user = useSelector((state) => state.user);
+  const progressBar = useSelector((state) => state.progressBar);
   const dispatch = useDispatch();
 
   // router
@@ -46,7 +47,7 @@ export default function Header() {
     dispatch(logoutSuccess());
 
     // go to home page
-    router.push('/');
+    router.push("/");
   };
 
   return (
@@ -215,6 +216,9 @@ export default function Header() {
               </MenuItem>
             </Box>
           </Menu>
+        </Box>
+        <Box>
+          {progressBar && <LinearProgress/>}
         </Box>
       </Container>
     </Box>

@@ -75,7 +75,7 @@ export default function ShoesModelListPage() {
 
   return (
     <Container>
-      <Box mt={{ sm: 3 }} mb={10} display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2}>
+      <Box mb={10} display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2}>
         <Box flex={1}>
           <SideBar onChange={handleChangeSideBar} />
         </Box>
