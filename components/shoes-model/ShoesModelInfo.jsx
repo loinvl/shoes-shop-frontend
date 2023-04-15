@@ -7,7 +7,7 @@ import { Add, Payment, Remove, ShoppingCart } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import cartAPI from "@/api/cartAPI";
 import { useDispatch } from "react-redux";
-import { showMessage } from "@/redux/messageReducer";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import { useRouter } from "next/router";
 
 export default function ShoesModelInfo({ info }) {
@@ -57,10 +57,19 @@ export default function ShoesModelInfo({ info }) {
   };
 
   // go to checkout page
-  const handleToCheckout = () => {
+  const handleOrderNow =  async () => {
+    // add item to cart before checkout
     const shoesID = currentShoes.shoesID;
-    const url = `/checkout?ShoesID=${shoesID}`;
+    const res = await cartAPI.addShoesToCart(shoesID, currentQuantity);
 
+    // handle error res
+    if(!res.success){
+      dispatch(showErrorMessage("Có lỗi xảy ra, hãy thử lại!"));
+      return;
+    }
+
+    // handle success res
+    const url = `/checkout?ShoesID=${shoesID}`;
     router.push(url);
   }
 
@@ -157,7 +166,7 @@ export default function ShoesModelInfo({ info }) {
                 startIcon={<Payment />}
                 sx={{ paddingY: "10px" }}
                 disabled={!currentShoes}
-                onClick={handleToCheckout}
+                onClick={handleOrderNow}
               >
                 Mua Ngay
               </PrimaryButton>

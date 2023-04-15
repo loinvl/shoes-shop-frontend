@@ -33,7 +33,7 @@ export default function DefaultLayout({ children }) {
       </Box>
       {children}
       <Footer />
-      {message && <MessageSnackBar>{message}</MessageSnackBar>}
+      {message && <MessageSnackBar type={message.type}>{message.content}</MessageSnackBar>}
     </>
   );
 }

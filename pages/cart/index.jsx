@@ -248,7 +248,7 @@ export default function CartPage() {
             </Grid>
           ) : (
             items.map((item, index) => (
-              <Grid key={index} item>
+              <Grid key={index} item xs={12}>
                 <Grid
                   container
                   columns={19}
