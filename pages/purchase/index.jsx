@@ -1,10 +1,12 @@
+import purchaseAPI from "@/api/purchaseAPI";
 import CustomLink from "@/components/CustomLink";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
 import styleColors from "@/styles/styleColors";
 import { Box, Card, CardContent, Container, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
-export default function PurchasePage() {
-  const purchaseList = [
+/* mock data
+const purchaseList = [
     {
       orderTime: "00:00 01/01/2023",
       orderStatus: "Đang giao",
@@ -47,9 +49,29 @@ export default function PurchasePage() {
       ],
     },
   ];
+
+*/
+export default function PurchasePage() {
+  const [purchaseList, setPurchaseList] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      // call api to get purchase order list
+      const res = await purchaseAPI.getPurchaseList();
+
+      // handle error res
+      if(!res.success){
+        return;
+      }
+
+      // handle success res
+      console.log(res.data.purchaseOrderList);
+      setPurchaseList(res.data.purchaseOrderList);
+    })();
+  }, []);
   return (
     <Container>
-      <Box mt={3} mb={5}>
+      <Box mb={5}>
         <Box>
           <Typography variant="h4" fontWeight="600" textAlign="center">
             ĐƠN HÀNG
@@ -58,10 +80,10 @@ export default function PurchasePage() {
         <Stack my={3} gap={2}>
           {purchaseList.map((purchase, index) => (
             <Box key={index}>
-              <CustomLink href="/purchase/order">
+              <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
                 <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "1em" }}>
                   <CardContent>
-                    <PurchaseCard purchase={purchase}/>
+                    <PurchaseCard purchase={purchase} />
                   </CardContent>
                 </Card>
               </CustomLink>

@@ -43,14 +43,14 @@ export default function PurchaseOrder({ orders }) {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography>Phí vận chuyển:</Typography>
         <Typography variant="h6" fontWeight="600">
-          30000đ
+          0đ
         </Typography>
       </Box>
       <Divider />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography>Tổng cộng:</Typography>
         <Typography variant="h5" fontWeight="600">
-          {orders.reduce((pre, cur) => (pre + cur.shoes.unitPrice*cur.quantity), 0) + 30000}
+          {orders.reduce((pre, cur) => (pre + cur.shoes.unitPrice*cur.quantity), 0)}
         </Typography>
       </Box>
     </Stack>
