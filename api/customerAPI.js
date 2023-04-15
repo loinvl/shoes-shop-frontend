@@ -6,6 +6,13 @@ const customerAPI = {
         const res = await axiosClientPrivate.get(url);
 
         return res;
+    },
+
+    updateProfile: async (data) => {
+        const url = '/api/customer/profile/update';
+        const res = await axiosClientPrivate.patch(url, data);
+
+        return res;
     }
 };
 
