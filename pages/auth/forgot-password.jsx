@@ -1,12 +1,17 @@
+import authAPI from "@/api/authAPI";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 export default function ForgotPasswordPage() {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -16,8 +21,24 @@ export default function ForgotPasswordPage() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // do something
+    // call api to send email then reset password
     console.log(data);
+    const res = await authAPI.forgotPassword(data.email);
+
+    // handle error res
+    if(!res.success){
+      if(res.errorCode == 1){
+        setError("email", {message: "Email chưa đăng ký tài khoản"});
+      }
+
+      if(res.errorCode == 500){
+        dispatch(showErrorMessage("Lỗi hệ thống, hãy thử lại"));
+      }
+      return;
+    }
+
+    // handle success res
+    dispatch(showMessage("Link đổi mật khẩu đã được gửi vào email của bạn, hãy kiểm tra"));
   };
   return (
     <Container>
