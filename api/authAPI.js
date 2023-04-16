@@ -38,6 +38,13 @@ const authAPI = {
     const res = axiosClientPublic.post(url, data);
 
     return res;
+  },
+
+  register: async (data) => {
+    const url = `/api/auth/register`;
+    const res = await axiosClientPublic.post(url, data);
+
+    return res;
   }
 };
 

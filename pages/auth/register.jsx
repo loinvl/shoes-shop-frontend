@@ -1,25 +1,55 @@
+import authAPI from "@/api/authAPI";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Box, Container, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
   } = useForm();
 
+  // register
   const onSubmit = async (data) => {
     // remove confirmPassword property
     delete data.confirmPassword;
 
-    // do something
+    // call api to register a account
     console.log(data);
+    const res = await authAPI.register(data);
+
+    // handle error data
+    if (!res.success) {
+      switch (res.errorCode) {
+        case 1:
+          setError("email", { message: "Email đã được đăng ký, hãy thử email khác" });
+          break;
+        case 2:
+          dispatch(showErrorMessage("Lỗi trong khi tạo mới tài khoản, hãy thử lại"));
+          break;
+        case 500:
+          dispatch(showErrorMessage("Lỗi hệ thống, hãy thử lại"));
+          break;
+      }
+      return;
+    }
+
+    // handle success res
+    dispatch(showMessage("Tạo tài khoản thành công"));
+    router.push("/auth/login");
   };
 
   return (
