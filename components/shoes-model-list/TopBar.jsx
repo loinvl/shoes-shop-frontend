@@ -20,6 +20,7 @@ export default function TopBar({ onChange }) {
         <PrimaryInput
           label="Tìm kiếm"
           fullWidth
+          onKeyDown={(e) => {if(e.key==='Enter'){onChange(search, sort)}}}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
