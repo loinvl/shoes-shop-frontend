@@ -31,8 +31,8 @@ const purchaseAPI = {
         return res;
     },
 
-    canclePurchase: async (purchaseOrderID) => {
-        const url = `/api/purchaseorder/list/${purchaseOrderID}/cancle`;
+    cancelPurchase: async (purchaseOrderID) => {
+        const url = `/api/purchaseorder/list/${purchaseOrderID}/cancel`;
         const res = await axiosClientPrivate.patch(url);
 
         return res;

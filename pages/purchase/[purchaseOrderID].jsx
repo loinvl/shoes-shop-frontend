@@ -119,9 +119,9 @@ export default function Order() {
   }, [router]);
 
   // handle cancel order when order does not transit
-  const handleCancleOrder = async (purchaseOrderID) => {
+  const handleCancelOrder = async (purchaseOrderID) => {
     // call api
-    const res = await purchaseAPI.canclePurchase(purchaseOrderID);
+    const res = await purchaseAPI.cancelPurchase(purchaseOrderID);
 
     // handle error res
     if (!res.success) {
@@ -130,11 +130,11 @@ export default function Order() {
     }
 
     // handle success res
-    console.log(res.data.canclePurchase);
+    console.log(res.data.cancelPurchase);
     setOpenConfirm(false);
     dispatch(showMessage("Hủy đơn hàng thành công"));
     window.scrollTo(0, 0);
-    setPurchase(res.data.canclePurchase);
+    setPurchase(res.data.cancelPurchase);
   };
 
   return (
@@ -225,13 +225,6 @@ export default function Order() {
           </Box>
           <Box display="flex" justifyContent="end" gap={3}>
             <RateModal disabled={purchase.orderStatus != 4} />
-            {/* <PrimaryButton
-              size="large"
-              disabled={purchase.orderStatus >= 2}
-              onClick={(e) => handleCancleOrder(purchase.purchaseOrderID)}
-            >
-              Hủy Đơn
-            </PrimaryButton> */}
             <ConfirmDialog
               openButton={
                 <PrimaryButton size="large" disabled={purchase.orderStatus >= 2} onClick={(e) => setOpenConfirm(true)}>
@@ -241,10 +234,10 @@ export default function Order() {
               open={openConfirm}
               title="Hủy Đơn Hàng"
               content="Bạn muốn hủy đơn hàng này? Hãy xem xét thật kỹ nhé."
-              cancleLabel="Thoát"
-              onCancle={(e) => setOpenConfirm(false)}
+              cancelLabel="Thoát"
+              onCancel={(e) => setOpenConfirm(false)}
               okLabel="Hủy Đơn"
-              onOk={(e) => handleCancleOrder(purchase.purchaseOrderID)}
+              onOk={(e) => handleCancelOrder(purchase.purchaseOrderID)}
             />
           </Box>
         </Stack>
