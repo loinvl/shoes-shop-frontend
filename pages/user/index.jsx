@@ -5,6 +5,7 @@ import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
 import { StyledImage } from "@/components/layouts/StyledImage";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
+import defaultValues from "@/utils/defaultValues";
 import { Image, PhotoCamera, Settings, Upload, Watch } from "@mui/icons-material";
 import { Box, Button, Container, Divider, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
@@ -108,7 +109,7 @@ export default function Profile() {
               <Stack flex={{ xs: 2, md: 1 }} px={{ xs: "15%", sm: "3%" }} spacing={3}>
                 <Box sx={{ width: "100%", height: "auto", aspectRatio: "4/5" }}>
                   <StyledImage
-                    src={profile.avatarLink || imageUrl || "/image/avatar-default.jpg"}
+                    src={imageUrl || profile.avatarLink || defaultValues.avatarProfileLink}
                     alt="avatar"
                     width="100%"
                     height="100%"

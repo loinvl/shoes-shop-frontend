@@ -110,8 +110,17 @@ export default function CartPage() {
   const handleSelectAllItem = () => {
     setSelectedAll(!selectedAll);
 
+    // enable or disable all children checkbox
     const newSelectedList = Array(items.length).fill(!selectedAll);
     setSelectedList(newSelectedList);
+
+    // add or remove from index list
+    if(selectedAll){
+      setSelectedIndexList([]);
+    }
+    else{
+      setSelectedIndexList(Array.from(Array(items.length).keys()));
+    }
   };
 
   useEffect(() => {
