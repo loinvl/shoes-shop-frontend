@@ -1,12 +1,19 @@
+import authAPI from "@/api/authAPI";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Box, Container, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 export default function ResetPasswordPage() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -16,8 +23,33 @@ export default function ResetPasswordPage() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // do something
+    const { token } = router.query;
+    if (!token) {
+      dispatch(showErrorMessage("Link không hợp lệ"));
+      return;
+    }
+
+    // call api to reset password
     console.log(data);
+    const res = await authAPI.resetPassword(token, data.password);
+
+    // handle error res
+    if (!res.success) {
+      switch (res.errorCode) {
+        case 1:
+          dispatch(showErrorMessage("Token không hợp lệ"));
+          break;
+        case 500:
+          dispatch(showErrorMessage("Lỗi hệ thống, hãy thử lại"));
+          break;
+      }
+      return;
+    }
+
+    // handle success res
+    dispatch(showMessage("Mật khẩu đã được làm mới"));
+    router.push('/');
+    router.push('/auth/login');
   };
 
   return (

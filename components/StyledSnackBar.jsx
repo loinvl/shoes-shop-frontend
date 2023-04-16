@@ -2,7 +2,7 @@ import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch } from "react-redux";
-import { showMessage } from "@/redux/messageReducer";
+import { hideMessage, showMessage } from "@/redux/messageReducer";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -18,7 +18,7 @@ const MessageSnackBar = (props) => {
     }
 
     setOpen(false);
-    dispatch(showMessage(null));
+    dispatch(hideMessage());
   };
   
   return (

@@ -6,13 +6,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { SecondaryButton } from "../StyledButton";
+import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import { Box, Grid, Rating } from "@mui/material";
 import StarAmount from "../StarAmount";
 import { PrimaryInput } from "../StyledTextField";
 import { StyledImage } from "../layouts/StyledImage";
 
-export default function RateModal() {
+export default function RateModal({disabled}) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -27,7 +27,7 @@ export default function RateModal() {
 
   return (
     <div>
-      <SecondaryButton size="large" onClick={handleClickOpen}>
+      <SecondaryButton disabled={disabled} size="large" onClick={handleClickOpen}>
         Đánh Giá
       </SecondaryButton>
       <Dialog open={open} onClose={handleClose}>
@@ -56,8 +56,8 @@ export default function RateModal() {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Hủy</Button>
-          <Button onClick={handleClose}>Đánh Giá</Button>
+          <SecondaryButton onClick={handleClose}>Hủy</SecondaryButton>
+          <PrimaryButton onClick={handleClose}>Đánh Giá</PrimaryButton>
         </DialogActions>
       </Dialog>
     </div>
