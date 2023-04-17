@@ -1,4 +1,4 @@
-import { StyledImage } from "@/components/layouts/StyledImage";
+import { StyledImage } from "@/components/StyledImage";
 import styleColors from "@/styles/styleColors";
 import status from "@/utils/statusUtil";
 import timeUtil from "@/utils/timeUtil";

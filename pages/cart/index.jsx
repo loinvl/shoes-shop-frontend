@@ -3,7 +3,7 @@ import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";
 import { NumberInput } from "@/components/StyledTextField";
-import { StyledImage } from "@/components/layouts/StyledImage";
+import { StyledImage } from "@/components/StyledImage";
 import { showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Add, Delete, Remove } from "@mui/icons-material";
@@ -340,7 +340,7 @@ export default function CartPage() {
                           }
                           title="Xóa Giày"
                           content="Bạn muốn xóa đôi giày này khỏi giỏ hàng?"
-                          cancleLabel="Hủy"
+                          cancelLabel="Hủy"
                           onCancle={(e) => setOpenConfirmIndex(null)}
                           okLabel="Đồng ý"
                           onOk={(e) => handleRemoveItem(index)}

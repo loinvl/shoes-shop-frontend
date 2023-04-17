@@ -3,7 +3,7 @@ import uploadAPI from "@/api/uploadAPI";
 import { PrimaryButton, SecondaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
-import { StyledImage } from "@/components/layouts/StyledImage";
+import { StyledImage } from "@/components/StyledImage";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import defaultValues from "@/utils/defaultValues";
 import { Image, PhotoCamera, Settings, Upload, Watch } from "@mui/icons-material";

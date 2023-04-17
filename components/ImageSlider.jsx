@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import styleColors from "@/styles/styleColors";
-import { StyledImage } from "./layouts/StyledImage";
+import { StyledImage } from "./StyledImage";
 
 export default function ImageSlider({items, width, height, children}) {
   return (

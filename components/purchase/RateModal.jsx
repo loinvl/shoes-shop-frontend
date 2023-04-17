@@ -10,7 +10,7 @@ import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import { Box, Grid, IconButton, Rating } from "@mui/material";
 import StarAmount from "../StarAmount";
 import { PrimaryInput } from "../StyledTextField";
-import { StyledImage } from "../layouts/StyledImage";
+import { StyledImage } from "../StyledImage";
 import defaultValues from "@/utils/defaultValues";
 import { AddAPhoto, Cancel, DeleteForever, HighlightOff } from "@mui/icons-material";
 import styleColors from "@/styles/styleColors";

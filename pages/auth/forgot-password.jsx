@@ -71,7 +71,7 @@ export default function ForgotPasswordPage() {
                 Xác Nhận
               </PrimaryButton>
             </Box>
-            <Box mt={1} display="flex" justifyContent="space-between">
+            <Box mt={1} display="flex" justifyContent="end">
               <CustomLink href="/auth/login">
                 <Typography sx={{ color: styleColors.blue }}>Đăng nhập</Typography>
               </CustomLink>

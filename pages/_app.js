@@ -4,11 +4,23 @@ import "@/styles/globals.css";
 import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }) {
-  return (
-    <Provider store={store}>
-      <DefaultLayout>
-        <Component {...pageProps} />
-      </DefaultLayout>
-    </Provider>
-  );
+  // // use when have one global layout
+  // return (
+  //   <Provider store={store}>
+  //     <DefaultLayout>
+  //       <Component {...pageProps} />
+  //     </DefaultLayout>
+  //   </Provider>
+  // );
+
+  // use when have one global layout and per page layout, example: admin layout
+  const getLayout =
+    Component.getLayout ||
+    ((page) => (
+      <Provider store={store}>
+        <DefaultLayout>{page}</DefaultLayout>
+      </Provider>
+    ));
+
+  return getLayout(<Component {...pageProps} />);
 }

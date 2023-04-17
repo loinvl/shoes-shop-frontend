@@ -1,6 +1,6 @@
 import { Avatar, Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import StarAmount from "../StarAmount";
-import { StyledImage } from "../layouts/StyledImage";
+import { StyledImage } from "../StyledImage";
 import styleColors from "@/styles/styleColors";
 import defaultVariables from "@/utils/defaultValues";
 import timeUtil from "@/utils/timeUtil";

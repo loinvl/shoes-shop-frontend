@@ -60,7 +60,7 @@ export default function PurchasePage() {
       const res = await purchaseAPI.getPurchaseList();
 
       // handle error res
-      if(!res.success){
+      if (!res.success) {
         return;
       }
 
@@ -78,17 +78,21 @@ export default function PurchasePage() {
           </Typography>
         </Box>
         <Stack my={3} gap={2}>
-          {purchaseList.map((purchase, index) => (
-            <Box key={index}>
-              <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
-                <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "1em" }}>
-                  <CardContent>
-                    <PurchaseCard purchase={purchase} />
-                  </CardContent>
-                </Card>
-              </CustomLink>
-            </Box>
-          ))}
+          {purchaseList.length == 0 ? (
+            <Stack alignItems="center">Trống! Hãy lựa giày thôi nào.</Stack>
+          ) : (
+            purchaseList.map((purchase, index) => (
+              <Box key={index}>
+                <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
+                  <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "1em" }}>
+                    <CardContent>
+                      <PurchaseCard purchase={purchase} />
+                    </CardContent>
+                  </Card>
+                </CustomLink>
+              </Box>
+            ))
+          )}
         </Stack>
       </Box>
     </Container>

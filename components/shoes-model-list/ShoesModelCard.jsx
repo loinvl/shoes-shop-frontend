@@ -1,6 +1,6 @@
 import styleColors from "@/styles/styleColors";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import { StyledImage } from "../layouts/StyledImage";
+import { StyledImage } from "../StyledImage";
 import defaultVariables from "@/utils/defaultValues";
 
 /* 
