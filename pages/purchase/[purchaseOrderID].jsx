@@ -220,11 +220,10 @@ export default function Order() {
               </Typography>
             </Box>
             <Box mt={3}>
-              <PurchaseCard purchase={purchase} />
+              <PurchaseCard purchase={purchase} rate={true}/>
             </Box>
           </Box>
           <Box display="flex" justifyContent="end" gap={3}>
-            <RateModal disabled={purchase.orderStatus != 4} />
             <ConfirmDialog
               openButton={
                 <PrimaryButton size="large" disabled={purchase.orderStatus >= 2} onClick={(e) => setOpenConfirm(true)}>

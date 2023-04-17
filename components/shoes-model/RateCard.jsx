@@ -3,6 +3,7 @@ import StarAmount from "../StarAmount";
 import { StyledImage } from "../layouts/StyledImage";
 import styleColors from "@/styles/styleColors";
 import defaultVariables from "@/utils/defaultValues";
+import timeUtil from "@/utils/timeUtil";
 
 export default function RateCard({ rate }) {
   return (
@@ -22,7 +23,7 @@ export default function RateCard({ rate }) {
                   <StarAmount star={rate.rateStar} />
                 </Box>
                 <Box>
-                  <Typography>{rate.rateTime}</Typography>
+                  <Typography>{timeUtil.convertToVietNamTime(rate.rateTime)}</Typography>
                 </Box>
                 <Box>
                   <Typography>
