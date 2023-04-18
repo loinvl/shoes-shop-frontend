@@ -59,8 +59,7 @@ export default function AdminHeader() {
   };
 
   return (
-    <Box borderBottom={`2px solid ${styleColors.cloudyGray}`} sx={{ backgroundColor: styleColors.white }}>
-      <Container>
+    <Box px={3} borderBottom={`2px solid ${styleColors.cloudyGray}`} sx={{ backgroundColor: styleColors.white }}>
         <Box display={"flex"} justifyContent="space-between" py={1}>
           <Box>
             <CustomLink href="/admin">
@@ -109,7 +108,7 @@ export default function AdminHeader() {
             {user && (
               <Box>
                 <MenuItem onClick={handleCloseMenu}>
-                  <CustomLink href="/user" style={{ width: "100%" }}>
+                  <CustomLink href="#profile" style={{ width: "100%" }}>
                     <PrimaryButton variant="contained" fullWidth>
                       Thông Tin Cá Nhân
                     </PrimaryButton>
@@ -127,7 +126,6 @@ export default function AdminHeader() {
           </Menu>
         </Box>
         <Box>{progressBar && <LinearProgress />}</Box>
-      </Container>
     </Box>
   );
 }
