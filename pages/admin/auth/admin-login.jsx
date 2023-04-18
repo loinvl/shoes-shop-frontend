@@ -1,8 +1,12 @@
 import authAPI from "@/api/authAPI";
+import AdminFooter from "@/components/AdminFooter";
+import AdminHeader from "@/components/AdminHeader";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
+import AutoLogin from "@/components/hoc/AutoLogin";
+import IsLogout from "@/components/hoc/IsLogout";
 import { loginSuccess } from "@/redux/userReducer";
 import styleColors from "@/styles/styleColors";
 import authUtil from "@/utils/authUtil";
@@ -20,7 +24,7 @@ export default function AdminLoginPage() {
     setError,
     formState: { errors },
   } = useForm();
-  
+
   // distpatch action
   const dispatch = useDispatch();
 
@@ -45,7 +49,7 @@ export default function AdminLoginPage() {
         return;
       }
 
-      if (res.message.includes("Mật khẩu")){
+      if (res.message.includes("Mật khẩu")) {
         setError("password", { message: res.message });
         return;
       }
@@ -55,18 +59,26 @@ export default function AdminLoginPage() {
 
     // success
     const { accessToken, refreshToken } = res.data;
-    authUtil.storeToken(accessToken, refreshToken);
     const user = authUtil.getUserPayload(accessToken);
+
+    // if not admin, redirect to customer login
+    if (user.UserRole != 1) {
+      router.push("/auth/login");
+      return;
+    }
+
+    // if admin
+    authUtil.storeToken(accessToken, refreshToken);
     dispatch(loginSuccess(user));
-    
-    // redirect to previous page
-    router.back();
+
+    // redirect to admin page
+    router.push("/admin");
   };
 
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box display="flex" justifyContent="center" alignItems="center" height="80vh">
+        <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
           <Box p={{ xs: 3, sm: 5 }} width={{ xs: "400px", md: "500px" }} border={`1px solid ${styleColors.black}`}>
             <Box>
               <Typography variant="h4" fontWeight="600" textAlign="center">
@@ -118,3 +130,17 @@ export default function AdminLoginPage() {
     </Container>
   );
 }
+
+AdminLoginPage.getLayout = (page) => {
+  return (
+    <AutoLogin>
+      <IsLogout>
+        <Stack height="100vh" justifyContent="space-between">
+          <AdminHeader />
+          {page}
+          <AdminFooter />
+        </Stack>
+      </IsLogout>
+    </AutoLogin>
+  );
+};

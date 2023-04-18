@@ -3,6 +3,7 @@ import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
+import IsLogout from "@/components/hoc/IsLogout";
 import { loginSuccess } from "@/redux/userReducer";
 import styleColors from "@/styles/styleColors";
 import authUtil from "@/utils/authUtil";
@@ -20,7 +21,7 @@ export default function LoginPage() {
     setError,
     formState: { errors },
   } = useForm();
-  
+
   // distpatch action
   const dispatch = useDispatch();
 
@@ -45,7 +46,7 @@ export default function LoginPage() {
         return;
       }
 
-      if (res.message.includes("Mật khẩu")){
+      if (res.message.includes("Mật khẩu")) {
         setError("password", { message: res.message });
         return;
       }
@@ -58,66 +59,68 @@ export default function LoginPage() {
     authUtil.storeToken(accessToken, refreshToken);
     const user = authUtil.getUserPayload(accessToken);
     dispatch(loginSuccess(user));
-    
+
     // redirect to previous page
     router.back();
   };
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box display="flex" justifyContent="center" alignItems="center" height="80vh">
-          <Box p={{ xs: 3, sm: 5 }} width={{ xs: "400px", md: "500px" }} border={`1px solid ${styleColors.black}`}>
-            <Box>
-              <Typography variant="h4" fontWeight="600" textAlign="center">
-                Đăng Nhập
-              </Typography>
-            </Box>
-            <Stack mt={8} gap={5}>
+    <IsLogout>
+      <Container>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box display="flex" justifyContent="center" alignItems="center" height="80vh">
+            <Box p={{ xs: 3, sm: 5 }} width={{ xs: "400px", md: "500px" }} border={`1px solid ${styleColors.black}`}>
               <Box>
-                <PrimaryInput
-                  name="email"
-                  fullWidth
-                  label="Email"
-                  {...register("email", {
-                    required: "Không được để trống",
-                    pattern: {
-                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
-                      message: "Định dạng email không hợp lệ",
-                    },
-                  })}
-                />
-                {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+                <Typography variant="h4" fontWeight="600" textAlign="center">
+                  Đăng Nhập
+                </Typography>
               </Box>
-              <Box>
-                <PrimaryInput
-                  name="password"
-                  fullWidth
-                  label="Mật khẩu"
-                  type="password"
-                  {...register("password", {
-                    required: "Không được để trống",
-                  })}
-                />
-                {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+              <Stack mt={8} gap={5}>
+                <Box>
+                  <PrimaryInput
+                    name="email"
+                    fullWidth
+                    label="Email"
+                    {...register("email", {
+                      required: "Không được để trống",
+                      pattern: {
+                        value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
+                        message: "Định dạng email không hợp lệ",
+                      },
+                    })}
+                  />
+                  {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+                </Box>
+                <Box>
+                  <PrimaryInput
+                    name="password"
+                    fullWidth
+                    label="Mật khẩu"
+                    type="password"
+                    {...register("password", {
+                      required: "Không được để trống",
+                    })}
+                  />
+                  {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+                </Box>
+              </Stack>
+              <Box mt={5}>
+                <PrimaryButton size="large" fullWidth type="submit">
+                  Đăng Nhập
+                </PrimaryButton>
               </Box>
-            </Stack>
-            <Box mt={5}>
-              <PrimaryButton size="large" fullWidth type="submit">
-                Đăng Nhập
-              </PrimaryButton>
-            </Box>
-            <Box mt={1} display="flex" justifyContent="space-between">
-              <CustomLink href="/auth/forgot-password">
-                <Typography sx={{ color: styleColors.blue }}>Quên mật khẩu?</Typography>
-              </CustomLink>
-              <CustomLink href="/auth/register">
-                <Typography sx={{ color: styleColors.blue }}>Tạo tài khoản</Typography>
-              </CustomLink>
+              <Box mt={1} display="flex" justifyContent="space-between">
+                <CustomLink href="/auth/forgot-password">
+                  <Typography sx={{ color: styleColors.blue }}>Quên mật khẩu?</Typography>
+                </CustomLink>
+                <CustomLink href="/auth/register">
+                  <Typography sx={{ color: styleColors.blue }}>Tạo tài khoản</Typography>
+                </CustomLink>
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </form>
-    </Container>
+        </form>
+      </Container>
+    </IsLogout>
   );
 }

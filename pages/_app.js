@@ -14,13 +14,11 @@ export default function App({ Component, pageProps }) {
   // );
 
   // use when have one global layout and per page layout, example: admin layout
-  const getLayout =
-    Component.getLayout ||
-    ((page) => (
-      <Provider store={store}>
-        <DefaultLayout>{page}</DefaultLayout>
-      </Provider>
-    ));
+  const getLayout = Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>);
 
-  return getLayout(<Component {...pageProps} />);
+  return (
+    <Provider store={store}>
+      {getLayout(<Component {...pageProps} />)}
+    </Provider>
+  );
 }

@@ -1,9 +1,10 @@
+import IsAdmin from "@/components/hoc/IsAdmin";
 import AdminLayout from "@/components/layouts/AdminLayout";
 
-export default function AdminPage() {
-  return <div>AdminPage</div>;
+export default function PurchaseManagementPage() {
+  return <div>PurchaseManagementPage</div>;
 }
 
-AdminPage.getLayout = function getLayout(page) {
+PurchaseManagementPage.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
