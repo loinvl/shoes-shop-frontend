@@ -6,6 +6,7 @@ import AdminNav from "../AdminNav";
 import IsAdmin from "../hoc/IsAdmin";
 import AutoLogin from "../hoc/AutoLogin";
 import { useState } from "react";
+import MessageSnackBar from "../StyledSnackBar";
 
 export default function AdminLayout({ children }) {
   const [enableTab, setEnableTab] = useState(0);

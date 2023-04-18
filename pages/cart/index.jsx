@@ -134,7 +134,7 @@ export default function CartPage() {
       }
 
       // handle success res
-      const items = res.data.cartDetailList;
+      const items = res.data.cartDetailList.reverse();
       setItems(items);
       setSelectedList(Array(items.length).fill(false));
     })();

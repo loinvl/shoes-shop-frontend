@@ -51,4 +51,28 @@ const AlertDialog = ({ title, content, open, onClose }) => {
   );
 };
 
-export { ConfirmDialog, AlertDialog };
+const CustomDialog = ({ openButton, title, cancelLabel, okLabel, open, onCancel, onOk, children }) => {
+  return (
+    <div>
+      {openButton}
+      <Dialog
+        open={open}
+        onClose={onCancel}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        fullWidth
+      >
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          {children}
+        </DialogContent>
+        <DialogActions>
+          <SecondaryButton onClick={onCancel}>{cancelLabel}</SecondaryButton>
+          <PrimaryButton onClick={onOk}>{okLabel}</PrimaryButton>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
+export { ConfirmDialog, AlertDialog, CustomDialog};
