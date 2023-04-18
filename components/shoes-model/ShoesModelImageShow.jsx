@@ -1,7 +1,7 @@
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { Box, Button, IconButton } from "@mui/material";
 import { useRef, useState } from "react";
-import { StyledImage } from "../layouts/StyledImage";
+import { StyledImage } from "../StyledImage";
 import styleColors from "@/styles/styleColors";
 import defaultVariables from "@/utils/defaultValues";
 

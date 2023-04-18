@@ -3,7 +3,7 @@ import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";
 import { NumberInput } from "@/components/StyledTextField";
-import { StyledImage } from "@/components/layouts/StyledImage";
+import { StyledImage } from "@/components/StyledImage";
 import { showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Add, Delete, Remove } from "@mui/icons-material";
@@ -11,6 +11,7 @@ import { Box, Checkbox, Container, Grid, IconButton, Typography } from "@mui/mat
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import IsLogin from "@/components/hoc/IsLogin";
 
 /*
 // mock data
@@ -110,8 +111,16 @@ export default function CartPage() {
   const handleSelectAllItem = () => {
     setSelectedAll(!selectedAll);
 
+    // enable or disable all children checkbox
     const newSelectedList = Array(items.length).fill(!selectedAll);
     setSelectedList(newSelectedList);
+
+    // add or remove from index list
+    if (selectedAll) {
+      setSelectedIndexList([]);
+    } else {
+      setSelectedIndexList(Array.from(Array(items.length).keys()));
+    }
   };
 
   useEffect(() => {
@@ -125,7 +134,7 @@ export default function CartPage() {
       }
 
       // handle success res
-      const items = res.data.cartDetailList;
+      const items = res.data.cartDetailList.reverse();
       setItems(items);
       setSelectedList(Array(items.length).fill(false));
     })();
@@ -192,182 +201,184 @@ export default function CartPage() {
   // handle click order button
   const handleOrder = () => {
     // create url to redirect to new url
-    const query = selectedIndexList.map(index => `ShoesID=${items[index].shoes.shoesID}`).join('&');
+    const query = selectedIndexList.map((index) => `ShoesID=${items[index].shoes.shoesID}`).join("&");
     const url = `/checkout?${query}`;
-    
+
     // redirect to checkout with some shoes was selected
     router.push(url);
   };
 
   return (
-    <Container>
-      <Box textAlign="center" mb={10}>
-        <Box>
-          <Typography variant="h4" fontWeight="600">
-            GIỎ HÀNG
-          </Typography>
-        </Box>
-        <Grid container columns={19} px={1} alignItems="center" spacing={{ xs: 1, md: 0 }}>
-          <Grid item xs={2} md={1}>
-            <Checkbox
-              checked={selectedAll}
-              onChange={() => handleSelectAllItem()}
-              inputProps={{ "aria-label": "controlled" }}
-            />
-          </Grid>
-          <Grid item xs={17} md={7}>
-            <Typography fontWeight="600">SẢN PHẨM</Typography>
-          </Grid>
-          <Grid item md={11} display={{ xs: "none", md: "flex" }}>
-            <Grid container columns={11} alignItems="center">
-              <Grid item xs={2}>
-                <Typography fontWeight="600">MÀU SẮC</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Typography fontWeight="600">KÍCH THƯỚC</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Typography fontWeight="600">ĐƠN GIÁ</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Typography fontWeight="600">SỐ LƯỢNG</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Typography fontWeight="600">THÀNH TIỀN</Typography>
-              </Grid>
-              <Grid item xs={1}>
-                <Typography fontWeight="600">XÓA</Typography>
+    <IsLogin>
+      <Container>
+        <Box textAlign="center" mb={10}>
+          <Box>
+            <Typography variant="h4" fontWeight="600">
+              GIỎ HÀNG
+            </Typography>
+          </Box>
+          <Grid container columns={19} px={1} alignItems="center" spacing={{ xs: 1, md: 0 }}>
+            <Grid item xs={2} md={1}>
+              <Checkbox
+                checked={selectedAll}
+                onChange={() => handleSelectAllItem()}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            </Grid>
+            <Grid item xs={17} md={7}>
+              <Typography fontWeight="600">SẢN PHẨM</Typography>
+            </Grid>
+            <Grid item md={11} display={{ xs: "none", md: "flex" }}>
+              <Grid container columns={11} alignItems="center">
+                <Grid item xs={2}>
+                  <Typography fontWeight="600">MÀU SẮC</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography fontWeight="600">KÍCH THƯỚC</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography fontWeight="600">ĐƠN GIÁ</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography fontWeight="600">SỐ LƯỢNG</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography fontWeight="600">THÀNH TIỀN</Typography>
+                </Grid>
+                <Grid item xs={1}>
+                  <Typography fontWeight="600">XÓA</Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid container mt={3}>
-          {items.length === 0 ? (
-            <Grid item xs={12} justifyContent="center">
-              <Typography>Trống. Hãy tích cực chọn lựa!</Typography>
-            </Grid>
-          ) : (
-            items.map((item, index) => (
-              <Grid key={index} item xs={12}>
-                <Grid
-                  container
-                  columns={19}
-                  py={3}
-                  px={1}
-                  spacing={{ xs: 1, md: 0 }}
-                  alignItems="center"
-                  sx={{ border: `1px solid ${styleColors.cloudyGray}` }}
-                >
-                  <Grid item xs={2} md={1}>
-                    <Checkbox
-                      checked={selectedList[index]}
-                      onChange={() => handleSelectItem(index)}
-                      inputProps={{ "aria-label": "controlled" }}
-                    />
-                  </Grid>
-                  <Grid item xs={17} md={7} display="flex" alignItems="center" gap={1}>
-                    <StyledImage src={item.shoesModel.images[0].imageLink} alt="shoes" width="100px" height="100px" />
-                    <Typography textAlign="justify">{item.shoesModel.shoesModelName}</Typography>
-                  </Grid>
-                  <Grid item xs={19} md={4}>
-                    <Grid container columns={4}>
-                      <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
-                        <Typography display={{ md: "none" }}>Màu sắc:&nbsp;</Typography>
-                        <Typography>{item.shoes.color}</Typography>
-                      </Grid>
-                      <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
-                        <Typography display={{ md: "none" }}>Kích thước:&nbsp;</Typography>
-                        <Typography>{item.shoes.size}</Typography>
+          <Grid container mt={3}>
+            {items.length === 0 ? (
+              <Grid item xs={12} justifyContent="center">
+                <Typography>Trống. Hãy tích cực chọn lựa!</Typography>
+              </Grid>
+            ) : (
+              items.map((item, index) => (
+                <Grid key={index} item xs={12}>
+                  <Grid
+                    container
+                    columns={19}
+                    py={3}
+                    px={1}
+                    spacing={{ xs: 1, md: 0 }}
+                    alignItems="center"
+                    sx={{ border: `1px solid ${styleColors.cloudyGray}` }}
+                  >
+                    <Grid item xs={2} md={1}>
+                      <Checkbox
+                        checked={selectedList[index]}
+                        onChange={() => handleSelectItem(index)}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    </Grid>
+                    <Grid item xs={17} md={7} display="flex" alignItems="center" gap={1}>
+                      <StyledImage src={item.shoesModel.images[0].imageLink} alt="shoes" width="100px" height="100px" />
+                      <Typography textAlign="justify">{item.shoesModel.shoesModelName}</Typography>
+                    </Grid>
+                    <Grid item xs={19} md={4}>
+                      <Grid container columns={4}>
+                        <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
+                          <Typography display={{ md: "none" }}>Màu sắc:&nbsp;</Typography>
+                          <Typography>{item.shoes.color}</Typography>
+                        </Grid>
+                        <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
+                          <Typography display={{ md: "none" }}>Kích thước:&nbsp;</Typography>
+                          <Typography>{item.shoes.size}</Typography>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={19} md={4}>
-                    <Grid container columns={4} alignItems="center">
-                      <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
-                        <Typography display={{ md: "none" }}>Đơn giá:&nbsp;</Typography>
-                        <Typography>{item.shoes.unitPrice}</Typography>
-                      </Grid>
-                      <Grid item md={2} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
-                        <Typography mr={2} display={{ md: "none" }}>
-                          Số lượng:&nbsp;
-                        </Typography>
-                        <NumberInput
-                          type="number"
-                          value={item.quantity}
-                          inputProps={{ style: { textAlign: "center" } }}
-                          InputProps={{
-                            startAdornment: (
-                              <IconButton onClick={(e) => handleDownQuantity(index)}>
-                                <Remove />
-                              </IconButton>
-                            ),
-                            endAdornment: (
-                              <IconButton onClick={(e) => handleUpQuantity(index)}>
-                                <Add />
-                              </IconButton>
-                            ),
-                            readOnly: true,
-                            sx: { padding: 0 },
-                          }}
-                          sx={{ width: { xs: "90px", sm: "100px", md: "100%" } }}
-                        />
+                    <Grid item xs={19} md={4}>
+                      <Grid container columns={4} alignItems="center">
+                        <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
+                          <Typography display={{ md: "none" }}>Đơn giá:&nbsp;</Typography>
+                          <Typography>{item.shoes.unitPrice}</Typography>
+                        </Grid>
+                        <Grid item md={2} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
+                          <Typography mr={2} display={{ md: "none" }}>
+                            Số lượng:&nbsp;
+                          </Typography>
+                          <NumberInput
+                            type="number"
+                            value={item.quantity}
+                            inputProps={{ style: { textAlign: "center" } }}
+                            InputProps={{
+                              startAdornment: (
+                                <IconButton onClick={(e) => handleDownQuantity(index)}>
+                                  <Remove />
+                                </IconButton>
+                              ),
+                              endAdornment: (
+                                <IconButton onClick={(e) => handleUpQuantity(index)}>
+                                  <Add />
+                                </IconButton>
+                              ),
+                              readOnly: true,
+                              sx: { padding: 0 },
+                            }}
+                            sx={{ width: { xs: "90px", sm: "100px", md: "100%" } }}
+                          />
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={19} md={3}>
-                    <Grid container columns={3} alignItems="center">
-                      <Grid item xs={1.5} md={2} display="flex" justifyContent={{ md: "center" }}>
-                        <Typography display={{ md: "none" }}>Thành tiền:&nbsp;</Typography>
-                        <Typography>{item.shoes.unitPrice * item.quantity}</Typography>
-                      </Grid>
-                      <Grid item xs={1.5} md={1} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
-                        <Typography display={{ md: "none" }}>Xóa:&nbsp;</Typography>
-                        <ConfirmDialog
-                          open={openConfirmIndex == index}
-                          openButton={
-                            <IconButton onClick={(e) => setOpenConfirmIndex(index)}>
-                              <Delete />
-                            </IconButton>
-                          }
-                          title="Xóa Giày"
-                          content="Bạn muốn xóa đôi giày này khỏi giỏ hàng?"
-                          cancleLabel="Hủy"
-                          onCancle={(e) => setOpenConfirmIndex(null)}
-                          okLabel="Đồng ý"
-                          onOk={(e) => handleRemoveItem(index)}
-                        ></ConfirmDialog>
+                    <Grid item xs={19} md={3}>
+                      <Grid container columns={3} alignItems="center">
+                        <Grid item xs={1.5} md={2} display="flex" justifyContent={{ md: "center" }}>
+                          <Typography display={{ md: "none" }}>Thành tiền:&nbsp;</Typography>
+                          <Typography>{item.shoes.unitPrice * item.quantity}</Typography>
+                        </Grid>
+                        <Grid item xs={1.5} md={1} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
+                          <Typography display={{ md: "none" }}>Xóa:&nbsp;</Typography>
+                          <ConfirmDialog
+                            open={openConfirmIndex == index}
+                            openButton={
+                              <IconButton onClick={(e) => setOpenConfirmIndex(index)}>
+                                <Delete />
+                              </IconButton>
+                            }
+                            title="Xóa Giày"
+                            content="Bạn muốn xóa đôi giày này khỏi giỏ hàng?"
+                            cancelLabel="Hủy"
+                            onCancle={(e) => setOpenConfirmIndex(null)}
+                            okLabel="Đồng ý"
+                            onOk={(e) => handleRemoveItem(index)}
+                          ></ConfirmDialog>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            ))
-          )}
-        </Grid>
+              ))
+            )}
+          </Grid>
 
-        <Box
-          mt={5}
-          p={3}
-          display="flex"
-          flexDirection={{ xs: "column", sm: "row" }}
-          justifyContent="center"
-          alignItems="center"
-          gap={3}
-          sx={{ border: `1px solid ${styleColors.cloudyGray}`, backgroundColor: styleColors.cyanBlue }}
-        >
-          <Box display="flex" alignItems="center">
-            <Typography>Tổng tiền(</Typography>
-            <Typography display="inline">{items.length} sản phẩm</Typography>
-            <Typography>):&nbsp;</Typography>
-            <Typography variant="h6" fontWeight="600">
-              {items.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0)}đ
-            </Typography>
+          <Box
+            mt={5}
+            p={3}
+            display="flex"
+            flexDirection={{ xs: "column", sm: "row" }}
+            justifyContent="center"
+            alignItems="center"
+            gap={3}
+            sx={{ border: `1px solid ${styleColors.cloudyGray}`, backgroundColor: styleColors.cyanBlue }}
+          >
+            <Box display="flex" alignItems="center">
+              <Typography>Tổng tiền(</Typography>
+              <Typography display="inline">{items.length} sản phẩm</Typography>
+              <Typography>):&nbsp;</Typography>
+              <Typography variant="h6" fontWeight="600">
+                {items.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0)}đ
+              </Typography>
+            </Box>
+            <PrimaryButton size="large" onClick={handleOrder} disabled={selectedIndexList.length === 0}>
+              Mua Hàng
+            </PrimaryButton>
           </Box>
-          <PrimaryButton size="large" onClick={handleOrder} disabled={selectedIndexList.length === 0}>
-            Mua Hàng
-          </PrimaryButton>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </IsLogin>
   );
 }

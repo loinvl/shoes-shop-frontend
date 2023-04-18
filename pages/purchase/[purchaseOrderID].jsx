@@ -1,6 +1,7 @@
 import purchaseAPI from "@/api/purchaseAPI";
 import { PrimaryButton, SecondaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";
+import IsLogin from "@/components/hoc/IsLogin";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
 import RateModal from "@/components/purchase/RateModal";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
@@ -119,9 +120,9 @@ export default function Order() {
   }, [router]);
 
   // handle cancel order when order does not transit
-  const handleCancleOrder = async (purchaseOrderID) => {
+  const handleCancelOrder = async (purchaseOrderID) => {
     // call api
-    const res = await purchaseAPI.canclePurchase(purchaseOrderID);
+    const res = await purchaseAPI.cancelPurchase(purchaseOrderID);
 
     // handle error res
     if (!res.success) {
@@ -130,125 +131,123 @@ export default function Order() {
     }
 
     // handle success res
-    console.log(res.data.canclePurchase);
+    console.log(res.data.cancelPurchase);
     setOpenConfirm(false);
     dispatch(showMessage("Hủy đơn hàng thành công"));
     window.scrollTo(0, 0);
-    setPurchase(res.data.canclePurchase);
+    setPurchase(res.data.cancelPurchase);
   };
 
   return (
     purchase && (
-      <Container>
-        <Stack mb={5} px={{ xs: 1, sm: 5 }} gap={5}>
-          <Box>
-            <Typography variant="h4" fontWeight="600" textAlign="center">
-              CHI TIẾT ĐƠN HÀNG
-            </Typography>
-          </Box>
-          <Box>
+      <IsLogin>
+        <Container>
+          <Stack mb={5} px={{ xs: 1, sm: 5 }} gap={5}>
             <Box>
-              <Typography variant="h6" fontWeight="600">
-                Thông Tin Người Nhận
+              <Typography variant="h4" fontWeight="600" textAlign="center">
+                CHI TIẾT ĐƠN HÀNG
               </Typography>
             </Box>
-            <Box mt={3}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <Typography>Tên người nhận: {purchase.customerName}</Typography>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Typography>Số điện thoại: {purchase.phone}</Typography>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Typography>Email: {purchase.email}</Typography>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Typography>Địa chỉ: {purchase.address}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography>Ghi chú: {purchase.note}</Typography>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-          <Divider />
-          <Box>
             <Box>
-              <Typography variant="h6" fontWeight="600">
-                Thông Tin Vận Chuyển
-              </Typography>
-            </Box>
-            {purchase.orderStatus != 5 ? (
-              <Box mt={3}>
-                <Stepper activeStep={purchase.orderStatus} alternativeLabel>
-                  <Step>
-                    <StepLabel StepIconComponent={ReceiptCustom}>{statusUtil.purchaseStatus[0]}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel StepIconComponent={AllInboxCustom}>{statusUtil.purchaseStatus[1]}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel StepIconComponent={LocalShippingCustom}>{statusUtil.purchaseStatus[2]}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel StepIconComponent={DeliveryDiningCustom}>{statusUtil.purchaseStatus[3]}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel StepIconComponent={FactCheckCustom}>{statusUtil.purchaseStatus[4]}</StepLabel>
-                  </Step>
-                </Stepper>
+              <Box>
+                <Typography variant="h6" fontWeight="600">
+                  Thông Tin Người Nhận
+                </Typography>
               </Box>
-            ) : (
               <Box mt={3}>
-                <Stepper activeStep={purchase.orderStatus} alternativeLabel>
-                  <Step>
-                    <StepLabel StepIconComponent={ReceiptCustom}>{statusUtil.purchaseStatus[0]}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel StepIconComponent={BackspaceCustom}>{statusUtil.purchaseStatus[5]}</StepLabel>
-                  </Step>
-                </Stepper>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <Typography>Tên người nhận: {purchase.customerName}</Typography>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography>Số điện thoại: {purchase.phone}</Typography>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography>Email: {purchase.email}</Typography>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Typography>Địa chỉ: {purchase.address}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>Ghi chú: {purchase.note}</Typography>
+                  </Grid>
+                </Grid>
               </Box>
-            )}
-          </Box>
-          <Divider />
-          <Box>
+            </Box>
+            <Divider />
             <Box>
-              <Typography variant="h6" fontWeight="600">
-                Thông Tin Đơn Hàng
-              </Typography>
+              <Box>
+                <Typography variant="h6" fontWeight="600">
+                  Thông Tin Vận Chuyển
+                </Typography>
+              </Box>
+              {purchase.orderStatus != 5 ? (
+                <Box mt={3}>
+                  <Stepper activeStep={purchase.orderStatus} alternativeLabel>
+                    <Step>
+                      <StepLabel StepIconComponent={ReceiptCustom}>{statusUtil.purchaseStatus[0]}</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel StepIconComponent={AllInboxCustom}>{statusUtil.purchaseStatus[1]}</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel StepIconComponent={LocalShippingCustom}>{statusUtil.purchaseStatus[2]}</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel StepIconComponent={DeliveryDiningCustom}>{statusUtil.purchaseStatus[3]}</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel StepIconComponent={FactCheckCustom}>{statusUtil.purchaseStatus[4]}</StepLabel>
+                    </Step>
+                  </Stepper>
+                </Box>
+              ) : (
+                <Box mt={3}>
+                  <Stepper activeStep={purchase.orderStatus} alternativeLabel>
+                    <Step>
+                      <StepLabel StepIconComponent={ReceiptCustom}>{statusUtil.purchaseStatus[0]}</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel StepIconComponent={BackspaceCustom}>{statusUtil.purchaseStatus[5]}</StepLabel>
+                    </Step>
+                  </Stepper>
+                </Box>
+              )}
             </Box>
-            <Box mt={3}>
-              <PurchaseCard purchase={purchase} />
+            <Divider />
+            <Box>
+              <Box>
+                <Typography variant="h6" fontWeight="600">
+                  Thông Tin Đơn Hàng
+                </Typography>
+              </Box>
+              <Box mt={3}>
+                <PurchaseCard purchase={purchase} rate={true} />
+              </Box>
             </Box>
-          </Box>
-          <Box display="flex" justifyContent="end" gap={3}>
-            <RateModal disabled={purchase.orderStatus != 4} />
-            {/* <PrimaryButton
-              size="large"
-              disabled={purchase.orderStatus >= 2}
-              onClick={(e) => handleCancleOrder(purchase.purchaseOrderID)}
-            >
-              Hủy Đơn
-            </PrimaryButton> */}
-            <ConfirmDialog
-              openButton={
-                <PrimaryButton size="large" disabled={purchase.orderStatus >= 2} onClick={(e) => setOpenConfirm(true)}>
-                  Hủy Đơn
-                </PrimaryButton>
-              }
-              open={openConfirm}
-              title="Hủy Đơn Hàng"
-              content="Bạn muốn hủy đơn hàng này? Hãy xem xét thật kỹ nhé."
-              cancleLabel="Thoát"
-              onCancle={(e) => setOpenConfirm(false)}
-              okLabel="Hủy Đơn"
-              onOk={(e) => handleCancleOrder(purchase.purchaseOrderID)}
-            />
-          </Box>
-        </Stack>
-      </Container>
+            <Box display="flex" justifyContent="end" gap={3}>
+              <ConfirmDialog
+                openButton={
+                  <PrimaryButton
+                    size="large"
+                    disabled={purchase.orderStatus >= 2}
+                    onClick={(e) => setOpenConfirm(true)}
+                  >
+                    Hủy Đơn
+                  </PrimaryButton>
+                }
+                open={openConfirm}
+                title="Hủy Đơn Hàng"
+                content="Bạn muốn hủy đơn hàng này? Hãy xem xét thật kỹ nhé."
+                cancelLabel="Thoát"
+                onCancel={(e) => setOpenConfirm(false)}
+                okLabel="Hủy Đơn"
+                onOk={(e) => handleCancelOrder(purchase.purchaseOrderID)}
+              />
+            </Box>
+          </Stack>
+        </Container>
+      </IsLogin>
     )
   );
 }

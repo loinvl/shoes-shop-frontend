@@ -5,13 +5,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { PrimaryButton, SecondaryButton } from "./StyledButton";
 
-const ConfirmDialog = ({ openButton, title, content, cancleLabel, okLabel, open, onCancle, onOk }) => {
+const ConfirmDialog = ({ openButton, title, content, cancelLabel, okLabel, open, onCancel, onOk }) => {
   return (
     <div>
       {openButton}
       <Dialog
         open={open}
-        onClose={onCancle}
+        onClose={onCancel}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         fullWidth
@@ -21,7 +21,7 @@ const ConfirmDialog = ({ openButton, title, content, cancleLabel, okLabel, open,
           <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <SecondaryButton onClick={onCancle}>{cancleLabel}</SecondaryButton>
+          <SecondaryButton onClick={onCancel}>{cancelLabel}</SecondaryButton>
           <PrimaryButton onClick={onOk}>{okLabel}</PrimaryButton>
         </DialogActions>
       </Dialog>
@@ -51,4 +51,28 @@ const AlertDialog = ({ title, content, open, onClose }) => {
   );
 };
 
-export { ConfirmDialog, AlertDialog };
+const CustomDialog = ({ openButton, title, cancelLabel, okLabel, open, onCancel, onOk, children }) => {
+  return (
+    <div>
+      {openButton}
+      <Dialog
+        open={open}
+        onClose={onCancel}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        fullWidth
+      >
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          {children}
+        </DialogContent>
+        <DialogActions>
+          <SecondaryButton onClick={onCancel}>{cancelLabel}</SecondaryButton>
+          <PrimaryButton onClick={onOk}>{okLabel}</PrimaryButton>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
+export { ConfirmDialog, AlertDialog, CustomDialog};

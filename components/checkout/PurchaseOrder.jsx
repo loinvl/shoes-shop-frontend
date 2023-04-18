@@ -50,7 +50,7 @@ export default function PurchaseOrder({ orders }) {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography>Tổng cộng:</Typography>
         <Typography variant="h5" fontWeight="600">
-          {orders.reduce((pre, cur) => (pre + cur.shoes.unitPrice*cur.quantity), 0)}
+          {orders.reduce((pre, cur) => (pre + cur.shoes.unitPrice*cur.quantity), 0)}đ
         </Typography>
       </Box>
     </Stack>

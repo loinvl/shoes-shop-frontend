@@ -77,7 +77,7 @@ export default function Header() {
             {user && (
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>
                 <IconButton onClick={handleOpenMenu}>
-                  <Avatar src="" sx={{ width: "30px", height: "30px" }} />
+                  <Avatar src={user.AvatarLink} sx={{ width: "30px", height: "30px" }} />
                 </IconButton>
               </Box>
             )}

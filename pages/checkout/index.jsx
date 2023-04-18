@@ -4,6 +4,7 @@ import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText } from "@/components/StyledTypography";
 import PurchaseOrder from "@/components/checkout/PurchaseOrder";
+import IsLogin from "@/components/hoc/IsLogin";
 import { showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
@@ -55,7 +56,7 @@ const orders = [
 export default function CheckoutPage() {
   const [profile, setProfile] = useState(null);
   const [orders, setOrders] = useState([]);
-  
+
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -106,125 +107,127 @@ export default function CheckoutPage() {
 
   const onSubmit = (data) => {
     const receiveCustomerInfo = data;
-    const checkoutDetails = orders.map(order => ({shoesID: order.shoes.shoesID, quantity: order.quantity}));
+    const checkoutDetails = orders.map((order) => ({ shoesID: order.shoes.shoesID, quantity: order.quantity }));
     handleCheckout(receiveCustomerInfo, checkoutDetails);
   };
 
   // handle checkout when click "Mua hàng" button
   const handleCheckout = async (receiveCustomerInfo, checkoutDetails) => {
-    const purchase = {...receiveCustomerInfo, checkoutDetails};
-    
+    const purchase = { ...receiveCustomerInfo, checkoutDetails };
+
     // call api to checkout
     const res = await purchaseAPI.checkout(purchase);
 
     // handle error res
-    if(!res.success){
+    if (!res.success) {
       return;
     }
 
     // handle success res
     dispatch(showMessage("Đặt Hàng Thành Công"));
-    router.push('/purchase');
+    router.push("/purchase");
   };
 
   return (
-    <Container>
-      <Box mt={3} mb={5}>
-        <Box>
-          <Typography variant="h4" fontWeight="600" textAlign="center">
-            ĐẶT HÀNG
-          </Typography>
-        </Box>
-        <Box my={2}>
-          <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={5}>
-            <Box flex={1}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.cloudyGray}`, borderRadius: "1em" }}>
-                  <Box>
-                    <Typography mb={1}>Tên người nhận:</Typography>
+    <IsLogin>
+      <Container>
+        <Box mt={3} mb={5}>
+          <Box>
+            <Typography variant="h4" fontWeight="600" textAlign="center">
+              ĐẶT HÀNG
+            </Typography>
+          </Box>
+          <Box my={2}>
+            <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={5}>
+              <Box flex={1}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.cloudyGray}`, borderRadius: "1em" }}>
                     <Box>
+                      <Typography mb={1}>Tên người nhận:</Typography>
+                      <Box>
+                        <PrimaryInput
+                          name="customerName"
+                          fullWidth
+                          {...register("customerName", {
+                            required: "Tên không được để trống",
+                            pattern: {
+                              value:
+                                /^[a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ ,.'-]{0,50}$/i,
+                              message: "Tên gồm các chữ cái việt nam và không quá 50 ký tự",
+                            },
+                          })}
+                        ></PrimaryInput>
+                        {errors.customerName && <ErrorText>{errors.customerName.message}</ErrorText>}
+                      </Box>
+                    </Box>
+                    <Box>
+                      <Typography mb={1}>Số điện thoại:</Typography>
+                      <Box>
+                        <PrimaryInput
+                          name="phone"
+                          fullWidth
+                          {...register("phone", {
+                            required: "Số điện thoại không được để trống",
+                            pattern: {
+                              value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/i,
+                              message: "Số điện thoại không đúng",
+                            },
+                          })}
+                        ></PrimaryInput>
+                        {errors.phone && <ErrorText>{errors.phone.message}</ErrorText>}
+                      </Box>
+                    </Box>
+                    <Box>
+                      <Typography mb={1}>Email:</Typography>
                       <PrimaryInput
-                        name="customerName"
+                        name="email"
                         fullWidth
-                        {...register("customerName", {
-                          required: "Tên không được để trống",
+                        {...register("email", {
+                          required: "Không được để trống",
                           pattern: {
-                            value:
-                              /^[a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ ,.'-]{0,50}$/i,
-                            message: "Tên gồm các chữ cái việt nam và không quá 50 ký tự",
+                            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
+                            message: "Định dạng email không hợp lệ",
                           },
                         })}
-                      ></PrimaryInput>
-                      {errors.customerName && <ErrorText>{errors.customerName.message}</ErrorText>}
+                      />
+                      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                     </Box>
-                  </Box>
-                  <Box>
-                    <Typography mb={1}>Số điện thoại:</Typography>
                     <Box>
+                      <Typography mb={1}>Địa chỉ:</Typography>
                       <PrimaryInput
-                        name="phone"
                         fullWidth
-                        {...register("phone", {
-                          required: "Số điện thoại không được để trống",
-                          pattern: {
-                            value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/i,
-                            message: "Số điện thoại không đúng",
-                          },
-                        })}
+                        multiline
+                        rows={2}
+                        placeholder="Ghi rõ: Số nhà, tên đường - Xã/Phường - Huyện/Quận - Tỉnh/Thành Phố"
+                        {...register("address", { required: "Địa chỉ không được để trống" })}
                       ></PrimaryInput>
-                      {errors.phone && <ErrorText>{errors.phone.message}</ErrorText>}
+                      {errors.address && <ErrorText>{errors.address.message}</ErrorText>}
                     </Box>
-                  </Box>
-                  <Box>
-                    <Typography mb={1}>Email:</Typography>
-                    <PrimaryInput
-                      name="email"
-                      fullWidth
-                      {...register("email", {
-                        required: "Không được để trống",
-                        pattern: {
-                          value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
-                          message: "Định dạng email không hợp lệ",
-                        },
-                      })}
-                    />
-                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
-                  </Box>
-                  <Box>
-                    <Typography mb={1}>Địa chỉ:</Typography>
-                    <PrimaryInput
-                      fullWidth
-                      multiline
-                      rows={2}
-                      placeholder="Ghi rõ: Số nhà, tên đường - Xã/Phường - Huyện/Quận - Tỉnh/Thành Phố"
-                      {...register("address", { required: "Địa chỉ không được để trống" })}
-                    ></PrimaryInput>
-                    {errors.address && <ErrorText>{errors.address.message}</ErrorText>}
-                  </Box>
-                  <Box>
-                    <Typography mb={1}>Ghi chú:</Typography>
-                    <PrimaryInput
-                      fullWidth
-                      multiline
-                      rows={3}
-                      placeholder="Lời nhắn cho cửa hàng"
-                      {...register("note")}
-                    ></PrimaryInput>
-                  </Box>
-                </Stack>
-              </form>
-            </Box>
-            <Box flex={1}>
-              <PurchaseOrder orders={orders} />
+                    <Box>
+                      <Typography mb={1}>Ghi chú:</Typography>
+                      <PrimaryInput
+                        fullWidth
+                        multiline
+                        rows={3}
+                        placeholder="Lời nhắn cho cửa hàng"
+                        {...register("note")}
+                      ></PrimaryInput>
+                    </Box>
+                  </Stack>
+                </form>
+              </Box>
+              <Box flex={1}>
+                <PurchaseOrder orders={orders} />
+              </Box>
             </Box>
           </Box>
+          <Box>
+            <PrimaryButton size="large" fullWidth onClick={handleSubmit(onSubmit)}>
+              Đặt Hàng
+            </PrimaryButton>
+          </Box>
         </Box>
-        <Box>
-          <PrimaryButton size="large" fullWidth onClick={handleSubmit(onSubmit)}>
-            Đặt Hàng
-          </PrimaryButton>
-        </Box>
-      </Box>
-    </Container>
+      </Container>
+    </IsLogin>
   );
 }

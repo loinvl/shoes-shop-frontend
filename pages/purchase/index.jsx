@@ -1,5 +1,6 @@
 import purchaseAPI from "@/api/purchaseAPI";
 import CustomLink from "@/components/CustomLink";
+import IsLogin from "@/components/hoc/IsLogin";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
 import styleColors from "@/styles/styleColors";
 import { Box, Card, CardContent, Container, Stack, Typography } from "@mui/material";
@@ -60,7 +61,7 @@ export default function PurchasePage() {
       const res = await purchaseAPI.getPurchaseList();
 
       // handle error res
-      if(!res.success){
+      if (!res.success) {
         return;
       }
 
@@ -70,27 +71,33 @@ export default function PurchasePage() {
     })();
   }, []);
   return (
-    <Container>
-      <Box mb={5}>
-        <Box>
-          <Typography variant="h4" fontWeight="600" textAlign="center">
-            ĐƠN HÀNG
-          </Typography>
+    <IsLogin>
+      <Container>
+        <Box mb={5}>
+          <Box>
+            <Typography variant="h4" fontWeight="600" textAlign="center">
+              ĐƠN HÀNG
+            </Typography>
+          </Box>
+          <Stack my={3} gap={2}>
+            {purchaseList.length == 0 ? (
+              <Stack alignItems="center">Trống! Hãy lựa giày thôi nào.</Stack>
+            ) : (
+              purchaseList.map((purchase, index) => (
+                <Box key={index}>
+                  <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
+                    <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "1em" }}>
+                      <CardContent>
+                        <PurchaseCard purchase={purchase} />
+                      </CardContent>
+                    </Card>
+                  </CustomLink>
+                </Box>
+              ))
+            )}
+          </Stack>
         </Box>
-        <Stack my={3} gap={2}>
-          {purchaseList.map((purchase, index) => (
-            <Box key={index}>
-              <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
-                <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "1em" }}>
-                  <CardContent>
-                    <PurchaseCard purchase={purchase} />
-                  </CardContent>
-                </Card>
-              </CustomLink>
-            </Box>
-          ))}
-        </Stack>
-      </Box>
-    </Container>
+      </Container>
+    </IsLogin>
   );
 }

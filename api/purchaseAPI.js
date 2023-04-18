@@ -17,6 +17,7 @@ const purchaseAPI = {
         return res;
     },
 
+    // get purchase list of customer
     getPurchaseList: async () => {
         const url = '/api/purchaseorder/list';
         const res = await axiosClientPrivate.get(url);
@@ -31,8 +32,22 @@ const purchaseAPI = {
         return res;
     },
 
-    canclePurchase: async (purchaseOrderID) => {
-        const url = `/api/purchaseorder/list/${purchaseOrderID}/cancle`;
+    cancelPurchase: async (purchaseOrderID) => {
+        const url = `/api/purchaseorder/list/${purchaseOrderID}/cancel`;
+        const res = await axiosClientPrivate.patch(url);
+
+        return res;
+    },
+
+    getPurchaseListAdmin: async () => {
+        const url = '/api/admin/purchase/list';
+        const res = await axiosClientPrivate.get(url);
+
+        return res;
+    },
+
+    updatePurchaseStatus: async (purchaseOrderID, orderStatus) => {
+        const url = `/api/admin/purchase/${purchaseOrderID}/status/update/${orderStatus}`;
         const res = await axiosClientPrivate.patch(url);
 
         return res;
