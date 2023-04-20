@@ -17,7 +17,32 @@ const styleColors = {
 
     // other tones
     red: "#FE251B",
-    yellow: "#FFCE3D"
+    yellow: "#FFCE3D",
+
+    ///////////////////
+    // primary color
+    primary: "#4d4d4d",
+    black: "black",
+    white: "white",
+
+    // secondary color,
+    secondary: "#4d4d4d",
+
+    // other color
+    gray: {
+        light: "##F2F2F2",
+        medium: "#CCCCCC",
+        dark: "#666666"
+    },
+
+    status: {
+        normal: "#666666",
+        success: "#00E200",
+        progress: "#2CCCFF",
+        error: "#FF2A04"
+    }
+
+
 }
 
 module.exports = styleColors;
