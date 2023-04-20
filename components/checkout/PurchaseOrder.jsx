@@ -1,16 +1,14 @@
 import styleColors from "@/styles/styleColors";
 import { Box, Divider, Stack, Typography } from "@mui/material";
+import { FourthHeading } from "../StyledTypography";
+import convertUtil from "@/utils/convertUtil";
 
 export default function PurchaseOrder({ orders }) {
   return (
     <Stack p={5} gap={3} sx={{ borderRadius: "1em", backgroundColor: styleColors.cloudyGray }}>
       <Box display="flex" justifyContent="space-between">
-        <Typography variant="h6" fontWeight="600">
-          Sản phẩm
-        </Typography>
-        <Typography variant="h6" fontWeight="600">
-          Thành tiền
-        </Typography>
+        <FourthHeading>Sản phẩm</FourthHeading>
+        <FourthHeading>Thành tiền</FourthHeading>
       </Box>
       <Divider />
       <Stack gap={2}>
@@ -28,12 +26,12 @@ export default function PurchaseOrder({ orders }) {
               <Typography>Màu sắc: {order.shoes.color}</Typography>
               <Typography>Kích thước: {order.shoes.size}</Typography>
               <Typography>
-                Đơn giá x Số lượng: {order.shoes.unitPrice}x{order.quantity}
+                Đơn giá x Số lượng: {convertUtil.toPriceString(order.shoes.unitPrice)}x{order.quantity}
               </Typography>
             </Box>
             <Box flex={1} textAlign="right">
               <Typography variant="h6" fontWeight="600">
-                {order.shoes.unitPrice * order.quantity}đ
+                {convertUtil.toPriceString(order.shoes.unitPrice * order.quantity)}
               </Typography>
             </Box>
           </Box>
@@ -48,9 +46,9 @@ export default function PurchaseOrder({ orders }) {
       </Box>
       <Divider />
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography>Tổng cộng:</Typography>
+        <Typography>Tổng tiền:</Typography>
         <Typography variant="h5" fontWeight="600">
-          {orders.reduce((pre, cur) => (pre + cur.shoes.unitPrice*cur.quantity), 0)}đ
+          {convertUtil.toPriceString(orders.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0))}
         </Typography>
       </Box>
     </Stack>

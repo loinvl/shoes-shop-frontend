@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import IsLogin from "@/components/hoc/IsLogin";
+import { FourthHeading, NormalHeading, ThirdHeading } from "@/components/StyledTypography";
+import convertUtil from "@/utils/convertUtil";
 
 /*
 // mock data
@@ -213,11 +215,17 @@ export default function CartPage() {
       <Container>
         <Box textAlign="center" mb={10}>
           <Box>
-            <Typography variant="h4" fontWeight="600">
-              GIỎ HÀNG
-            </Typography>
+            <ThirdHeading>GIỎ HÀNG</ThirdHeading>
           </Box>
-          <Grid container columns={19} px={1} alignItems="center" spacing={{ xs: 1, md: 0 }}>
+          <Grid
+            container
+            columns={19}
+            px={1}
+            py={3}
+            alignItems="center"
+            spacing={{ xs: 1, md: 0 }}
+            sx={{ border: `1px solid ${styleColors.cloudyGray}`, backgroundColor: styleColors.cloudyGray }}
+          >
             <Grid item xs={2} md={1}>
               <Checkbox
                 checked={selectedAll}
@@ -226,32 +234,32 @@ export default function CartPage() {
               />
             </Grid>
             <Grid item xs={17} md={7}>
-              <Typography fontWeight="600">SẢN PHẨM</Typography>
+              <NormalHeading>SẢN PHẨM</NormalHeading>
             </Grid>
             <Grid item md={11} display={{ xs: "none", md: "flex" }}>
               <Grid container columns={11} alignItems="center">
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">MÀU SẮC</Typography>
+                  <NormalHeading>MÀU SẮC</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">KÍCH THƯỚC</Typography>
+                  <NormalHeading>KÍCH THƯỚC</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">ĐƠN GIÁ</Typography>
+                  <NormalHeading>ĐƠN GIÁ</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">SỐ LƯỢNG</Typography>
+                  <NormalHeading>SỐ LƯỢNG</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">THÀNH TIỀN</Typography>
+                  <NormalHeading>THÀNH TIỀN</NormalHeading>
                 </Grid>
                 <Grid item xs={1}>
-                  <Typography fontWeight="600">XÓA</Typography>
+                  <NormalHeading>XÓA</NormalHeading>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid container mt={3}>
+          <Grid container mt={2}>
             {items.length === 0 ? (
               <Grid item xs={12} justifyContent="center">
                 <Typography>Trống. Hãy tích cực chọn lựa!</Typography>
@@ -295,7 +303,7 @@ export default function CartPage() {
                       <Grid container columns={4} alignItems="center">
                         <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
                           <Typography display={{ md: "none" }}>Đơn giá:&nbsp;</Typography>
-                          <Typography>{item.shoes.unitPrice}</Typography>
+                          <Typography>{convertUtil.toPriceString(item.shoes.unitPrice)}</Typography>
                         </Grid>
                         <Grid item md={2} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
                           <Typography mr={2} display={{ md: "none" }}>
@@ -328,7 +336,9 @@ export default function CartPage() {
                       <Grid container columns={3} alignItems="center">
                         <Grid item xs={1.5} md={2} display="flex" justifyContent={{ md: "center" }}>
                           <Typography display={{ md: "none" }}>Thành tiền:&nbsp;</Typography>
-                          <Typography>{item.shoes.unitPrice * item.quantity}</Typography>
+                          <Typography>
+                            {convertUtil.toPriceString(item.shoes.unitPrice * item.quantity)}
+                          </Typography>
                         </Grid>
                         <Grid item xs={1.5} md={1} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
                           <Typography display={{ md: "none" }}>Xóa:&nbsp;</Typography>
@@ -370,7 +380,9 @@ export default function CartPage() {
               <Typography display="inline">{items.length} sản phẩm</Typography>
               <Typography>):&nbsp;</Typography>
               <Typography variant="h6" fontWeight="600">
-                {items.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0)}đ
+                {convertUtil.toPriceString(
+                  items.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0)
+                )}
               </Typography>
             </Box>
             <PrimaryButton size="large" onClick={handleOrder} disabled={selectedIndexList.length === 0}>

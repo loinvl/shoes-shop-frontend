@@ -1,5 +1,5 @@
 import { Box, Button, Grid, IconButton, InputAdornment, Stack, Typography } from "@mui/material";
-import { SecondaryHeading } from "../StyledTypography";
+import { SecondaryHeading, ThirdHeading } from "../StyledTypography";
 import { PrimaryButton, SecondaryButton, SelectButton } from "../StyledButton";
 import { NumberInput } from "../StyledTextField";
 import styleColors from "@/styles/styleColors";
@@ -9,6 +9,7 @@ import cartAPI from "@/api/cartAPI";
 import { useDispatch } from "react-redux";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import { useRouter } from "next/router";
+import convertUtil from "@/utils/convertUtil";
 
 export default function ShoesModelInfo({ info }) {
   const [currentShoes, setCurrentShoes] = useState(
@@ -83,9 +84,9 @@ export default function ShoesModelInfo({ info }) {
               <Typography>Thương hiệu:</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h5" fontWeight="600" color={styleColors.black}>
+              <ThirdHeading>
                 {info.brand?.brandName.toUpperCase()}
-              </Typography>
+              </ThirdHeading>
             </Grid>
           </Grid>
           <Grid item xs={12} container alignItems="center" spacing={3}>
@@ -93,9 +94,9 @@ export default function ShoesModelInfo({ info }) {
               <Typography>Đơn giá:</Typography>
             </Grid>
             <Grid item>
-              <SecondaryHeading>
-                {currentShoes == null ? "Không có hàng" : currentShoes.unitPrice + "đ"}
-              </SecondaryHeading>
+              <ThirdHeading>
+                {currentShoes == null ? "Không có hàng" : convertUtil.toPriceString(currentShoes.unitPrice)}
+              </ThirdHeading>
             </Grid>
           </Grid>
           <Grid item xs={12} container alignItems="center" spacing={3}>

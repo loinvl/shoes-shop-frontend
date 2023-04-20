@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { NumberInput, PrimaryInput } from "../StyledTextField";
 import { PrimaryButton } from "../StyledButton";
 import brandAPI from "@/api/brandAPI";
+import { FourthHeading, ThirdHeading } from "../StyledTypography";
 
 // mock data
 const brands = [
@@ -50,9 +51,9 @@ export default function SideBar({ onChange }) {
     <Box p={{ xs: 1, md: 3 }} sx={{ border: `1px solid ${styleColors.cloudyGray}`, borderRadius: "1em" }}>
       <Box display="flex" flexDirection={{ xs: "row", sm: "column" }} gap={2}>
         <Box my={3} flex={2}>
-          <Typography sx={{ fontSize: { xs: "1.1em", md: "1.3em" } }} fontWeight={600} color={styleColors.oilBlack}>
+          <FourthHeading>
             Khoảng giá
-          </Typography>
+          </FourthHeading>
           <Box mt={3}>
             <Box
               display="flex"
@@ -72,9 +73,9 @@ export default function SideBar({ onChange }) {
         </Box>
         <Divider />
         <Box my={3} flex={1}>
-          <Typography sx={{ fontSize: { xs: "1.1em", md: "1.3em" } }} fontWeight={600} color={styleColors.oilBlack}>
+          <FourthHeading>
             Kích thước
-          </Typography>
+          </FourthHeading>
           <Box mt={3} display="flex" flexDirection="column" gap={2}>
             <Box flex={5}>
               <NumberInput fullWidth label="Size" type="number" value={size || ""} onChange={(e) => setSize(e.target.value)} />
@@ -89,9 +90,9 @@ export default function SideBar({ onChange }) {
       </Box>
       <Divider />
       <Box my={3}>
-        <Typography sx={{ fontSize: { xs: "1.1em", md: "1.3em" } }} fontWeight={600} color={styleColors.oilBlack}>
+        <FourthHeading>
           Thương Hiệu
-        </Typography>
+        </FourthHeading>
         <Box mt={3} display={{ xs: "none", sm: "block" }}>
           <Typography
             color={brandID === null ? styleColors.blue : styleColors.metalGray}

@@ -2,7 +2,7 @@ import customerAPI from "@/api/customerAPI";
 import uploadAPI from "@/api/uploadAPI";
 import { PrimaryButton, SecondaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
-import { ErrorText } from "@/components/StyledTypography";
+import { ErrorText, ThirdHeading } from "@/components/StyledTypography";
 import { StyledImage } from "@/components/StyledImage";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import defaultValues from "@/utils/defaultValues";
@@ -103,9 +103,9 @@ export default function Profile() {
           <form onSubmit={handleSubmit(handleUpdateProfile)}>
             <Box mb={5}>
               <Box>
-                <Typography variant="h4" fontWeight="600" textAlign="center">
+                <ThirdHeading textAlign="center">
                   THÔNG TIN CÁ NHÂN
-                </Typography>
+                </ThirdHeading>
               </Box>
               <Box mt={3} display="flex" flexDirection={{ xs: "column", sm: "row" }}>
                 <Stack flex={{ xs: 2, md: 1 }} px={{ xs: "15%", sm: "3%" }} spacing={3}>

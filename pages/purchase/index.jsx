@@ -1,5 +1,6 @@
 import purchaseAPI from "@/api/purchaseAPI";
 import CustomLink from "@/components/CustomLink";
+import { ThirdHeading } from "@/components/StyledTypography";
 import IsLogin from "@/components/hoc/IsLogin";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
 import styleColors from "@/styles/styleColors";
@@ -75,9 +76,9 @@ export default function PurchasePage() {
       <Container>
         <Box mb={5}>
           <Box>
-            <Typography variant="h4" fontWeight="600" textAlign="center">
+            <ThirdHeading textAlign="center">
               ĐƠN HÀNG
-            </Typography>
+            </ThirdHeading>
           </Box>
           <Stack my={3} gap={2}>
             {purchaseList.length == 0 ? (
@@ -86,7 +87,7 @@ export default function PurchasePage() {
               purchaseList.map((purchase, index) => (
                 <Box key={index}>
                   <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
-                    <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "1em" }}>
+                    <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "0.2em" }}>
                       <CardContent>
                         <PurchaseCard purchase={purchase} />
                       </CardContent>

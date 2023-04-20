@@ -79,13 +79,18 @@ export default function AdminLoginPage() {
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
-          <Box p={{ xs: 3, sm: 5 }} width={{ xs: "400px", md: "500px" }} border={`1px solid ${styleColors.black}`}>
+          <Box
+            px={{ xs: 3, sm: 5 }}
+            py={8}
+            width={{ xs: "400px", md: "500px" }}
+            border={`1px solid ${styleColors.black}`}
+          >
             <Box>
               <Typography variant="h4" fontWeight="600" textAlign="center">
                 Admin
               </Typography>
             </Box>
-            <Stack mt={8} gap={5}>
+            <Stack mt={3} gap={5}>
               <Box>
                 <PrimaryInput
                   name="email"

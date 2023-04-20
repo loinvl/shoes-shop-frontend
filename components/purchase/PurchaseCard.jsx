@@ -1,7 +1,7 @@
 import { StyledImage } from "@/components/StyledImage";
 import styleColors from "@/styles/styleColors";
 import status from "@/utils/statusUtil";
-import timeUtil from "@/utils/timeUtil";
+import convertUtil from "@/utils/convertUtil";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import RateModal from "./RateModal";
 import uploadAPI from "@/api/uploadAPI";
@@ -11,6 +11,7 @@ import rateAPI from "@/api/rateAPI";
 import { useDispatch } from "react-redux";
 import { SecondaryButton } from "../StyledButton";
 import RateCard from "../shoes-model/RateCard";
+import { FourthHeading, NormalHeading } from "../StyledTypography";
 
 export default function PurchaseCard({ purchase, rate = false }) {
   // one rate map with one orderdetail, not rate is null map with orderdetail
@@ -74,12 +75,12 @@ export default function PurchaseCard({ purchase, rate = false }) {
                     <Typography>Màu sắc: {item.shoes.color}</Typography>
                     <Typography>Kích thước: {item.shoes.size}</Typography>
                     <Typography>
-                      Đơn giá x Số lượng: {item.unitPrice}x{item.quantity}
+                      Đơn giá x Số lượng: {convertUtil.toPriceString(item.unitPrice)}x{item.quantity}
                     </Typography>
                   </Box>
                 </Box>
                 <Box>
-                  <Typography fontWeight="600">{item.unitPrice * item.quantity}đ</Typography>
+                  <NormalHeading>{convertUtil.toPriceString(item.unitPrice * item.quantity)}</NormalHeading>
                 </Box>
               </Box>
               {rate && (
@@ -109,23 +110,22 @@ export default function PurchaseCard({ purchase, rate = false }) {
             </Box>
           ))}
         </Box>
-        <Box
-          mt={5}
-          display="flex"
-          flexDirection={{ xs: "column", sm: "row" }}
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <Stack mt={{ xs: 3, sm: 5 }}>
+          <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between">
+            <Typography>Ngày đặt hàng: {convertUtil.toVietNamTime(purchase.orderTime)}</Typography>
+            <Box>
+              <NormalHeading>{status.purchaseStatus[purchase.orderStatus].toUpperCase()}</NormalHeading>
+            </Box>
+          </Stack>
           <Box>
-            <Typography>Ngày đặt hàng: {timeUtil.convertToVietNamTime(purchase.orderTime)}</Typography>
-            <Typography>Trạng thái đơn hàng: {status.purchaseStatus[purchase.orderStatus]}</Typography>
+            <FourthHeading textAlign={{xs: "left", sm: "right"}}>
+              Tổng tiền:{" "}
+              {convertUtil.toPriceString(
+                purchase.orderDetail.reduce((pre, cur) => pre + cur.unitPrice * cur.quantity, 0)
+              )}
+            </FourthHeading>
           </Box>
-          <Box>
-            <Typography variant="h6" fontWeight="600">
-              Tổng cộng: {purchase.orderDetail.reduce((pre, cur) => pre + cur.unitPrice * cur.quantity, 0)}đ
-            </Typography>
-          </Box>
-        </Box>
+        </Stack>
       </Box>
     )
   );

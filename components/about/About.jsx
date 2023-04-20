@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { PrimaryHeading, SecondaryHeading } from "../StyledTypography";
+import { PrimaryHeading, SecondaryHeading, ThirdHeading } from "../StyledTypography";
 import styleColors from "@/styles/styleColors";
 
 export default function About() {
@@ -9,9 +9,9 @@ export default function About() {
         <PrimaryHeading color={styleColors.black}>
           Shoes Shop
         </PrimaryHeading>
-        <SecondaryHeading color={styleColors.black}>
+        <ThirdHeading color={styleColors.black}>
           Thời Trang Hiện Đại
-        </SecondaryHeading>
+        </ThirdHeading>
         <Typography mt={3}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comml

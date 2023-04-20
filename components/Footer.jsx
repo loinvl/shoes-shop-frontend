@@ -3,6 +3,7 @@ import { ContactPhone, Facebook, Favorite, Twitter, YouTube } from "@mui/icons-m
 import { Box, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import CustomLink from "./CustomLink";
+import { FourthHeading, NormalHeading, ThirdHeading } from "./StyledTypography";
 
 export default function Footer() {
   return (
@@ -38,15 +39,15 @@ export default function Footer() {
                 </CustomLink>
               </Box>
             </Box>
-            <Box 
-             display="flex"
-             flexDirection={{ xs: "column", md: "row" }}
-             justifyContent="space-between"
-             alignItems="start"
-             gap={{ xs: 5, md: 15 }}
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", md: "row" }}
+              justifyContent="space-between"
+              alignItems="start"
+              gap={{ xs: 5, md: 15 }}
             >
               <Box display="flex" flexDirection="column" gap={2}>
-                <Typography variant="h6">Lời Cảm Ơn</Typography>
+                <FourthHeading>Lời Cảm Ơn</FourthHeading>
                 <Typography>
                   Mến chào quý khách hàng của Shoes Shop! Cám ơn bạn đã luôn tin tưởng và ủng hộ chúng tôi. Bạn trao
                   chúng tôi cơ hội, chùng tôi trao bạn niềm tin!
@@ -54,7 +55,7 @@ export default function Footer() {
               </Box>
               <Box display="flex" flexDirection="column" gap={2}>
                 <Box>
-                  <Typography variant="h6">Thông Tin Liên Hệ</Typography>
+                  <FourthHeading>Thông Tin Liên Hệ</FourthHeading>
                 </Box>
                 <Box>
                   <Typography noWrap>Số điện thoại: +84000000000</Typography>
@@ -75,9 +76,9 @@ export default function Footer() {
         <Typography>@2023 Shoes Shop Made With&nbsp;</Typography>
         <Favorite sx={{ color: styleColors.red }} />
         <Typography>&nbsp;By&nbsp;</Typography>
-        <Typography color={styleColors.black} fontWeight={600}>
-          <CustomLink href="https://www.facebook.com/profile.php?id=100017728178359">NguyenVanLoi</CustomLink>
-        </Typography>
+        <CustomLink href="https://www.facebook.com/profile.php?id=100017728178359">
+          <NormalHeading color={styleColors.black}>NguyenVanLoi</NormalHeading>
+        </CustomLink>
       </Box>
     </Box>
   );

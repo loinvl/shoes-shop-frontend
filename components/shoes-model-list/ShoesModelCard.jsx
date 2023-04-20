@@ -2,6 +2,8 @@ import styleColors from "@/styles/styleColors";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import { StyledImage } from "../StyledImage";
 import defaultVariables from "@/utils/defaultValues";
+import { FourthHeading, NormalHeading } from "../StyledTypography";
+import convertUtil from "@/utils/convertUtil";
 
 /* 
 Shoes model card include:
@@ -12,8 +14,10 @@ Shoes model card include:
 
 export default function ShoelModelCard({ shoesModel, width }) {
   const minPrice = shoesModel.shoeses.reduce((prev, curr) => (prev.unitPrice < curr.unitPrice ? prev : curr)).unitPrice;
-  const maxPrice = shoesModel.shoeses.reduce((prev, curr) => (prev.unitPrice >= curr.unitPrice ? prev : curr)).unitPrice;
-  
+  const maxPrice = shoesModel.shoeses.reduce((prev, curr) =>
+    prev.unitPrice >= curr.unitPrice ? prev : curr
+  ).unitPrice;
+
   return (
     <Card
       sx={{
@@ -44,9 +48,11 @@ export default function ShoelModelCard({ shoesModel, width }) {
             <Typography color={styleColors.black}>{shoesModel.shoesModelName}</Typography>
           </Box>
           <Box>
-            <Typography fontWeight="600" color={styleColors.black}>
-              {minPrice == maxPrice ? minPrice : `${minPrice}đ - ${maxPrice}`}đ
-            </Typography>
+            <NormalHeading>
+              {minPrice == maxPrice
+                ? convertUtil.toPriceString(minPrice)
+                : `${convertUtil.toPriceString(minPrice)} - ${convertUtil.toPriceString(maxPrice)}`}
+            </NormalHeading>
           </Box>
         </Stack>
       </CardContent>

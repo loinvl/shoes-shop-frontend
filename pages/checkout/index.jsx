@@ -2,7 +2,7 @@ import customerAPI from "@/api/customerAPI";
 import purchaseAPI from "@/api/purchaseAPI";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
-import { ErrorText } from "@/components/StyledTypography";
+import { ErrorText, FourthHeading, ThirdHeading } from "@/components/StyledTypography";
 import PurchaseOrder from "@/components/checkout/PurchaseOrder";
 import IsLogin from "@/components/hoc/IsLogin";
 import { showMessage } from "@/redux/messageReducer";
@@ -133,15 +133,20 @@ export default function CheckoutPage() {
       <Container>
         <Box mt={3} mb={5}>
           <Box>
-            <Typography variant="h4" fontWeight="600" textAlign="center">
+            <ThirdHeading textAlign="center">
               ĐẶT HÀNG
-            </Typography>
+            </ThirdHeading>
           </Box>
           <Box my={2}>
             <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={5}>
               <Box flex={1}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.cloudyGray}`, borderRadius: "1em" }}>
+                    <Box>
+                      <FourthHeading>
+                        THÔNG TIN NGƯỜI NHẬN
+                      </FourthHeading>
+                    </Box>
                     <Box>
                       <Typography mb={1}>Tên người nhận:</Typography>
                       <Box>
@@ -218,13 +223,13 @@ export default function CheckoutPage() {
               </Box>
               <Box flex={1}>
                 <PurchaseOrder orders={orders} />
+                <Box mt={3}>
+                  <PrimaryButton size="large" fullWidth onClick={handleSubmit(onSubmit)}>
+                    Đặt Hàng
+                  </PrimaryButton>
+                </Box>
               </Box>
             </Box>
-          </Box>
-          <Box>
-            <PrimaryButton size="large" fullWidth onClick={handleSubmit(onSubmit)}>
-              Đặt Hàng
-            </PrimaryButton>
           </Box>
         </Box>
       </Container>

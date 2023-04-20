@@ -1,14 +1,15 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
 import RateCard from "./RateCard";
+import { FourthHeading, ThirdHeading } from "../StyledTypography";
 
 export default function ShoesModelRate({ rates }) {
   return (
     rates && (
       <Stack>
-        <Typography fontWeight="600" fontSize="1.6em">
+        <FourthHeading>
           Đánh Giá Sản Phẩm
-        </Typography>
-        <Stack gap={5}>
+        </FourthHeading>
+        <Stack gap={5} mt={2}>
           {rates.length === 0 ? (
             <Typography textAlign="center">Chưa có đánh giá nào!</Typography>
           ) : (

@@ -1,6 +1,7 @@
 import purchaseAPI from "@/api/purchaseAPI";
 import { PrimaryButton, SecondaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";
+import { FourthHeading, ThirdHeading } from "@/components/StyledTypography";
 import IsLogin from "@/components/hoc/IsLogin";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
 import RateModal from "@/components/purchase/RateModal";
@@ -144,15 +145,15 @@ export default function Order() {
         <Container>
           <Stack mb={5} px={{ xs: 1, sm: 5 }} gap={5}>
             <Box>
-              <Typography variant="h4" fontWeight="600" textAlign="center">
+              <ThirdHeading textAlign="center">
                 CHI TIẾT ĐƠN HÀNG
-              </Typography>
+              </ThirdHeading>
             </Box>
             <Box>
               <Box>
-                <Typography variant="h6" fontWeight="600">
+                <FourthHeading>
                   Thông Tin Người Nhận
-                </Typography>
+                </FourthHeading>
               </Box>
               <Box mt={3}>
                 <Grid container spacing={2}>
@@ -177,9 +178,9 @@ export default function Order() {
             <Divider />
             <Box>
               <Box>
-                <Typography variant="h6" fontWeight="600">
+                <FourthHeading>
                   Thông Tin Vận Chuyển
-                </Typography>
+                </FourthHeading>
               </Box>
               {purchase.orderStatus != 5 ? (
                 <Box mt={3}>
@@ -217,9 +218,9 @@ export default function Order() {
             <Divider />
             <Box>
               <Box>
-                <Typography variant="h6" fontWeight="600">
+                <FourthHeading>
                   Thông Tin Đơn Hàng
-                </Typography>
+                </FourthHeading>
               </Box>
               <Box mt={3}>
                 <PurchaseCard purchase={purchase} rate={true} />
