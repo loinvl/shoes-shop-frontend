@@ -1,11 +1,11 @@
 import styleColors from "@/styles/styleColors";
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import { FourthHeading } from "../StyledTypography";
+import { FourthHeading, NormalHeading, ThirdHeading } from "../StyledTypography";
 import convertUtil from "@/utils/convertUtil";
 
 export default function PurchaseOrder({ orders }) {
   return (
-    <Stack p={5} gap={3} sx={{ borderRadius: "1em", backgroundColor: styleColors.cloudyGray }}>
+    <Stack p={5} gap={3} sx={{ borderRadius: "0.5em", backgroundColor: styleColors.gray.light }}>
       <Box display="flex" justifyContent="space-between">
         <FourthHeading>Sản phẩm</FourthHeading>
         <FourthHeading>Thành tiền</FourthHeading>
@@ -19,7 +19,7 @@ export default function PurchaseOrder({ orders }) {
             justifyContent="space-between"
             alignItems="end"
             gap={3}
-            sx={{ borderBottom: `1px solid ${styleColors.metalGray}` }}
+            sx={{ borderBottom: `1px solid ${styleColors.gray.medium}` }}
           >
             <Box flex={3}>
               <Typography>{order.shoesModel.shoesModelName}</Typography>
@@ -30,9 +30,9 @@ export default function PurchaseOrder({ orders }) {
               </Typography>
             </Box>
             <Box flex={1} textAlign="right">
-              <Typography variant="h6" fontWeight="600">
+              <FourthHeading color={styleColors.secondary}>
                 {convertUtil.toPriceString(order.shoes.unitPrice * order.quantity)}
-              </Typography>
+              </FourthHeading>
             </Box>
           </Box>
         ))}
@@ -40,16 +40,16 @@ export default function PurchaseOrder({ orders }) {
       <Divider />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography>Phí vận chuyển:</Typography>
-        <Typography variant="h6" fontWeight="600">
+        <FourthHeading color={styleColors.secondary}>
           0đ
-        </Typography>
+        </FourthHeading>
       </Box>
       <Divider />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography>Tổng tiền:</Typography>
-        <Typography variant="h5" fontWeight="600">
+        <ThirdHeading color={styleColors.secondary}>
           {convertUtil.toPriceString(orders.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0))}
-        </Typography>
+        </ThirdHeading>
       </Box>
     </Stack>
   );

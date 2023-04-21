@@ -131,7 +131,7 @@ export default function CheckoutPage() {
   return (
     <IsLogin>
       <Container>
-        <Box mt={3} mb={5}>
+        <Box mb={5}>
           <Box>
             <ThirdHeading textAlign="center">
               ĐẶT HÀNG
@@ -141,7 +141,7 @@ export default function CheckoutPage() {
             <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={5}>
               <Box flex={1}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.cloudyGray}`, borderRadius: "1em" }}>
+                  <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.gray.medium}`, borderRadius: "0.5em" }}>
                     <Box>
                       <FourthHeading>
                         THÔNG TIN NGƯỜI NHẬN
