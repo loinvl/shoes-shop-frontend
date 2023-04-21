@@ -3,7 +3,7 @@ import styleColors from "@/styles/styleColors";
 import { useEffect, useState } from "react";
 import { NumberInput, PrimaryInput } from "../StyledTextField";
 import { PrimaryButton } from "../StyledButton";
-import brandAPI from "@/api/brandAPI";
+import brandAPI from "@/backendAPI/brandAPI";
 import { FourthHeading, ThirdHeading } from "../StyledTypography";
 
 // mock data

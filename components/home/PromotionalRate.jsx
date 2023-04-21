@@ -17,7 +17,7 @@ export default function PromotionalRate({ rate }) {
         <StarAmount star={5}/>
       </Box>
       <Box mt={2}>
-        <Typography>"{rate.content}"</Typography>
+        <Typography>{`"`}{rate.content}{`"`}</Typography>
       </Box>
     </Box>
   );

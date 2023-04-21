@@ -1,4 +1,4 @@
-import authAPI from "@/api/authAPI";
+import authAPI from "@/backendAPI/authAPI";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";

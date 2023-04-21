@@ -1,4 +1,4 @@
-import authAPI from "@/api/authAPI";
+import authAPI from "@/backendAPI/authAPI";
 import AdminFooter from "@/components/AdminFooter";
 import AdminHeader from "@/components/AdminHeader";
 import CustomLink from "@/components/CustomLink";

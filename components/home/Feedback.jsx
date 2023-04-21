@@ -3,7 +3,7 @@ import { PrimaryHeading } from "../StyledTypography";
 import PromotionalRate from "./PromotionalRate";
 import styleColors from "@/styles/styleColors";
 
-export default function () {
+export default function Feedback () {
   const firstRate = {
     name: "Khách Hàng",
     avatar: "/banner/banner7.png",

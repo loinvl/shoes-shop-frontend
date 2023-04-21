@@ -13,7 +13,7 @@ import { useState } from "react";
 import CustomLink from "./CustomLink";
 import { PrimaryButton, SecondaryButton } from "./StyledButton";
 import { useDispatch, useSelector } from "react-redux";
-import authAPI from "@/api/authAPI";
+import authAPI from "@/backendAPI/authAPI";
 import authUtil from "@/utils/authUtil";
 import { logoutSuccess } from "@/redux/userReducer";
 import { useRouter } from "next/router";
