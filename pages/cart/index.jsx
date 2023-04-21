@@ -351,7 +351,7 @@ export default function CartPage() {
                             open={openConfirmIndex == index}
                             openButton={
                               <IconButton onClick={(e) => setOpenConfirmIndex(index)}>
-                                <Delete sx={{ color: styleColors.status.normal }} />
+                                <Delete color="action"/>
                               </IconButton>
                             }
                             title="Xóa Giày"

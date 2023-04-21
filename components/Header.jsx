@@ -95,14 +95,14 @@ export default function Header() {
             <Box>
               <CustomLink href="/cart">
                 <StyledBadge badgeContent={1}>
-                  <ShoppingCart color="action" sx={{color: styleColors.primary}} />
+                  <ShoppingCart color="action"/>
                 </StyledBadge>
               </CustomLink>
             </Box>
             <Box>
               <CustomLink href="/purchase">
                 <StyledBadge badgeContent={1}>
-                  <Receipt color="action" sx={{color: styleColors.primary}}/>
+                  <Receipt color="action"/>
                 </StyledBadge>
               </CustomLink>
             </Box>
