@@ -1,5 +1,5 @@
-const timeUtil = {
-  convertToVietNamTime: (time) => {
+const convertUtil = {
+  toVietNamTime: (time) => {
     // create a new Date object from the UTC date/time string
     const utcDateTime = new Date(time);
     utcDateTime.setHours(0,0,0,0);
@@ -17,6 +17,14 @@ const timeUtil = {
     // output: "15/04/2023 - 01:00PM"
     return vietNamTime;
   },
+
+  toPriceString: (value) => {
+    // convert number or string to number
+    const number = Number.parseFloat(value);
+    const price = number.toLocaleString().replaceAll(',', '.') + 'đ';
+
+    return price;
+  }
 };
 
-export default timeUtil;
+export default convertUtil;

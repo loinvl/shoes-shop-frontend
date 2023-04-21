@@ -33,6 +33,7 @@ axiosClientPublic.interceptors.response.use(
       success: false,
       message: "Response is not data",
       data: null,
+      errorCode: 500,
     };
   },
   (error) => {
@@ -50,6 +51,7 @@ axiosClientPublic.interceptors.response.use(
       success: false,
       message: "Response is not data",
       data: null,
+      errorCode: 500,
     };
   }
 );

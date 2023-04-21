@@ -2,10 +2,10 @@ import customerAPI from "@/api/customerAPI";
 import purchaseAPI from "@/api/purchaseAPI";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
-import { ErrorText } from "@/components/StyledTypography";
+import { ErrorText, FourthHeading, ThirdHeading } from "@/components/StyledTypography";
 import PurchaseOrder from "@/components/checkout/PurchaseOrder";
 import IsLogin from "@/components/hoc/IsLogin";
-import { showMessage } from "@/redux/messageReducer";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
@@ -72,10 +72,12 @@ export default function CheckoutPage() {
 
       // handle error res
       if (!resProfile.success) {
+        dispatch(showErrorMessage("Lỗi trong quá trình lấy dữ liệu, hãy thử lại"));
         return;
       }
 
       if (!resOrder.success) {
+        dispatch(showErrorMessage("Lỗi trong quá trình lấy dữ liệu, hãy thử lại"));
         return;
       }
 
@@ -120,6 +122,20 @@ export default function CheckoutPage() {
 
     // handle error res
     if (!res.success) {
+      switch (res.errorCode) {
+        case 1:
+          dispatch(showErrorMessage("Bạn chưa chọn sản phẩm để thanh toán"));
+          break;
+        case 2:
+          dispatch(showErrorMessage("Hàng trong kho không đủ"));
+          break;
+        case 3:
+          dispatch(showErrorMessage("Lỗi trong quá trình tạo đơn hàng, hãy thử lại"));
+          break;
+        default:
+          dispatch(showErrorMessage("Lỗi server, hãy thử lại"));
+          break;
+      }
       return;
     }
 
@@ -131,17 +147,18 @@ export default function CheckoutPage() {
   return (
     <IsLogin>
       <Container>
-        <Box mt={3} mb={5}>
+        <Box mb={5}>
           <Box>
-            <Typography variant="h4" fontWeight="600" textAlign="center">
-              ĐẶT HÀNG
-            </Typography>
+            <ThirdHeading textAlign="center">ĐẶT HÀNG</ThirdHeading>
           </Box>
           <Box my={2}>
             <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={5}>
               <Box flex={1}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.cloudyGray}`, borderRadius: "1em" }}>
+                  <Stack p={5} gap={3} sx={{ border: `1px solid ${styleColors.gray.medium}`, borderRadius: "0.5em" }}>
+                    <Box>
+                      <FourthHeading>THÔNG TIN NGƯỜI NHẬN</FourthHeading>
+                    </Box>
                     <Box>
                       <Typography mb={1}>Tên người nhận:</Typography>
                       <Box>
@@ -218,13 +235,13 @@ export default function CheckoutPage() {
               </Box>
               <Box flex={1}>
                 <PurchaseOrder orders={orders} />
+                <Box mt={3}>
+                  <PrimaryButton size="large" fullWidth onClick={handleSubmit(onSubmit)}>
+                    Đặt Hàng
+                  </PrimaryButton>
+                </Box>
               </Box>
             </Box>
-          </Box>
-          <Box>
-            <PrimaryButton size="large" fullWidth onClick={handleSubmit(onSubmit)}>
-              Đặt Hàng
-            </PrimaryButton>
           </Box>
         </Box>
       </Container>

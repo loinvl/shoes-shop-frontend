@@ -59,7 +59,7 @@ export default function AdminHeader() {
   };
 
   return (
-    <Box px={3} borderBottom={`2px solid ${styleColors.cloudyGray}`} sx={{ backgroundColor: styleColors.white }}>
+    <Box px={3} borderBottom={`2px solid ${styleColors.gray.medium}`} sx={{ backgroundColor: styleColors.white }}>
         <Box display={"flex"} justifyContent="space-between" py={1}>
           <Box>
             <CustomLink href="/admin">

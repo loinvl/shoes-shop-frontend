@@ -7,11 +7,13 @@ import { StyledImage } from "@/components/StyledImage";
 import { showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Add, Delete, Remove } from "@mui/icons-material";
-import { Box, Checkbox, Container, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Checkbox, Container, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import IsLogin from "@/components/hoc/IsLogin";
+import { FourthHeading, NormalHeading, ThirdHeading } from "@/components/StyledTypography";
+import convertUtil from "@/utils/convertUtil";
 
 /*
 // mock data
@@ -74,8 +76,12 @@ const items = [
 */
 export default function CartPage() {
   const [items, setItems] = useState([]);
+
+  // handle checkbox
   const [selectedAll, setSelectedAll] = useState(false);
   const [selectedList, setSelectedList] = useState([]);
+
+  // handle choose shoes list
   const [selectedIndexList, setSelectedIndexList] = useState([]);
   const [openConfirmIndex, setOpenConfirmIndex] = useState(null);
 
@@ -213,11 +219,18 @@ export default function CartPage() {
       <Container>
         <Box textAlign="center" mb={10}>
           <Box>
-            <Typography variant="h4" fontWeight="600">
-              GIỎ HÀNG
-            </Typography>
+            <ThirdHeading>GIỎ HÀNG</ThirdHeading>
           </Box>
-          <Grid container columns={19} px={1} alignItems="center" spacing={{ xs: 1, md: 0 }}>
+          <Grid
+          mt={2}
+            container
+            columns={19}
+            px={1}
+            py={3}
+            alignItems="center"
+            //spacing={{ xs: 1, md: 0 }}
+            sx={{ border: `1px solid ${styleColors.gray.medium}`, backgroundColor: styleColors.gray.light }}
+          >
             <Grid item xs={2} md={1}>
               <Checkbox
                 checked={selectedAll}
@@ -226,32 +239,32 @@ export default function CartPage() {
               />
             </Grid>
             <Grid item xs={17} md={7}>
-              <Typography fontWeight="600">SẢN PHẨM</Typography>
+              <NormalHeading>SẢN PHẨM</NormalHeading>
             </Grid>
             <Grid item md={11} display={{ xs: "none", md: "flex" }}>
               <Grid container columns={11} alignItems="center">
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">MÀU SẮC</Typography>
+                  <NormalHeading>MÀU SẮC</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">KÍCH THƯỚC</Typography>
+                  <NormalHeading>KÍCH THƯỚC</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">ĐƠN GIÁ</Typography>
+                  <NormalHeading>ĐƠN GIÁ</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">SỐ LƯỢNG</Typography>
+                  <NormalHeading>SỐ LƯỢNG</NormalHeading>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography fontWeight="600">THÀNH TIỀN</Typography>
+                  <NormalHeading>THÀNH TIỀN</NormalHeading>
                 </Grid>
                 <Grid item xs={1}>
-                  <Typography fontWeight="600">XÓA</Typography>
+                  <NormalHeading>XÓA</NormalHeading>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid container mt={3}>
+          <Grid container mt={2}>
             {items.length === 0 ? (
               <Grid item xs={12} justifyContent="center">
                 <Typography>Trống. Hãy tích cực chọn lựa!</Typography>
@@ -264,9 +277,9 @@ export default function CartPage() {
                     columns={19}
                     py={3}
                     px={1}
-                    spacing={{ xs: 1, md: 0 }}
+                    //spacing={{ xs: 1, md: 0 }}
                     alignItems="center"
-                    sx={{ border: `1px solid ${styleColors.cloudyGray}` }}
+                    sx={{ border: `1px solid ${styleColors.gray.medium}` }}
                   >
                     <Grid item xs={2} md={1}>
                       <Checkbox
@@ -295,7 +308,7 @@ export default function CartPage() {
                       <Grid container columns={4} alignItems="center">
                         <Grid item xs={2} display="flex" justifyContent={{ md: "center" }}>
                           <Typography display={{ md: "none" }}>Đơn giá:&nbsp;</Typography>
-                          <Typography>{item.shoes.unitPrice}</Typography>
+                          <Typography>{convertUtil.toPriceString(item.shoes.unitPrice)}</Typography>
                         </Grid>
                         <Grid item md={2} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
                           <Typography mr={2} display={{ md: "none" }}>
@@ -328,7 +341,9 @@ export default function CartPage() {
                       <Grid container columns={3} alignItems="center">
                         <Grid item xs={1.5} md={2} display="flex" justifyContent={{ md: "center" }}>
                           <Typography display={{ md: "none" }}>Thành tiền:&nbsp;</Typography>
-                          <Typography>{item.shoes.unitPrice * item.quantity}</Typography>
+                          <NormalHeading color={styleColors.secondary}>
+                            {convertUtil.toPriceString(item.shoes.unitPrice * item.quantity)}
+                          </NormalHeading>
                         </Grid>
                         <Grid item xs={1.5} md={1} display="flex" alignItems="center" justifyContent={{ md: "center" }}>
                           <Typography display={{ md: "none" }}>Xóa:&nbsp;</Typography>
@@ -336,13 +351,13 @@ export default function CartPage() {
                             open={openConfirmIndex == index}
                             openButton={
                               <IconButton onClick={(e) => setOpenConfirmIndex(index)}>
-                                <Delete />
+                                <Delete color="action"/>
                               </IconButton>
                             }
                             title="Xóa Giày"
                             content="Bạn muốn xóa đôi giày này khỏi giỏ hàng?"
                             cancelLabel="Hủy"
-                            onCancle={(e) => setOpenConfirmIndex(null)}
+                            onCancel={(e) => setOpenConfirmIndex(null)}
                             okLabel="Đồng ý"
                             onOk={(e) => handleRemoveItem(index)}
                           ></ConfirmDialog>
@@ -354,29 +369,24 @@ export default function CartPage() {
               ))
             )}
           </Grid>
-
-          <Box
-            mt={5}
-            p={3}
-            display="flex"
-            flexDirection={{ xs: "column", sm: "row" }}
-            justifyContent="center"
-            alignItems="center"
-            gap={3}
-            sx={{ border: `1px solid ${styleColors.cloudyGray}`, backgroundColor: styleColors.cyanBlue }}
-          >
+          <Box mt={3}>
+            <Divider />
+          </Box>
+          <Stack alignItems="end" mt={5} spacing={2}>
             <Box display="flex" alignItems="center">
               <Typography>Tổng tiền(</Typography>
-              <Typography display="inline">{items.length} sản phẩm</Typography>
+              <NormalHeading display="inline">{selectedIndexList.length} sản phẩm</NormalHeading>
               <Typography>):&nbsp;</Typography>
-              <Typography variant="h6" fontWeight="600">
-                {items.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0)}đ
-              </Typography>
+              <FourthHeading color={styleColors.secondary}>
+                {convertUtil.toPriceString(
+                  selectedIndexList.reduce((pre, cur) => pre + items[cur].shoes.unitPrice * items[cur].quantity, 0)
+                )}
+              </FourthHeading>
             </Box>
             <PrimaryButton size="large" onClick={handleOrder} disabled={selectedIndexList.length === 0}>
               Mua Hàng
             </PrimaryButton>
-          </Box>
+          </Stack>
         </Box>
       </Container>
     </IsLogin>

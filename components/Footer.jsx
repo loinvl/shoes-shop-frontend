@@ -3,11 +3,12 @@ import { ContactPhone, Facebook, Favorite, Twitter, YouTube } from "@mui/icons-m
 import { Box, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import CustomLink from "./CustomLink";
+import { FourthHeading, NormalHeading, ThirdHeading } from "./StyledTypography";
 
 export default function Footer() {
   return (
     <Box>
-      <Box sx={{ backgroundColor: styleColors.fogGray }}>
+      <Box sx={{ backgroundColor: styleColors.gray.light }}>
         <Container>
           <Box
             display="flex"
@@ -25,28 +26,28 @@ export default function Footer() {
               </Box>
               <Box display="flex" justifyContent="space-between">
                 <CustomLink href="#contact">
-                  <ContactPhone />
+                  <ContactPhone sx={{ color: styleColors.icon.contact }} />
                 </CustomLink>
                 <CustomLink href="#facebook">
-                  <Facebook />
+                  <Facebook sx={{ color: styleColors.icon.facebook }} />
                 </CustomLink>
                 <CustomLink href="#youtube">
-                  <YouTube />
+                  <YouTube sx={{ color: styleColors.icon.youtube }} />
                 </CustomLink>
                 <CustomLink href="#twitter">
-                  <Twitter />
+                  <Twitter sx={{ color: styleColors.icon.twitter }} />
                 </CustomLink>
               </Box>
             </Box>
-            <Box 
-             display="flex"
-             flexDirection={{ xs: "column", md: "row" }}
-             justifyContent="space-between"
-             alignItems="start"
-             gap={{ xs: 5, md: 15 }}
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", md: "row" }}
+              justifyContent="space-between"
+              alignItems="start"
+              gap={{ xs: 5, md: 15 }}
             >
               <Box display="flex" flexDirection="column" gap={2}>
-                <Typography variant="h6">Lời Cảm Ơn</Typography>
+                <FourthHeading sx={{ color: styleColors.primary }}>Lời Cảm Ơn</FourthHeading>
                 <Typography>
                   Mến chào quý khách hàng của Shoes Shop! Cám ơn bạn đã luôn tin tưởng và ủng hộ chúng tôi. Bạn trao
                   chúng tôi cơ hội, chùng tôi trao bạn niềm tin!
@@ -54,7 +55,7 @@ export default function Footer() {
               </Box>
               <Box display="flex" flexDirection="column" gap={2}>
                 <Box>
-                  <Typography variant="h6">Thông Tin Liên Hệ</Typography>
+                  <FourthHeading sx={{ color: styleColors.primary }}>Thông Tin Liên Hệ</FourthHeading>
                 </Box>
                 <Box>
                   <Typography noWrap>Số điện thoại: +84000000000</Typography>
@@ -70,14 +71,14 @@ export default function Footer() {
         justifyContent="center"
         alignItems="center"
         p={2}
-        sx={{ color: styleColors.metalGray, backgroundColor: styleColors.cyanBlue }}
+        sx={{ color: styleColors.white, backgroundColor: styleColors.primary }}
       >
         <Typography>@2023 Shoes Shop Made With&nbsp;</Typography>
-        <Favorite sx={{ color: styleColors.red }} />
+        <Favorite sx={{ color: styleColors.secondary }} />
         <Typography>&nbsp;By&nbsp;</Typography>
-        <Typography color={styleColors.black} fontWeight={600}>
-          <CustomLink href="https://www.facebook.com/profile.php?id=100017728178359">NguyenVanLoi</CustomLink>
-        </Typography>
+        <CustomLink href="https://www.facebook.com/profile.php?id=100017728178359">
+          <NormalHeading>NguyenVanLoi</NormalHeading>
+        </CustomLink>
       </Box>
     </Box>
   );

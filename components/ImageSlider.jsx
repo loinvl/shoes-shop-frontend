@@ -10,7 +10,7 @@ export default function ImageSlider({items, width, height, children}) {
         sx={{width: width, height: height}}
         indicatorContainerProps={{style: {position: "absolute", bottom: "2%", zIndex: 1}}}
         indicatorIconButtonProps={{style:{padding: 5, color: styleColors.white}}}
-        activeIndicatorIconButtonProps ={{style:{color: styleColors.black}}}>
+        activeIndicatorIconButtonProps ={{style:{color: styleColors.primary}}}>
         {items.map((item, index) => (
           <Box position="relative" key={index}>
             <StyledImage src={item.src} alt={item.alt} width={width} height={height}/>

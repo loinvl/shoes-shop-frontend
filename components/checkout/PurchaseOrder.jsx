@@ -1,16 +1,14 @@
 import styleColors from "@/styles/styleColors";
 import { Box, Divider, Stack, Typography } from "@mui/material";
+import { FourthHeading, NormalHeading, ThirdHeading } from "../StyledTypography";
+import convertUtil from "@/utils/convertUtil";
 
 export default function PurchaseOrder({ orders }) {
   return (
-    <Stack p={5} gap={3} sx={{ borderRadius: "1em", backgroundColor: styleColors.cloudyGray }}>
+    <Stack p={5} gap={3} sx={{ borderRadius: "0.5em", backgroundColor: styleColors.gray.light }}>
       <Box display="flex" justifyContent="space-between">
-        <Typography variant="h6" fontWeight="600">
-          Sản phẩm
-        </Typography>
-        <Typography variant="h6" fontWeight="600">
-          Thành tiền
-        </Typography>
+        <FourthHeading>Sản phẩm</FourthHeading>
+        <FourthHeading>Thành tiền</FourthHeading>
       </Box>
       <Divider />
       <Stack gap={2}>
@@ -21,20 +19,20 @@ export default function PurchaseOrder({ orders }) {
             justifyContent="space-between"
             alignItems="end"
             gap={3}
-            sx={{ borderBottom: `1px solid ${styleColors.metalGray}` }}
+            sx={{ borderBottom: `1px solid ${styleColors.gray.medium}` }}
           >
             <Box flex={3}>
               <Typography>{order.shoesModel.shoesModelName}</Typography>
               <Typography>Màu sắc: {order.shoes.color}</Typography>
               <Typography>Kích thước: {order.shoes.size}</Typography>
               <Typography>
-                Đơn giá x Số lượng: {order.shoes.unitPrice}x{order.quantity}
+                Đơn giá x Số lượng: {convertUtil.toPriceString(order.shoes.unitPrice)}x{order.quantity}
               </Typography>
             </Box>
             <Box flex={1} textAlign="right">
-              <Typography variant="h6" fontWeight="600">
-                {order.shoes.unitPrice * order.quantity}đ
-              </Typography>
+              <FourthHeading color={styleColors.secondary}>
+                {convertUtil.toPriceString(order.shoes.unitPrice * order.quantity)}
+              </FourthHeading>
             </Box>
           </Box>
         ))}
@@ -42,16 +40,16 @@ export default function PurchaseOrder({ orders }) {
       <Divider />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography>Phí vận chuyển:</Typography>
-        <Typography variant="h6" fontWeight="600">
+        <FourthHeading color={styleColors.secondary}>
           0đ
-        </Typography>
+        </FourthHeading>
       </Box>
       <Divider />
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography>Tổng cộng:</Typography>
-        <Typography variant="h5" fontWeight="600">
-          {orders.reduce((pre, cur) => (pre + cur.shoes.unitPrice*cur.quantity), 0)}đ
-        </Typography>
+        <Typography>Tổng tiền:</Typography>
+        <ThirdHeading color={styleColors.secondary}>
+          {convertUtil.toPriceString(orders.reduce((pre, cur) => pre + cur.shoes.unitPrice * cur.quantity, 0))}
+        </ThirdHeading>
       </Box>
     </Stack>
   );

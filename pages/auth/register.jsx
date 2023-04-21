@@ -2,7 +2,7 @@ import authAPI from "@/api/authAPI";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
-import { ErrorText } from "@/components/StyledTypography";
+import { ErrorText, SecondaryHeading } from "@/components/StyledTypography";
 import IsLogout from "@/components/hoc/IsLogout";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
@@ -57,14 +57,14 @@ export default function RegisterPage() {
     <IsLogout>
       <Container>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box mt={{ sm: 5 }} mb={10} display="flex" justifyContent="center" alignItems="center">
-            <Box p={{ xs: 3, sm: 5 }} width={{ xs: "400px", md: "500px" }} border={`1px solid ${styleColors.black}`}>
+          <Box mb={10} display="flex" justifyContent="center" alignItems="center">
+            <Box px={{ xs: 3, sm: 5 }} py={8} width={{ xs: "400px", md: "500px" }} border={`1px solid ${styleColors.black}`}>
               <Box>
-                <Typography variant="h4" fontWeight="600" textAlign="center">
+                <SecondaryHeading textAlign="center">
                   Đăng Ký
-                </Typography>
+                </SecondaryHeading>
               </Box>
-              <Stack mt={8} gap={5}>
+              <Stack mt={3} gap={5}>
                 <Box>
                   <PrimaryInput
                     name="customerName"

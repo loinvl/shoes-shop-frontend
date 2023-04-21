@@ -3,12 +3,13 @@ import StarAmount from "../StarAmount";
 import { StyledImage } from "../StyledImage";
 import styleColors from "@/styles/styleColors";
 import defaultVariables from "@/utils/defaultValues";
-import timeUtil from "@/utils/timeUtil";
+import convertUtil from "@/utils/convertUtil";
+import { NormalHeading } from "../StyledTypography";
 
 export default function RateCard({ rate }) {
   return (
     rate && (
-      <Card sx={{ border: `1px solid ${styleColors.black}` }}>
+      <Card sx={{ border: `1px solid ${styleColors.gray.medium}` }}>
         <CardContent>
           <Box display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={1}>
             <Box flex={{ sm: 5, md: 6 }} display="flex" gap={1}>
@@ -17,13 +18,13 @@ export default function RateCard({ rate }) {
               </Box>
               <Stack gap={1}>
                 <Box>
-                  <Typography>{rate.customer.customerName}</Typography>
+                  <NormalHeading>{rate.customer.customerName}</NormalHeading>
                 </Box>
                 <Box>
                   <StarAmount star={rate.rateStar} />
                 </Box>
                 <Box>
-                  <Typography>{timeUtil.convertToVietNamTime(rate.rateTime)}</Typography>
+                  <Typography>{convertUtil.toVietNamTime(rate.rateTime)}</Typography>
                 </Box>
                 <Box>
                   <Typography>

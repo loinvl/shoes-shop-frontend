@@ -58,6 +58,7 @@ axiosClientPrivate.interceptors.response.use(
         success: false,
         message: "Not response or response is not data",
         data: null,
+        errorCode: 500,
       };
     } catch (error) {
       console.log(error);
@@ -65,6 +66,7 @@ axiosClientPrivate.interceptors.response.use(
         success: false,
         message: "Error when receive response",
         data: null,
+        errorCode: 500,
       };
     }
   },
@@ -96,6 +98,7 @@ axiosClientPrivate.interceptors.response.use(
         success: false,
         message: "Response is not data",
         data: null,
+        errorCode: 500,
       };
     } catch (error) {
       console.log(error);
@@ -103,6 +106,7 @@ axiosClientPrivate.interceptors.response.use(
         success: false,
         message: "Error when receive response",
         data: null,
+        errorCode: 500,
       };
     }
   }

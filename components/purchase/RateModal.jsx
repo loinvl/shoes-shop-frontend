@@ -1,33 +1,23 @@
 import { useRef, useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import { Box, Grid, IconButton, Rating } from "@mui/material";
-import StarAmount from "../StarAmount";
 import { PrimaryInput } from "../StyledTextField";
 import { StyledImage } from "../StyledImage";
 import defaultValues from "@/utils/defaultValues";
 import { AddAPhoto, Cancel, DeleteForever, HighlightOff } from "@mui/icons-material";
 import styleColors from "@/styles/styleColors";
-import uploadAPI from "@/api/uploadAPI";
-import { useDispatch } from "react-redux";
-import rateAPI from "@/api/rateAPI";
-import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 
-export default function RateModal({ disabled, order }) {
+export default function RateModal({ disabled, order, handleDataRate }) {
   const [star, setStar] = useState(5);
   const [feedback, setFeedback] = useState("");
   const [open, setOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const inputRef = useRef();
-
-  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,41 +37,18 @@ export default function RateModal({ disabled, order }) {
 
   // handle rate
   const handleRate = async () => {
-    // call api to upload feedback image
-    let imageLink = "";
-    if (imageFile) {
-      const resUpload = await uploadAPI.uploadImage(imageFile);
+    // send data to parent component
+    handleDataRate(order.purchaseOrderID, order.shoesID, star, feedback, imageFile);
 
-      // handle error res
-      if (!resUpload.success) {
-        dispatch(showErrorMessage("Lỗi khi tải ảnh lên, hãy thử lại"));
-        return;
-      }
-
-      // handle success res
-      imageLink = resUpload.data.imageLink;
-    }
-
-    // call api to post rate to server
-    console.log(order.purchaseOrderID, order.shoesID, star, feedback, imageLink);
-    const resRate = await rateAPI.rate(order.purchaseOrderID, order.shoesID, star, feedback, imageLink);
-
-    // handle error res
-    if(!resRate.success){
-      dispatch(showErrorMessage("Lỗi khi đánh giá, hãy thử lại"));
-      return;
-    }
-
-    // handle success res
-    dispatch(showMessage("Đánh giá thành công"));
+    // after send data
     setOpen(false);
   };
 
   return (
     <div>
-      <SecondaryButton disabled={disabled} size="large" onClick={handleClickOpen}>
+      <PrimaryButton disabled={disabled} onClick={handleClickOpen}>
         Đánh Giá
-      </SecondaryButton>
+      </PrimaryButton>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Đánh Giá Sản Phẩm</DialogTitle>
         <DialogContent>
