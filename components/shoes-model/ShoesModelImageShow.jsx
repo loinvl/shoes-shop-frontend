@@ -63,12 +63,12 @@ export default function ShoesModelImageShow({ images, width }) {
               <Box
                 key={index}
                 border={index == currentImageIndex ? `1px solid ${styleColors.blue}` : "none"}
-                borderRadius={index == currentImageIndex ? "1em" : "none"}
+                borderRadius={index == currentImageIndex ? "0.5em" : "none"}
                 sx={{
                   width: "auto",
                   height: "100%",
                   aspectRatio: "1/1",
-                  ":hover": { cursor: "pointer", border: `1px solid ${styleColors.blue}`, borderRadius: "1em" },
+                  ":hover": { cursor: "pointer", border: `1px solid ${styleColors.blue}`, borderRadius: "0.5em" },
                 }}
               >
                 <StyledImage

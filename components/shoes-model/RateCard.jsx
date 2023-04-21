@@ -9,7 +9,7 @@ import { NormalHeading } from "../StyledTypography";
 export default function RateCard({ rate }) {
   return (
     rate && (
-      <Card sx={{ border: `1px solid ${styleColors.black}` }}>
+      <Card sx={{ border: `1px solid ${styleColors.gray.medium}` }}>
         <CardContent>
           <Box display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={1}>
             <Box flex={{ sm: 5, md: 6 }} display="flex" gap={1}>

@@ -84,7 +84,7 @@ export default function ShoesModelInfo({ info }) {
               <Typography>Thương hiệu:</Typography>
             </Grid>
             <Grid item>
-              <ThirdHeading>
+              <ThirdHeading color={styleColors.gray.dark}>
                 {info.brand?.brandName.toUpperCase()}
               </ThirdHeading>
             </Grid>
@@ -94,7 +94,7 @@ export default function ShoesModelInfo({ info }) {
               <Typography>Đơn giá:</Typography>
             </Grid>
             <Grid item>
-              <ThirdHeading>
+              <ThirdHeading color={styleColors.secondary}>
                 {currentShoes == null ? "Không có hàng" : convertUtil.toPriceString(currentShoes.unitPrice)}
               </ThirdHeading>
             </Grid>
@@ -154,7 +154,7 @@ export default function ShoesModelInfo({ info }) {
           <Grid item container alignItems="center" spacing={3}>
             <Grid item>
               <SecondaryButton
-                startIcon={<ShoppingCart />}
+                startIcon={<ShoppingCart sx={{color: styleColors.secondary}}/>}
                 sx={{ paddingY: "10px" }}
                 disabled={!currentShoes}
                 onClick={handleAddToCart}
@@ -164,7 +164,7 @@ export default function ShoesModelInfo({ info }) {
             </Grid>
             <Grid item>
               <PrimaryButton
-                startIcon={<Payment />}
+                startIcon={<Payment sx={{color: styleColors.blue}}/>}
                 sx={{ paddingY: "10px" }}
                 disabled={!currentShoes}
                 onClick={handleOrderNow}
