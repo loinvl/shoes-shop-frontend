@@ -1,4 +1,4 @@
-import purchaseAPI from "@/api/purchaseAPI";
+import purchaseAPI from "@/backendAPI/purchaseAPI";
 import CustomLink from "@/components/CustomLink";
 import { ThirdHeading } from "@/components/StyledTypography";
 import IsLogin from "@/components/hoc/IsLogin";

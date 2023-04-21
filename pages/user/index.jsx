@@ -1,5 +1,5 @@
-import customerAPI from "@/api/customerAPI";
-import uploadAPI from "@/api/uploadAPI";
+import customerAPI from "@/backendAPI/customerAPI";
+import uploadAPI from "@/backendAPI/uploadAPI";
 import { PrimaryButton, SecondaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText, ThirdHeading } from "@/components/StyledTypography";

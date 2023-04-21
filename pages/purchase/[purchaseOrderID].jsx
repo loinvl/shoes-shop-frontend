@@ -1,4 +1,4 @@
-import purchaseAPI from "@/api/purchaseAPI";
+import purchaseAPI from "@/backendAPI/purchaseAPI";
 import { PrimaryButton, SecondaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";
 import { FourthHeading, ThirdHeading } from "@/components/StyledTypography";
@@ -106,8 +106,10 @@ export default function Order() {
   useEffect(() => {
     (async () => {
       // check router
-      if(!router.isReady){return;}
-      
+      if (!router.isReady) {
+        return;
+      }
+
       // call api to get purchase order by id
       const { purchaseOrderID } = router.query;
       const res = await purchaseAPI.getPurchaseByID(purchaseOrderID);

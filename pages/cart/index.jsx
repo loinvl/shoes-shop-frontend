@@ -1,4 +1,4 @@
-import cartAPI from "@/api/cartAPI";
+import cartAPI from "@/backendAPI/cartAPI";
 import CustomLink from "@/components/CustomLink";
 import { PrimaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";

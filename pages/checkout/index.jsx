@@ -1,5 +1,5 @@
-import customerAPI from "@/api/customerAPI";
-import purchaseAPI from "@/api/purchaseAPI";
+import customerAPI from "@/backendAPI/customerAPI";
+import purchaseAPI from "@/backendAPI/purchaseAPI";
 import { PrimaryButton } from "@/components/StyledButton";
 import { PrimaryInput } from "@/components/StyledTextField";
 import { ErrorText, FourthHeading, ThirdHeading } from "@/components/StyledTypography";
@@ -62,6 +62,11 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     (async () => {
+      // check router ready
+      if (!router.isReady) {
+        return;
+      }
+      
       // get shoes id list from query params
       let shoesIDList = router.query.ShoesID || [];
       shoesIDList = Array.isArray(shoesIDList) ? shoesIDList : [shoesIDList];

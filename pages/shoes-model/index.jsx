@@ -1,4 +1,4 @@
-import shoesModelAPI from "@/api/shoesModelAPI";
+import shoesModelAPI from "@/backendAPI/shoesModelAPI";
 import ShoesModelGrid from "@/components/shoes-model-list/ShoesModelGrid";
 import SideBar from "@/components/shoes-model-list/SideBar";
 import TopBar from "@/components/shoes-model-list/TopBar";

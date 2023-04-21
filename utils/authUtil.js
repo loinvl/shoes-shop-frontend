@@ -1,4 +1,4 @@
-import authAPI from "@/api/authAPI";
+import authAPI from "@/backendAPI/authAPI";
 import Cookies from "js-cookie";
 import jwt from 'jsonwebtoken';
 

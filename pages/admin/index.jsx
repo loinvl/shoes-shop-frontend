@@ -1,4 +1,4 @@
-import purchaseAPI from "@/api/purchaseAPI";
+import purchaseAPI from "@/backendAPI/purchaseAPI";
 import { SelectButton } from "@/components/StyledButton";
 import { PrimaryButton } from "@/components/StyledButton";
 import { ConfirmDialog, CustomDialog } from "@/components/StyledDialog";
@@ -69,8 +69,8 @@ export default function PurchaseManagementPage() {
   return (
     <Stack spacing={1}>
       {purchaseList.map((purchase, index) => (
-        <Box>
-          <Box key={index} p={1} border={`1px solid ${styleColors.gray.medium}`} borderRadius="0.5em">
+        <Box key={index}>
+          <Box p={1} border={`1px solid ${styleColors.gray.medium}`} borderRadius="0.5em">
             <PurchaseCard purchase={purchase} />
           </Box>
           <Stack alignItems="end">

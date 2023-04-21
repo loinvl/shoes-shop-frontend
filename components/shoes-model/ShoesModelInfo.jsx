@@ -5,7 +5,7 @@ import { NumberInput } from "../StyledTextField";
 import styleColors from "@/styles/styleColors";
 import { Add, Payment, Remove, ShoppingCart } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import cartAPI from "@/api/cartAPI";
+import cartAPI from "@/backendAPI/cartAPI";
 import { useDispatch } from "react-redux";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import { useRouter } from "next/router";
