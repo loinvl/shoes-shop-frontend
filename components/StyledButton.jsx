@@ -6,24 +6,24 @@ const PrimaryButton = styled(Button)({
   color: styleColors.white,
   backgroundColor: styleColors.black,
   ":hover": {
-    color: styleColors.metalGray,
+    color: styleColors.gray.dark,
     backgroundColor: styleColors.white,
-    outline: `1px solid ${styleColors.metalGray}`,
+    outline: `1px solid ${styleColors.gray.dark}`,
   },
   ":disabled": {
     color: styleColors.white,
-    backgroundColor: styleColors.metalGray
+    backgroundColor: styleColors.gray.dark
   }
 });
 
 const SecondaryButton = styled(Button)({
-  color: styleColors.metalGray,
+  color: styleColors.gray.dark,
   backgroundColor: styleColors.white,
-  outline: `1px solid ${styleColors.metalGray}`,
+  outline: `1px solid ${styleColors.gray.dark}`,
   ":hover": {
     color: styleColors.white,
     backgroundColor: styleColors.black,
-    outline: `1px solid ${styleColors.metalGray}`,
+    outline: `1px solid ${styleColors.gray.dark}`,
   },
 });
 
@@ -33,9 +33,9 @@ const SelectButton = (props) => {
     <Button
       {...restOfProps}
       sx={{
-        color: styleColors.metalGray,
+        color: styleColors.gray.dark,
         backgroundColor: styleColors.white,
-        outline: `1px solid ${styleColors.metalGray}`,
+        outline: `1px solid ${styleColors.gray.dark}`,
         ":hover": {
           outline: `2px solid ${styleColors.blue}`,
         },
@@ -49,7 +49,7 @@ const SelectButton = (props) => {
     <Button
       {...restOfProps}
       sx={{
-        color: styleColors.metalGray,
+        color: styleColors.gray.dark,
         backgroundColor: styleColors.white,
         outline: `2px solid ${styleColors.blue}`,
         overflow: 'hidden',

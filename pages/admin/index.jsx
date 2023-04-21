@@ -6,6 +6,7 @@ import IsAdmin from "@/components/hoc/IsAdmin";
 import AdminLayout from "@/components/layouts/AdminLayout";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
 import { showErrorMessage, showMessage } from "@/redux/messageReducer";
+import styleColors from "@/styles/styleColors";
 import defaultValues from "@/utils/defaultValues";
 import statusUtil from "@/utils/statusUtil";
 import { East } from "@mui/icons-material";
@@ -69,10 +70,10 @@ export default function PurchaseManagementPage() {
     <Stack spacing={1}>
       {purchaseList.map((purchase, index) => (
         <Box>
-          <Box key={index} p={1} border="1px solid black">
+          <Box key={index} p={1} border={`1px solid ${styleColors.gray.medium}`} borderRadius="0.5em">
             <PurchaseCard purchase={purchase} />
           </Box>
-          <Box>
+          <Stack alignItems="end">
             <CustomDialog
               title="Cập Nhật Trạng Thái Đơn Hàng"
               open={index == customDialogIndex}
@@ -114,7 +115,7 @@ export default function PurchaseManagementPage() {
                 </Grid>
               </Grid>
             </CustomDialog>
-          </Box>
+          </Stack>
         </Box>
       ))}
     </Stack>

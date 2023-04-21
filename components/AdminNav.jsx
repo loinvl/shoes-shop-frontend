@@ -35,7 +35,7 @@ export default function AdminNav({ tab, handleChooseTab }) {
   };
 
   return (
-    <Stack sx={{ width: "100%", height: "100%", backgroundColor: styleColors.oilBlack }}>
+    <Stack sx={{ width: "100%", height: "100%", backgroundColor: styleColors.black }}>
       {nav.map((item, index) => (
         <Box key={index}>
           <IconButton sx={{ width: "100%" }} onClick={(e) => handleClick(index)}>
@@ -46,8 +46,8 @@ export default function AdminNav({ tab, handleChooseTab }) {
               py={2}
               pl={3}
               spacing={1}
-              backgroundColor={tab == index ? styleColors.metalGray : ""}
-              sx={{ borderRadius: "0.2em", ":hover": { backgroundColor: styleColors.metalGray } }}
+              backgroundColor={tab == index ? styleColors.gray.dark : ""}
+              sx={{ borderRadius: "0.2em", ":hover": { backgroundColor: styleColors.gray.dark } }}
             >
               {item.icon}
               <Typography color={styleColors.white}>{item.name}</Typography>

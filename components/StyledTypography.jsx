@@ -37,7 +37,7 @@ const NormalHeading = styled(Typography)({
 });
 
 const ErrorText = styled(Typography)({
-  color: styleColors.red,
+  color: styleColors.status.error,
   fontSize: "0.8em",
 });
 

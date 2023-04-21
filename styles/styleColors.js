@@ -1,20 +1,4 @@
 const styleColors = {
-    // black tones
-    oilBlack: "#111111",
-
-    // gray tones
-    fogGray: "#FAFAFA",
-    metalGray: "#666666",
-    cloudyGray: "#E5E5E5",
-
-    // blue tones
-    cyanBlue: "#E2F2FF",
-
-    // other tones
-    red: "#FE251B",
-    yellow: "#FFCE3D",
-
-    ///////////////////
     // primary color
     primary: "#26292E",
     black: "#000000",
