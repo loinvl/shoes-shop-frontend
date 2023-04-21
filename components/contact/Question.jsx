@@ -6,8 +6,8 @@ import { PrimaryButton } from "../StyledButton";
 
 export default function Question() {
   return (
-    <Box py={10} px={{ xs: 2, sm: 5, md: 10 }} sx={{ backgroundColor: styleColors.fogGray }} borderRadius="10px">
-      <PrimaryHeading color={styleColors.black} textAlign="center">
+    <Box py={10} px={{ xs: 2, sm: 5, md: 10 }} sx={{ backgroundColor: styleColors.gray.light }} borderRadius="10px">
+      <PrimaryHeading color={styleColors.primary} textAlign="center">
         Hỏi - Đáp
       </PrimaryHeading>
       <Stack mt={5} spacing={5}>

@@ -5,13 +5,16 @@ import convertUtil from "@/utils/convertUtil";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import RateModal from "./RateModal";
 import uploadAPI from "@/api/uploadAPI";
-import { showErrorMessage } from "@/redux/messageReducer";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import { useEffect, useState } from "react";
 import rateAPI from "@/api/rateAPI";
 import { useDispatch } from "react-redux";
-import { SecondaryButton } from "../StyledButton";
+import { PrimaryButton, SecondaryButton } from "../StyledButton";
 import RateCard from "../shoes-model/RateCard";
 import { FourthHeading, NormalHeading } from "../StyledTypography";
+import { CustomDialog } from "../StyledDialog";
+import { AlertDialog } from "../StyledDialog";
+import { useRouter } from "next/router";
 
 export default function PurchaseCard({ purchase, rate = false }) {
   // one rate map with one orderdetail, not rate is null map with orderdetail
@@ -33,9 +36,10 @@ export default function PurchaseCard({ purchase, rate = false }) {
       }
 
       // handle success res
+      const ratesRes = res.data.rateList;
+      console.log(ratesRes);
       const rateList = purchase.orderDetail.map((item) => {
-        const rate = res.data.rateList.find((rate) => (rate.shoes.shoesID = item.shoes.shoesID));
-
+        const rate = ratesRes.find((rate) => rate.shoes.shoesID === item.shoes.shoesID);
         return rate;
       });
 
@@ -43,23 +47,58 @@ export default function PurchaseCard({ purchase, rate = false }) {
       setRateList(rateList);
     })();
   }, []);
+
+  // handle rate on one shoes
+  const handleDataRate = async (purchaseOrderID, shoesID, star, feedback, imageFile) => {
+    // call api to upload feedback image
+    let imageLink = "";
+    if (imageFile) {
+      const resUpload = await uploadAPI.uploadImage(imageFile);
+
+      // handle error res
+      if (!resUpload.success) {
+        dispatch(showErrorMessage("Lỗi khi tải ảnh lên, hãy thử lại"));
+        return;
+      }
+
+      // handle success res
+      imageLink = resUpload.data.imageLink;
+    }
+
+    // call api to post rate to server
+    console.log(purchaseOrderID, shoesID, star, feedback, imageLink);
+    const resRate = await rateAPI.rate(purchaseOrderID, shoesID, star, feedback, imageLink);
+
+    // handle error res
+    if(!resRate.success){
+      dispatch(showErrorMessage("Lỗi khi đánh giá, hãy thử lại"));
+      return;
+    }
+
+    // handle success res
+    dispatch(showMessage("Đánh giá thành công"));
+    const orderDetailIndex = purchase.orderDetail.findIndex(item => item.shoes.shoesID === shoesID);
+    const newRateList = [...rateList];
+    newRateList[orderDetailIndex] = resRate.data.newRate;
+    setRateList(newRateList);
+  }
+
   return (
     purchase && (
       <Box>
         <Box>
           {purchase.orderDetail.map((item, index) => (
-            <Box>
+            <Box key={index}>
               <Box
                 display="flex"
                 flexDirection={{ xs: "column", sm: "row" }}
                 justifyContent="space-between"
                 alignItems="end"
-                gap={{ sm: 1, md: 3 }}
+                gap={{ xs: 1, md: 3 }}
                 p={{ xs: 1, md: 3 }}
-                key={index}
-                sx={{ border: `1px solid ${styleColors.cloudyGray}` }}
+                sx={{ border: `1px solid ${styleColors.gray.medium}`, backgroundColor: styleColors.white }}
               >
-                <Box display="flex" alignItems="center" gap={{ sm: 1, md: 3 }}>
+                <Box display="flex" width="100%" alignItems="center" gap={{ sm: 1, md: 3 }}>
                   <Box>
                     <StyledImage
                       src={item.shoesModel.images[0].imageLink}
@@ -80,27 +119,34 @@ export default function PurchaseCard({ purchase, rate = false }) {
                   </Box>
                 </Box>
                 <Box>
-                  <NormalHeading>{convertUtil.toPriceString(item.unitPrice * item.quantity)}</NormalHeading>
+                  <NormalHeading color={styleColors.secondary}>
+                    {convertUtil.toPriceString(item.unitPrice * item.quantity)}
+                  </NormalHeading>
                 </Box>
               </Box>
               {rate && (
                 <Stack display="flex" width="100%">
                   {rateList[index] ? (
-                    previewRateIndex == index ? (
-                      <Box width="100%">
-                        <RateCard rate={rateList[index]} />
-                        <SecondaryButton fullWidth onClick={(e) => setPreviewRateIndex(null)}>
-                          Ẩn
-                        </SecondaryButton>
-                      </Box>
-                    ) : (
-                      <SecondaryButton onClick={(e) => setPreviewRateIndex(index)}>Xem Đánh Giá</SecondaryButton>
-                    )
+                    <Box>
+                      <Stack alignItems="end">
+                        <PrimaryButton onClick={(e) => setPreviewRateIndex(index)}>Xem Đánh Giá</PrimaryButton>
+                      </Stack>
+                      <AlertDialog
+                        fullWidth
+                        open={previewRateIndex == index}
+                        title="Đánh Giá"
+                        content={<RateCard rate={rateList[index]} />}
+                        onClose={(e) => setPreviewRateIndex(null)}
+                      />
+                    </Box>
                   ) : (
-                    <RateModal
-                      disabled={purchase.orderStatus != 4}
-                      order={{ purchaseOrderID: purchase.purchaseOrderID, shoesID: item.shoes.shoesID }}
-                    />
+                    <Stack alignItems="end">
+                      <RateModal
+                        disabled={purchase.orderStatus != 4}
+                        order={{ purchaseOrderID: purchase.purchaseOrderID, shoesID: item.shoes.shoesID }}
+                        handleDataRate={handleDataRate}
+                      />
+                    </Stack>
                   )}
                 </Stack>
               )}
@@ -114,12 +160,24 @@ export default function PurchaseCard({ purchase, rate = false }) {
           <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between">
             <Typography>Ngày đặt hàng: {convertUtil.toVietNamTime(purchase.orderTime)}</Typography>
             <Box>
-              <NormalHeading>{status.purchaseStatus[purchase.orderStatus].toUpperCase()}</NormalHeading>
+              <NormalHeading
+                color={
+                  purchase.orderStatus == 0
+                    ? styleColors.status.normal
+                    : purchase.orderStatus == 4
+                    ? styleColors.status.success
+                    : purchase.orderStatus == 5
+                    ? styleColors.status.error
+                    : styleColors.status.progress
+                }
+              >
+                {status.purchaseStatus[purchase.orderStatus]}
+              </NormalHeading>
             </Box>
           </Stack>
           <Box>
-            <FourthHeading textAlign={{xs: "left", sm: "right"}}>
-              Tổng tiền:{" "}
+            <FourthHeading textAlign={{ xs: "left", sm: "right" }} color={styleColors.secondary}>
+              Tổng tiền:&nbsp;
               {convertUtil.toPriceString(
                 purchase.orderDetail.reduce((pre, cur) => pre + cur.unitPrice * cur.quantity, 0)
               )}

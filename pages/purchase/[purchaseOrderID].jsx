@@ -59,38 +59,38 @@ const purchase = {
 
 const ReceiptCustom = (props) => {
   const { active, completed } = props;
-  const color = active ? styleColors.blue : completed ? styleColors.blue : "disabled";
+  const color = active ? styleColors.blue : completed ? styleColors.blue : styleColors.gray.dark;
 
   return <Receipt sx={{ color: color }} />;
 };
 const AllInboxCustom = (props) => {
   const { active, completed } = props;
-  const color = active ? styleColors.blue : completed ? styleColors.blue : "disabled";
+  const color = active ? styleColors.blue : completed ? styleColors.blue : styleColors.gray.dark;
 
   return <AllInbox sx={{ color: color }} />;
 };
 const LocalShippingCustom = (props) => {
   const { active, completed } = props;
-  const color = active ? styleColors.blue : completed ? styleColors.blue : "disabled";
+  const color = active ? styleColors.blue : completed ? styleColors.blue : styleColors.gray.dark;
 
   return <LocalShipping sx={{ color: color }} />;
 };
 const DeliveryDiningCustom = (props) => {
   const { active, completed } = props;
-  const color = active ? styleColors.blue : completed ? styleColors.blue : "disabled";
+  const color = active ? styleColors.blue : completed ? styleColors.blue : styleColors.gray.dark;
 
   return <DeliveryDining sx={{ color: color }} />;
 };
 const FactCheckCustom = (props) => {
   const { active, completed } = props;
-  const color = active ? styleColors.blue : completed ? styleColors.blue : "disabled";
+  const color = active ? styleColors.blue : completed ? styleColors.blue : styleColors.gray.dark;
 
   return <FactCheck sx={{ color: color }} />;
 };
 
 const BackspaceCustom = (props) => {
   const { active, completed } = props;
-  const color = active ? styleColors.blue : completed ? styleColors.blue : "disabled";
+  const color = active ? styleColors.blue : completed ? styleColors.blue : styleColors.gray.dark;
 
   return <Backspace sx={{ color: color }} />;
 };
@@ -105,6 +105,9 @@ export default function Order() {
   //
   useEffect(() => {
     (async () => {
+      // check router
+      if(!router.isReady){return;}
+      
       // call api to get purchase order by id
       const { purchaseOrderID } = router.query;
       const res = await purchaseAPI.getPurchaseByID(purchaseOrderID);
@@ -143,17 +146,13 @@ export default function Order() {
     purchase && (
       <IsLogin>
         <Container>
-          <Stack mb={5} px={{ xs: 1, sm: 5 }} gap={5}>
-            <Box>
-              <ThirdHeading textAlign="center">
-                CHI TIẾT ĐƠN HÀNG
-              </ThirdHeading>
-            </Box>
+          <Box>
+            <ThirdHeading textAlign="center">CHI TIẾT ĐƠN HÀNG</ThirdHeading>
+          </Box>
+          <Stack mt={3} mb={5} px={{ xs: 1, sm: 5 }} gap={5}>
             <Box>
               <Box>
-                <FourthHeading>
-                  Thông Tin Người Nhận
-                </FourthHeading>
+                <FourthHeading>Thông Tin Người Nhận</FourthHeading>
               </Box>
               <Box mt={3}>
                 <Grid container spacing={2}>
@@ -178,9 +177,7 @@ export default function Order() {
             <Divider />
             <Box>
               <Box>
-                <FourthHeading>
-                  Thông Tin Vận Chuyển
-                </FourthHeading>
+                <FourthHeading>Thông Tin Vận Chuyển</FourthHeading>
               </Box>
               {purchase.orderStatus != 5 ? (
                 <Box mt={3}>
@@ -218,34 +215,30 @@ export default function Order() {
             <Divider />
             <Box>
               <Box>
-                <FourthHeading>
-                  Thông Tin Đơn Hàng
-                </FourthHeading>
+                <FourthHeading>Thông Tin Đơn Hàng</FourthHeading>
               </Box>
               <Box mt={3}>
-                <PurchaseCard purchase={purchase} rate={true} />
+                <PurchaseCard purchase={purchase} rate={purchase.orderStatus == 4} />
               </Box>
             </Box>
-            <Box display="flex" justifyContent="end" gap={3}>
-              <ConfirmDialog
-                openButton={
-                  <PrimaryButton
-                    size="large"
-                    disabled={purchase.orderStatus >= 2}
-                    onClick={(e) => setOpenConfirm(true)}
-                  >
-                    Hủy Đơn
-                  </PrimaryButton>
-                }
-                open={openConfirm}
-                title="Hủy Đơn Hàng"
-                content="Bạn muốn hủy đơn hàng này? Hãy xem xét thật kỹ nhé."
-                cancelLabel="Thoát"
-                onCancel={(e) => setOpenConfirm(false)}
-                okLabel="Hủy Đơn"
-                onOk={(e) => handleCancelOrder(purchase.purchaseOrderID)}
-              />
-            </Box>
+            {purchase.orderStatus < 2 && (
+              <Box display="flex" justifyContent="end">
+                <ConfirmDialog
+                  openButton={
+                    <PrimaryButton size="large" onClick={(e) => setOpenConfirm(true)}>
+                      Hủy Đơn
+                    </PrimaryButton>
+                  }
+                  open={openConfirm}
+                  title="Hủy Đơn Hàng"
+                  content="Bạn muốn hủy đơn hàng này? Hãy xem xét thật kỹ nhé."
+                  cancelLabel="Thoát"
+                  onCancel={(e) => setOpenConfirm(false)}
+                  okLabel="Hủy Đơn"
+                  onOk={(e) => handleCancelOrder(purchase.purchaseOrderID)}
+                />
+              </Box>
+            )}
           </Stack>
         </Container>
       </IsLogin>

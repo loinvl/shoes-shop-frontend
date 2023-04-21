@@ -22,7 +22,7 @@ export default function Feature() {
   };
   return (
     <Box py={10} textAlign="center">
-      <PrimaryHeading color={styleColors.black}>Mua Sắm Tiện Lợi</PrimaryHeading>
+      <PrimaryHeading color={styleColors.primary}>Mua Sắm Tiện Lợi</PrimaryHeading>
       <Box pt={5} display="flex" flexDirection={{ xs: "column", md: "row" }} justifyContent="space-between" gap={5}>
         <Box flex={1}>
           <ContactCard key={delivery.title} content={delivery} width="100%" height="250px" />

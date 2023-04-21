@@ -80,14 +80,14 @@ export default function PurchasePage() {
               ĐƠN HÀNG
             </ThirdHeading>
           </Box>
-          <Stack my={3} gap={2}>
+          <Stack gap={2}>
             {purchaseList.length == 0 ? (
               <Stack alignItems="center">Trống! Hãy lựa giày thôi nào.</Stack>
             ) : (
               purchaseList.map((purchase, index) => (
                 <Box key={index}>
                   <CustomLink href={`/purchase/${purchase.purchaseOrderID}`}>
-                    <Card sx={{ border: `1px solid ${styleColors.metalGray}`, borderRadius: "0.2em" }}>
+                    <Card sx={{ border: `1px solid ${styleColors.gray.medium}`, borderRadius: "0.5em", backgroundColor: styleColors.gray.light }}>
                       <CardContent>
                         <PurchaseCard purchase={purchase} />
                       </CardContent>

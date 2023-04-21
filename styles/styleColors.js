@@ -33,9 +33,9 @@ const styleColors = {
 
     status: {
         normal: "#666666",
-        success: "#00E200",
-        progress: "#2CCCFF",
-        error: "#FF2A04"
+        success: "#2DC258",
+        progress: "#0070F3",
+        error: "#EB3E32"
     },
 
     icon: {
