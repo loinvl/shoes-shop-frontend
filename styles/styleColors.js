@@ -8,7 +8,6 @@ const styleColors = {
     cloudyGray: "#E5E5E5",
 
     // blue tones
-    blue: "#0070F3",
     cyanBlue: "#E2F2FF",
 
     // other tones
@@ -20,6 +19,7 @@ const styleColors = {
     primary: "#26292E",
     black: "#000000",
     white: "#FFFFFF",
+    blue: "#0070F3",
 
     // secondary color,
     secondary: "#EB3E32",
@@ -43,6 +43,7 @@ const styleColors = {
         facebook: "#4267B2",
         youtube: "#FF0000",
         twitter: "#1DA1F2",
+        star: "#FDCC0D"
     }
 
 

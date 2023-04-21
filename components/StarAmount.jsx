@@ -6,9 +6,9 @@ export default function StarAmount({ star }) {
   let starAmount = [];
   for (let i = 0; i < 5; i++) {
     if (i < star) {
-      starAmount.push(<Star key={i} sx={{ color: styleColors.yellow }} />);
+      starAmount.push(<Star key={i} sx={{ color: styleColors.icon.star }} />);
     } else {
-      starAmount.push(<Star key={i} sx={{ color: styleColors.cloudyGray }}/>);
+      starAmount.push(<Star key={i} sx={{ color: styleColors.gray.medium }}/>);
     }
   }
 

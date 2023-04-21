@@ -8,7 +8,7 @@ import convertUtil from "@/utils/convertUtil";
 /* 
 Shoes model card include:
     - shoes model name
-    - brand
+    - brandShoelModelCard
     - min price
 */
 
@@ -21,7 +21,7 @@ export default function ShoelModelCard({ shoesModel, width }) {
   return (
     <Card
       sx={{
-        border: `1px solid ${styleColors.black}`,
+        border: `1px solid ${styleColors.gray.dark}`,
         transition: "transform 0.2s ease-in-out",
         ":hover": {
           border: `2px solid ${styleColors.blue}`,
@@ -40,15 +40,15 @@ export default function ShoelModelCard({ shoesModel, width }) {
             />
           </Box>
           <Box>
-            <Typography variant="h6" color={styleColors.cloudyGray}>
+            <Typography variant="h6" color={styleColors.gray.medium}>
               {shoesModel.brand.brandName}
             </Typography>
           </Box>
           <Box height="6rem" overflow="hidden">
-            <Typography color={styleColors.black}>{shoesModel.shoesModelName}</Typography>
+            <Typography>{shoesModel.shoesModelName}</Typography>
           </Box>
           <Box>
-            <NormalHeading>
+            <NormalHeading color={styleColors.secondary}>
               {minPrice == maxPrice
                 ? convertUtil.toPriceString(minPrice)
                 : `${convertUtil.toPriceString(minPrice)} - ${convertUtil.toPriceString(maxPrice)}`}
