@@ -17,8 +17,8 @@ export default function () {
   };
 
   return (
-    <Box py={10} px={{ xs: 2, sm: 5, md: 10 }} sx={{ backgroundColor: styleColors.fogGray }} borderRadius="10px">
-      <PrimaryHeading color={styleColors.black} textAlign="center">
+    <Box py={10} px={{ xs: 2, sm: 5, md: 10 }} sx={{ backgroundColor: styleColors.gray.light }} borderRadius="0.5em">
+      <PrimaryHeading color={styleColors.primary} textAlign="center">
         Đánh Giá
       </PrimaryHeading>
       <Box pt={5} display="flex" flexDirection={{ xs: "column", md: "row" }} justifyContent="space-between" gap={{xs: 2, md: 5}}>

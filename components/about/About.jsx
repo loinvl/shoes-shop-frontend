@@ -6,10 +6,10 @@ export default function About() {
   return (
     <Box>
       <Box py={10} px={{ xs: 2, sm: 6, md: 20 }} textAlign="center">
-        <PrimaryHeading color={styleColors.black}>
+        <PrimaryHeading color={styleColors.primary}>
           Shoes Shop
         </PrimaryHeading>
-        <ThirdHeading color={styleColors.black}>
+        <ThirdHeading>
           Thời Trang Hiện Đại
         </ThirdHeading>
         <Typography mt={3}>

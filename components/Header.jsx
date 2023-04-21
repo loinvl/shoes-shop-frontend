@@ -21,6 +21,7 @@ import authUtil from "@/utils/authUtil";
 import { logoutSuccess } from "@/redux/userReducer";
 import { useRouter } from "next/router";
 import { FourthHeading, NormalHeading } from "./StyledTypography";
+import StyledBadge from "./StyledBadge";
 
 const nav = [
   {
@@ -82,7 +83,7 @@ export default function Header() {
   };
 
   return (
-    <Box borderBottom={`2px solid ${styleColors.cloudyGray}`} sx={{ backgroundColor: styleColors.white }}>
+    <Box borderBottom={`2px solid ${styleColors.gray.medium}`} sx={{ backgroundColor: styleColors.white }}>
       <Container>
         <Box display={"flex"} justifyContent="space-between" py={1}>
           <Box>
@@ -93,16 +94,16 @@ export default function Header() {
           <Box display={"flex"} justifyContent="flex-end" alignItems={"center"} gap={{ xs: 2, sm: 5 }}>
             <Box>
               <CustomLink href="/cart">
-                <Badge badgeContent={1} color="error">
-                  <ShoppingCart color="action" />
-                </Badge>
+                <StyledBadge badgeContent={1}>
+                  <ShoppingCart color="action" sx={{color: styleColors.primary}} />
+                </StyledBadge>
               </CustomLink>
             </Box>
             <Box>
               <CustomLink href="/purchase">
-                <Badge badgeContent={1} color="error">
-                  <Receipt color="action" />
-                </Badge>
+                <StyledBadge badgeContent={1}>
+                  <Receipt color="action" sx={{color: styleColors.primary}}/>
+                </StyledBadge>
               </CustomLink>
             </Box>
             {user && (
@@ -115,7 +116,7 @@ export default function Header() {
             {!user && (
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>
                 <CustomLink href="/auth/register">
-                  <Typography variant="h7" color={styleColors.metalGray}>
+                  <Typography variant="h7" color={styleColors.gray.dark}>
                     Đăng ký
                   </Typography>
                 </CustomLink>
@@ -131,11 +132,11 @@ export default function Header() {
             <Box sx={{ display: { xs: "flex", sm: "none" } }}>
               {showMenuIcon ? (
                 <IconButton onClick={handleOpenMenu}>
-                  <MenuIcon color="action" />
+                  <MenuIcon color="action" sx={{color: styleColors.primary}}/>
                 </IconButton>
               ) : (
                 <IconButton onClick={handleCloseMenu}>
-                  <Close color="action" />
+                  <Close color="action" sx={{color: styleColors.primary}}/>
                 </IconButton>
               )}
             </Box>
@@ -146,12 +147,12 @@ export default function Header() {
           justifyContent="center"
           alignItems="center"
           gap={{ sm: 5, md: 10 }}
-          backgroundColor={styleColors.blue}
+          backgroundColor={styleColors.primary}
         >
           {nav.map((item, index) => (
             <Box key={index}>
               <CustomLink href={item.href}>
-                <Box p={1} sx={{ color: styleColors.white, ":hover": { color: styleColors.black } }}>
+                <Box p={1} sx={{ color: styleColors.white, ":hover": { color: styleColors.secondary } }}>
                   <NormalHeading color={"inherit"}>{item.name.toUpperCase()}</NormalHeading>
                 </Box>
               </CustomLink>

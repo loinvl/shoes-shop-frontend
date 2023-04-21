@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const StyledImage = styled("img")({
     objectFit: "cover",
-    borderRadius: "1em"
+    borderRadius: "0.5em"
 });
 
 export{

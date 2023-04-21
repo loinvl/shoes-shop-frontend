@@ -1,9 +1,5 @@
 const styleColors = {
-    // white tones
-    white: "#FFFFFF",
-
     // black tones
-    black: "#000000",
     oilBlack: "#111111",
 
     // gray tones
@@ -21,16 +17,16 @@ const styleColors = {
 
     ///////////////////
     // primary color
-    primary: "#4d4d4d",
-    black: "black",
-    white: "white",
+    primary: "#26292E",
+    black: "#000000",
+    white: "#FFFFFF",
 
     // secondary color,
-    secondary: "#4d4d4d",
+    secondary: "#EB3E32",
 
     // other color
     gray: {
-        light: "##F2F2F2",
+        light: "#F2F2F2",
         medium: "#CCCCCC",
         dark: "#666666"
     },
@@ -40,6 +36,13 @@ const styleColors = {
         success: "#00E200",
         progress: "#2CCCFF",
         error: "#FF2A04"
+    },
+
+    icon: {
+        contact: "#00E200",
+        facebook: "#4267B2",
+        youtube: "#FF0000",
+        twitter: "#1DA1F2",
     }
 
 

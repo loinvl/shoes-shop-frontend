@@ -52,7 +52,7 @@ export default function ShoesSample() {
   ];
   return (
     <Box py={10} px={{sm: 5, md: 10}} textAlign="center">
-      <PrimaryHeading color={styleColors.black}>Mẫu Giày</PrimaryHeading>
+      <PrimaryHeading color={styleColors.primary}>Mẫu Giày</PrimaryHeading>
       <Box pt={5} display="flex" flexDirection={{ xs: "column", sm: "row" }} justifyContent="space-between" gap={5}>
         <Box flex={1}>
           <ImageSlider items={primaryShoesSamples} width="100%" height="250px">
