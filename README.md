@@ -2,7 +2,7 @@
 
 ## Description: 
  - An e-commerce website built for sell high-quality shoes.
- 
+
 ## Technologies used: 
  - Frontend: ReactJS, NextJS, Redux Toolkit and MUI.
  - Backend: ASP.NET Core 6 and Entity Framework (Database-First).
@@ -39,7 +39,7 @@ Customer:
  - Chat with each orther: comming soon.
 
 ## Product link(maybe will be shutdown whenever cause using free hosting):
- - htpps://the-shoes-shop-2023.vercel.app
+ - https://the-shoes-shop-2023.vercel.app
 
 ## Github links: 
  - Frontend: github.com/DrinkWater30M/theshoesshop-frontend
