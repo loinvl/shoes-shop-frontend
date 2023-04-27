@@ -116,6 +116,7 @@ export default function Order() {
 
       // handle error res
       if (!res.success) {
+        dispatch(showErrorMessage("Lỗi khi tải dữ liệu, hãy thử lại"));
         return;
       }
 

@@ -5,6 +5,8 @@ import { NumberInput, PrimaryInput } from "../StyledTextField";
 import { PrimaryButton } from "../StyledButton";
 import brandAPI from "@/backendAPI/brandAPI";
 import { FourthHeading, ThirdHeading } from "../StyledTypography";
+import { useDispatch } from "react-redux";
+import { showErrorMessage } from "@/redux/messageReducer";
 
 // mock data
 const brands = [
@@ -30,15 +32,19 @@ export default function SideBar({ onChange }) {
   const [size, setSize] = useState(null);
   const [brandID, setBrandID] = useState(null);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     (async () => {
       const res = await brandAPI.getBrandList();
 
+      // handle error res
       if (!res.success) {
-        // handle error
+        dispatch(showErrorMessage("Lỗi khi tải tên thương hiệu, hãy thử lại"));
         return;
       }
 
+      // handle success res
       setBrandList(res.data.brandList);
     })();
   }, []);

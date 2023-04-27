@@ -3,9 +3,11 @@ import CustomLink from "@/components/CustomLink";
 import { ThirdHeading } from "@/components/StyledTypography";
 import IsLogin from "@/components/hoc/IsLogin";
 import PurchaseCard from "@/components/purchase/PurchaseCard";
+import { showErrorMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Box, Card, CardContent, Container, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 /* mock data
 const purchaseList = [
@@ -56,6 +58,8 @@ const purchaseList = [
 export default function PurchasePage() {
   const [purchaseList, setPurchaseList] = useState([]);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     (async () => {
       // call api to get purchase order list
@@ -63,6 +67,7 @@ export default function PurchasePage() {
 
       // handle error res
       if (!res.success) {
+        dispatch(showErrorMessage("Lỗi khi tải dữ liệu, hãy thử lại"));
         return;
       }
 

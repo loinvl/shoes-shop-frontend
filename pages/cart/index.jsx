@@ -4,7 +4,7 @@ import { PrimaryButton } from "@/components/StyledButton";
 import { ConfirmDialog } from "@/components/StyledDialog";
 import { NumberInput } from "@/components/StyledTextField";
 import { StyledImage } from "@/components/StyledImage";
-import { showMessage } from "@/redux/messageReducer";
+import { showErrorMessage, showMessage } from "@/redux/messageReducer";
 import styleColors from "@/styles/styleColors";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { Box, Checkbox, Container, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
@@ -136,6 +136,7 @@ export default function CartPage() {
 
       // handle error res
       if (!res.success) {
+        dispatch(showErrorMessage("Lỗi khi tải dữ liệu, hãy thử lại"));
         return;
       }
 
