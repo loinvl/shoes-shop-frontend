@@ -17,6 +17,7 @@ import authAPI from "@/backendAPI/authAPI";
 import authUtil from "@/utils/authUtil";
 import { logoutSuccess } from "@/redux/userReducer";
 import { useRouter } from "next/router";
+import { showErrorMessage } from "@/redux/messageReducer";
 
 export default function AdminHeader() {
   const [showMenuIcon, setShowMenuIcon] = useState(true);
@@ -47,6 +48,7 @@ export default function AdminHeader() {
 
     // handle error res
     if (!res.success) {
+      dispatch(showErrorMessage("Lỗi khi đăng xuất, hãy thử lại"));
       return;
     }
 

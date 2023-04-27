@@ -50,6 +50,7 @@ export default function ShoesModelInfo({ info }) {
 
     // handle error res
     if (!res.success) {
+      dispatch(showErrorMessage("Lỗi khi thêm, hãy thử lại"));
       return;
     }
 

@@ -1,38 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hi you, I am glad to see you, relax and enjoy this repo.
 
-## Getting Started
+## Description: 
+ - An e-commerce website built for sell high-quality shoes.
+ 
+## Technologies used: 
+ - Frontend: ReactJS, NextJS, Redux Toolkit and MUI.
+ - Backend: ASP.NET Core 6 and Entity Framework (Database-First).
+ - Database: MySQL and Redis(to create black list for logouted account).
 
-First, run the development server:
+## Tasks:
+ - Designed and implemented UI/UX using MUI library.
+ - Implemented APIs with Asp.net core 6 and used Postman to test.
+ - Used JWT for auth with access and refresh token techniques.
+ - Analyzed, designed, and implemented the database.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Features:
+Customer:
+ - Home, about, and contact.
+ - Shoes list: can filter by price, brand, size; can sort by price, name; can pagination.
+ - Detail shoes and add them to cart.
+ - Detail rate shoes.
+ - Manage cart.
+ - Order and checkout.
+ - Manage purchases and tracking.
+ - Rate for each items in a purchase after completed order.
+ - Profile and update profile.
+ - Login, register, forgot password, reset password.
+ - Checkout by cart: coming soon.
+ 
+ Admin:
+ - Manage purchases.
+ - Manage shoes: coming soon.
+ - Statistic: coming soon.
+ - Manage customer: coming soon.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ Orther:
+ - SEO: comming soon.
+ - Chat with each orther: comming soon.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Product link(maybe will be shutdown whenever cause using free hosting):
+ - htpps://the-shoes-shop-2023.vercel.app
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Github links: 
+ - Frontend: github.com/DrinkWater30M/theshoesshop-frontend
+ - Backend: gthub.com/DrinkWater30M/TheShoesShop_BackEnd 

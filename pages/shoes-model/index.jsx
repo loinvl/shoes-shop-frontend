@@ -2,8 +2,10 @@ import shoesModelAPI from "@/backendAPI/shoesModelAPI";
 import ShoesModelGrid from "@/components/shoes-model-list/ShoesModelGrid";
 import SideBar from "@/components/shoes-model-list/SideBar";
 import TopBar from "@/components/shoes-model-list/TopBar";
+import { showErrorMessage } from "@/redux/messageReducer";
 import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function ShoesModelListPage() {
   const [shoesModelList, setShoesModelList] = useState([]);
@@ -16,6 +18,8 @@ export default function ShoesModelListPage() {
   const [brandID, setBrandID] = useState(null);
   const [search, setSearch] = useState(null);
   const [sort, setSort] = useState(null);
+
+  const dispatch = useDispatch();
 
   // handle choice from price
   const handleChangeSideBar = (from, to, size, brandID) => {
@@ -45,13 +49,13 @@ export default function ShoesModelListPage() {
       };
       const res = await shoesModelAPI.getShoesModelList(params);
 
-      // handle res
+      // handle error res
       if (!res.success) {
-        // handle error
-        console.log("call api failure, handle later");
+        dispatch(showErrorMessage("Lỗi khi tải dữ liệu, hãy thử lại"));
         return;
       }
 
+      // handle success res
       window.scrollTo({ top: 0 });
       console.log(res.data.shoesModelList);
       setShoesModelList(res.data.shoesModelList);

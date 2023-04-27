@@ -22,6 +22,7 @@ import { logoutSuccess } from "@/redux/userReducer";
 import { useRouter } from "next/router";
 import { FourthHeading, NormalHeading } from "./StyledTypography";
 import StyledBadge from "./StyledBadge";
+import { showErrorMessage } from "@/redux/messageReducer";
 
 const nav = [
   {
@@ -71,6 +72,7 @@ export default function Header() {
 
     // handle error res
     if (!res.success) {
+      dispatch(showErrorMessage("Lỗi khi đăng xuất, hãy thử lại."));
       return;
     }
 
