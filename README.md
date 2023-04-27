@@ -2,6 +2,7 @@
 
 ## Description: 
  - An e-commerce website built for sell high-quality shoes.
+ 
 ## Technologies used: 
  - Frontend: ReactJS, NextJS, Redux Toolkit and MUI.
  - Backend: ASP.NET Core 6 and Entity Framework (Database-First).
