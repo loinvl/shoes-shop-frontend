@@ -42,5 +42,5 @@ Customer:
  - https://the-shoes-shop-2023.vercel.app
 
 ## Github links: 
- - Frontend: github.com/DrinkWater30M/theshoesshop-frontend
- - Backend: gthub.com/DrinkWater30M/TheShoesShop_BackEnd 
+ - Frontend: github.com/loinvl/theshoesshop-frontend
+ - Backend: gthub.com/loinvl/TheShoesShop_BackEnd 
