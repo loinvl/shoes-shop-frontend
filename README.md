@@ -39,7 +39,7 @@ Customer:
  - Chat with each orther: comming soon.
 
 ## Product link(maybe will be shutdown whenever cause using free hosting):
- - https://the-shoes-shop-2023.vercel.app
+ - https://shoesshop.loinv.online
 
 ## Github links: 
  - Frontend: https://github.com/loinvl/shoes-shop-frontend
