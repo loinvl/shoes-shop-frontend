@@ -38,8 +38,9 @@ Customer:
  - SEO: comming soon.
  - Chat with each orther: comming soon.
 
-## Product link(maybe will be shutdown whenever cause using free hosting):
- - https://shoesshop.loinv.online
+## Product:
+ - Website: https://shoesshop.loinv.online
+ - Api document(swagger): https://api.shoesshop.loinv.online/swagger/index.html
 
 ## Github links: 
  - Frontend: https://github.com/loinvl/shoes-shop-frontend
